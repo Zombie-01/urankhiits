@@ -15,6 +15,7 @@ import { saveAs } from "file-saver";
 import { Compare } from "../ui/compare";
 import { FileUpload } from "../ui/file-upload";
 import { MultiStepLoader } from "../ui/multi-step-loader";
+import { Select } from "@/app/select";
 
 const themes = ["Modern", "Vintage", "Minimalist", "Professional"];
 const rooms = ["Living Room", "Dining Room", "Bedroom", "Bathroom", "Office"];
@@ -32,11 +33,6 @@ export type ImageAreaProps = {
   >;
 };
 
-type ImageOutputProps = ImageAreaProps & {
-  loading: boolean;
-  outputImage: string | null;
-  downloadOutputImage(): void;
-};
 const loadingStates = [
   {
     text: "Upload image",
@@ -52,56 +48,16 @@ const loadingStates = [
   },
 ];
 
-function ImageOutput(props: ImageOutputProps) {
-  return (
-    <section className="relative min-h-[206px] w-full">
-      <button
-        type="button"
-        className={`${
-          props.loading ? "flex items-center justify-center" : ""
-        } relative block h-full w-full rounded-lg border-2 border-dashed border-gray-300 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`}>
-        {!props.outputImage && !props.loading ? (
-          <>
-            <props.icon className="mx-auto h-12 w-12 text-gray-400" />
-            <span className="mt-2 block text-sm font-semibold text-gray-300">
-              {props.title}
-            </span>
-          </>
-        ) : null}
-
-        {!props.loading && props.outputImage ? (
-          <img
-            src={props.outputImage}
-            alt="output"
-            className="h-full w-full object-cover"
-          />
-        ) : null}
-      </button>
-
-      {!props.loading && props.outputImage ? (
-        <button
-          onClick={props.downloadOutputImage}
-          className="group absolute right-1 top-1 bg-yellow-500 p-2 text-black">
-          <GoDownload className="h-4 w-4 duration-300 group-hover:scale-110" />
-        </button>
-      ) : null}
-    </section>
-  );
-}
-
 export default function AnimatedModalDemo() {
   const [outputImage, setOutputImage] = useState<string | null>(null);
   const [base64Image, setBase64Image] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const [theme, setTheme] = useState<string>(themes[0]);
+  const [room, setRoom] = useState<string>(rooms[0]);
   const [error, setError] = useState<string | null>("");
   const [file, setFile] = useState<File | null>(null);
-  const images = [
-    "https://images.unsplash.com/photo-1517322048670-4fba75cbbb62?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1573790387438-4da905039392?q=80&w=3425&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1555400038-63f5ba517a47?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1554931670-4ebfabf6e7a9?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1546484475-7f7bd55792da?q=80&w=2581&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  ];
+
   function convertImageToBase64(file: File): void {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -130,8 +86,8 @@ export default function AnimatedModalDemo() {
         },
         body: JSON.stringify({
           image: base64Image,
-          theme: themes[0],
-          room: rooms[0],
+          theme: theme,
+          room: room,
         }),
       });
 
@@ -182,6 +138,14 @@ export default function AnimatedModalDemo() {
                 image
               </span>{" "}
             </h4>
+            <Select
+              theme={theme}
+              themes={themes}
+              room={room}
+              rooms={rooms}
+              setTheme={setTheme}
+              setRoom={setRoom}
+            />
             <div className="flex justify-center items-center">
               {file ? (
                 <Compare
