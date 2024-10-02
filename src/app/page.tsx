@@ -1,101 +1,55 @@
+"use client";
+import FloatingNavDemo from "@/components/example/floating-navbar-demo";
+import HeroParallaxDemo from "@/components/example/hero-parallax-demo";
+import { TracingBeam } from "@/components/ui/tracing-beam";
 import Image from "next/image";
+import DarkModeToggle from "./DarkModeToggle";
+import FloatingDockDemo from "@/components/example/floating-dock-demo";
+import ParallaxScrollDemo from "@/components/example/parallax-scroll-demo";
+import ThreeDCardDemo from "@/components/example/3d-card-demo";
+import StickyScrollRevealDemo from "@/components/example/sticky-scroll-reveal-demo";
+import TextRevealCardPreview from "@/components/example/text-reveal-card-demo";
+import InfiniteMovingCardsDemo from "@/components/example/infinite-moving-cards-demo";
+import AppleCardsCarouselDemo from "@/components/example/apple-cards-carousel-demo";
+import { useEffect, useState } from "react";
+import TypewriterLoader from "./loader";
+import Logo from "./logo";
+import ExpandableCardDemo from "@/components/blocks/expandable-card-demo-standard";
+import AnimatedModalDemo from "@/components/example/animated-modal-demo";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [showLoader, setShowLoader] = useState(true);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    // Set a timeout to hide the loader after 4 seconds
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, 4000);
+
+    // Cleanup the timer when the component is unmounted
+    return () => clearTimeout(timer);
+  }, []);
+  return (
+    <>
+      <div
+        className={`fixed top-0 bg-white dark:bg-black ${
+          showLoader ? "opacity-100 z-[99999999]" : "opacity-0 z-[-1000]"
+        } left-0 right-0 bottom-0 z-10 transition-opacity duration-500 ease-in-out`}>
+        <TypewriterLoader />
+      </div>
+      <TracingBeam className="px-6">
+        <DarkModeToggle />
+        <Logo />
+        <FloatingNavDemo />
+        <HeroParallaxDemo />
+        <AnimatedModalDemo />
+        <AppleCardsCarouselDemo />
+        <TextRevealCardPreview />
+        <div id="about" className="flex  flex-col md:flex-row items-center">
+          <StickyScrollRevealDemo />
+          <ThreeDCardDemo />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </TracingBeam>
+    </>
   );
 }
