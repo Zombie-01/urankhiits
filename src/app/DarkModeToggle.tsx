@@ -1,25 +1,11 @@
 "use client";
 import { ButtonsCard } from "@/components/ui/tailwindcss-buttons";
+import useDarkMode from "@/lib/darkmode";
 import { IconMoon, IconSun } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 
 const DarkModeToggle: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Set the initial theme based on the user's system preference or saved theme
-  useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    if (
-      theme === "dark" ||
-      (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
-      setIsDarkMode(true);
-    } else {
-      document.documentElement.classList.remove("dark");
-      setIsDarkMode(false);
-    }
-  }, []);
+  const { isDarkMode, setIsDarkMode } = useDarkMode();
 
   // Toggle between dark and light modes
   const toggleDarkMode = () => {

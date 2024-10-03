@@ -18,11 +18,11 @@ export default function TypewriterLoader() {
     },
     {
       text: "URANKHIITS.",
-      className: "text-blue-500 dark:text-blue-500",
+      className: "text-[#2e2e2e]",
     },
   ];
   return (
-    <div className="flex flex-col items-center justify-center h-[40rem]  ">
+    <div className="flex h-screen bg-black flex-col items-center justify-center   ">
       <TypewriterEffectSmooth words={words} />
     </div>
   );
