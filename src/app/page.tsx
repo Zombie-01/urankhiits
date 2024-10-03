@@ -37,19 +37,19 @@ export default function Home() {
         } left-0 right-0 bottom-0 z-10 transition-opacity duration-500 ease-in-out`}>
         <TypewriterLoader />
       </div>
-      <TracingBeam className="px-6">
-        <DarkModeToggle />
-        <Logo />
-        <FloatingNavDemo />
-        <HeroParallaxDemo />
-        <AnimatedModalDemo />
+      <DarkModeToggle />
+      <Logo />
+      <FloatingNavDemo />
+      <HeroParallaxDemo />
+      <AnimatedModalDemo />
+      <div className="container mx-auto">
         <AppleCardsCarouselDemo />
         <TextRevealCardPreview />
         <div id="about" className="flex  flex-col md:flex-row items-center">
           <StickyScrollRevealDemo />
           <ThreeDCardDemo />
         </div>
-      </TracingBeam>
+      </div>
     </>
   );
 }
