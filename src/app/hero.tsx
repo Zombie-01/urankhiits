@@ -49,7 +49,7 @@ const Hero = () => {
         </div>
       ))}
       <div className="absolute inset-0 bg-black opacity-60 z-[10]"></div>
-      <div className="w-full container z-10 mx-auto md:max-w-[50vw] ">
+      <div className="w-full container z-10 mx-auto  ">
         <FlipWordsDemo />
       </div>
     </div>

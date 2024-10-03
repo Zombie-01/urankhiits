@@ -1,6 +1,7 @@
 "use client";
 
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import SVGAnimation from "./svg";
 
 export default function TypewriterLoader() {
   const words = [
@@ -8,21 +9,22 @@ export default function TypewriterLoader() {
       text: "Build",
     },
     {
-      text: "awesome",
+      text: "modern",
     },
     {
-      text: "home",
+      text: "design",
     },
     {
       text: "with",
     },
     {
       text: "URANKHIITS.",
-      className: "text-[#2e2e2e]",
+      className: " text-[#5e332c] ",
     },
   ];
   return (
-    <div className="flex h-screen bg-black flex-col items-center justify-center   ">
+    <div className="flex h-screen   bg-black flex-col items-center justify-center   ">
+      <SVGAnimation />
       <TypewriterEffectSmooth words={words} />
     </div>
   );
