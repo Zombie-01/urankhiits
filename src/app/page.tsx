@@ -16,6 +16,7 @@ import TypewriterLoader from "./loader";
 import Logo from "./logo";
 import ExpandableCardDemo from "@/components/blocks/expandable-card-demo-standard";
 import AnimatedModalDemo from "@/components/example/animated-modal-demo";
+import Hero from "./hero";
 
 export default function Home() {
   const [showLoader, setShowLoader] = useState(true);
@@ -40,7 +41,7 @@ export default function Home() {
       <DarkModeToggle />
       <Logo />
       <FloatingNavDemo />
-      <HeroParallaxDemo />
+      <Hero />
       <AnimatedModalDemo />
       <div className="container mx-auto">
         <AppleCardsCarouselDemo />
