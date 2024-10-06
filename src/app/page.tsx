@@ -46,7 +46,7 @@ export default function Home() {
       <div className="container mx-auto">
         <AppleCardsCarouselDemo />
         <TextRevealCardPreview />
-        <div id="about" className="flex  flex-col md:flex-row items-center">
+        <div id="contact" className="flex  flex-col md:flex-row items-center">
           <StickyScrollRevealDemo />
           <ThreeDCardDemo />
         </div>

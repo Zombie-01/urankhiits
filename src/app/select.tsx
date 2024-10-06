@@ -21,13 +21,12 @@ export function Select({
   rooms: any;
 }) {
   const [active, setActive] = useState<string | null>(null);
-  const [selected, setSelected] = useState<string | null>(null);
 
   return (
-    <div className={cn("z-50", className)}>
+    <div className={cn("z-[9999999]", className)}>
       <Menu setActive={setActive}>
         <MenuItem setActive={setActive} active={active} item={theme}>
-          <div className="flex flex-col space-y-4 text-sm">
+          <div className="flex flex-col z-50 space-y-4 text-sm">
             {themes.map((e: string) => (
               <HoveredLink onClick={() => setTheme(e)}>{e}</HoveredLink>
             ))}
