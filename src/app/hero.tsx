@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  
   const slides = [
     {
       title: "Moonbeam",
