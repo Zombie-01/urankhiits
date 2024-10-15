@@ -19,7 +19,8 @@ export default function TypewriterLoader() {
     },
     {
       text: "URANKHIITS.",
-      className: " text-[#5e332c] ",
+      className: " text-[#FFFFFF
+] ",
     },
   ];
   return (
