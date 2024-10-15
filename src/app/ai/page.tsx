@@ -138,8 +138,8 @@ export default function ImagePage() {
           duration={2000}
         />
         <div className="text-center w-full">
-          <div className="relative h-40">
-            <div className="absolute left-1/2 z-50 -translate-x-1/2">
+          <div className="relative h-20">
+            <div className="absolute left-1/2 z-50 w-64 -translate-x-1/2">
               <Select
                 theme={theme}
                 themes={themes}

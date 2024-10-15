@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
 import { cn } from "@/lib/utils";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -38,20 +37,15 @@ export default function ThreeDCardDemo() {
     setLoad(false);
   };
   return (
-    <CardContainer className="inter-var">
-      <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
-        <CardItem
-          translateZ="50"
-          className="text-xl font-bold text-neutral-600 dark:text-white">
+    <div className="inter-var">
+      <div className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+        <div className="text-xl font-bold text-neutral-600 dark:text-white">
           Sent us email
-        </CardItem>
-        <CardItem
-          as="p"
-          translateZ="60"
-          className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300">
+        </div>
+        <p className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300">
           more info{" "}
-        </CardItem>
-        <CardItem translateZ="100" className="w-full mt-4">
+        </p>
+        <div className="w-full mt-4">
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
             <LabelInputContainer>
               <Label htmlFor="name">Name</Label>
@@ -76,8 +70,8 @@ export default function ThreeDCardDemo() {
               />
             </LabelInputContainer>
           </div>
-        </CardItem>
-        <CardItem translateZ="100" className="w-full mt-4">
+        </div>
+        <div className="w-full mt-4">
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Email Address</Label>
             <Input
@@ -89,8 +83,8 @@ export default function ThreeDCardDemo() {
               type="email"
             />
           </LabelInputContainer>
-        </CardItem>
-        <CardItem translateZ="100" className="w-full mt-4">
+        </div>
+        <div className="w-full mt-4">
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Message</Label>
             <Textarea
@@ -101,20 +95,17 @@ export default function ThreeDCardDemo() {
               placeholder="...."
             />
           </LabelInputContainer>
-        </CardItem>
+        </div>
         <div className="flex justify-between items-center mt-20">
-          <CardItem
-            translateZ={20}
-            as="button"
-            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold">
+          <div className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold">
             <button onClick={() => handleSubmit()} type="submit">
               Sent message &rarr;
               <BottomGradient />
             </button>
-          </CardItem>
+          </div>
         </div>
-      </CardBody>
-    </CardContainer>
+      </div>
+    </div>
   );
 }
 const BottomGradient = () => {

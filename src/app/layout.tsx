@@ -41,14 +41,14 @@ const aeonikLight = localFont({
 
 // AeonikTRIAL Light Italic
 const aeonikLightItalic = localFont({
-  src: "./fonts/AeonikTRIAL-LightItalic.otf",
+src: "./fonts/AeonikTRIAL-LightItalic.otf",
   variable: "--font-aeonik-light-italic",
   weight: "300", // Italic version of Light weight
 });
 export const metadata: Metadata = {
-  title: "Urenkhiits | Design",
-  description: "Urenkhiits .",
-  keywords: "Urenkhiits, ai generate, ai, generate image, iterior, ai interior",
+  title: "Urankhiits | Design",
+  description: "Urankhiits .",
+  keywords: "Urankhiits, ai generate, ai, generate image, iterior, ai interior",
 };
 export default function RootLayout({
   children,

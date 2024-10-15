@@ -17,6 +17,7 @@ import Logo from "./logo";
 import ExpandableCardDemo from "@/components/blocks/expandable-card-demo-standard";
 import AnimatedModalDemo from "@/components/example/animated-modal-demo";
 import Hero from "./hero";
+import ImageSelector from "@/components/custom/aiimages";
 
 export default function Home() {
   const [showLoader, setShowLoader] = useState(true);
@@ -42,9 +43,9 @@ export default function Home() {
       <Logo />
       <FloatingNavDemo />
       <Hero />
-      <AnimatedModalDemo />
       <div className="container mx-auto">
         <AppleCardsCarouselDemo />
+        <InfiniteMovingCardsDemo />
         <TextRevealCardPreview />
         <div id="contact" className="flex  flex-col md:flex-row items-center">
           <StickyScrollRevealDemo />

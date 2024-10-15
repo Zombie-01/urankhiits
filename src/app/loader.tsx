@@ -19,11 +19,10 @@ export default function TypewriterLoader() {
     },
     {
       text: "URANKHIITS.",
-      className: " text-[#5e332c] ",
     },
   ];
   return (
-    <div className="flex h-screen   bg-black flex-col items-center justify-center   ">
+    <div className="flex h-screen bg-black flex-col items-center justify-center   ">
       <SVGAnimation />
       <TypewriterEffectSmooth words={words} />
     </div>
