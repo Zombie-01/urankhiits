@@ -51,8 +51,8 @@ const DummyContent = () => {
 
 const data = [
   {
-    category: "Artificial Intelligence",
-    title: "You can do more with AI.",
+    //category: "Artificial Intelligence",
+    title: "KOHLER",
     src: "https://drive.google.com/file/d/1K9EqQ3bbQYCgvOYSKy_QqTds7k8KS_Tc/view?usp=sharing",
     content: <DummyContent />,
   },
