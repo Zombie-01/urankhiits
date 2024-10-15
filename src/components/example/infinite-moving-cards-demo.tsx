@@ -81,28 +81,12 @@ export default function InfiniteMovingCardsDemo() {
                   fill
                   src={image.out}
                   alt={"generated" + image.alt}
-                  className=" aspect-video object-contain "
+                  className=" aspect-video object-cover "
                 />
               </div>
             ),
           }))}
           direction="right"
-          speed="normal"
-        />
-        <InfiniteMovingCards
-          items={images.map((image) => ({
-            id: image.id,
-            item: image,
-            content: (
-              <Image
-                src={image.out}
-                fill
-                alt="generated"
-                className=" aspect-video object-contain "
-              />
-            ),
-          }))}
-          direction="left"
           speed="normal"
         />
       </div>

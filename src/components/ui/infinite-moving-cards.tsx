@@ -90,6 +90,11 @@ export const InfiniteMovingCards = ({
         {items.map((item, idx) => (
           <li
             key={item.id}
+            onClick={() => {
+              console.log("Item clicked:", item); // Debugging log
+              setSelectedImage(item.item);
+              setOpen(true);
+            }}
             className="w-[350px] cursor-pointer max-w-full relative px-8 min-h-[200px] py-6 md:w-content">
             <div>{item.content}</div>
           </li>
