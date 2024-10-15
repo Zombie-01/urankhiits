@@ -19,6 +19,7 @@ export default function TypewriterLoader() {
     },
     {
       text: "URANKHIITS.",
+      className: " text-[#FFFFFF]",
     },
   ];
   return (
