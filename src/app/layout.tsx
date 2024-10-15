@@ -46,9 +46,9 @@ const aeonikLightItalic = localFont({
   weight: "300", // Italic version of Light weight
 });
 export const metadata: Metadata = {
-  title: "Urenkhiits | Design",
-  description: "Urenkhiits .",
-  keywords: "Urenkhiits, ai generate, ai, generate image, iterior, ai interior",
+  title: "Urankhiits | Design",
+  description: "Urankhiits .",
+  keywords: "Urankhiits, ai generate, ai, generate image, iterior, ai interior",
 };
 export default function RootLayout({
   children,
