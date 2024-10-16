@@ -32,7 +32,7 @@ const DummyContent = () => {
       {contentArray.map((_, index) => (
         <motion.div
           key={"dummy-content" + index}
-          className="flex-col w-full max-w-[400px]   rounded-3xl  p-4"
+          className="flex-col w-full rounded-3xl  p-4"
           whileHover={{ scale: 1.05 }} // Add a subtle hover effect
         >
           <div className="relative h-[300px]">
@@ -40,7 +40,7 @@ const DummyContent = () => {
               src="https://assets.aceternity.com/macbook.png"
               alt="Macbook mockup from Aceternity UI"
               fill
-              className="md:w-1/2 md:h-1/2 min-h-[200px] min-w-[200px] h-full w-full  object-contain"
+              className=" min-h-[200px]  h-full w-full aspect-video object-cover"
             />
           </div>
         </motion.div>

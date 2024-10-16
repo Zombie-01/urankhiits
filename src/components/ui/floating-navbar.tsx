@@ -60,7 +60,7 @@ export const FloatingNav = ({
           duration: 0.2,
         }}
         className={cn(
-          "flex max-w-fit  fixed top-5 inset-x-0 mx-auto border border-transparent  rounded-full z-[5000] px-2  py-2  items-center justify-center space-x-4",
+          "flex max-w-fit  fixed bg-black/80 px-4 dark:bg-white/80 top-5 inset-x-0 mx-auto border border-transparent  rounded-full z-[5000]  py-2  items-center justify-center space-x-4",
           className
         )}>
         {navItems.map((navItem: any, idx: number) => (
@@ -68,10 +68,14 @@ export const FloatingNav = ({
             key={`link=${idx}`}
             href={navItem.link}
             className={cn(
-              "relative  items-center flex space-x-1 text-black dark:text-white dark:hover:text-neutral-300 hover:text-neutral-500"
+              "relative  items-center flex space-x-1 text-white dark:text-black hover:scale-110 transition-all"
             )}>
-            <span className="block sm:hidden">{navItem.icon}</span>
-            <span className="hidden sm:block text-sm">{navItem.name}</span>
+            <span className="block text-white dark:text-black sm:hidden">
+              {navItem.icon}
+            </span>
+            <span className="hidden sm:block font-semibold text-sm">
+              {navItem.name}
+            </span>
           </Link>
         ))}
       </motion.div>

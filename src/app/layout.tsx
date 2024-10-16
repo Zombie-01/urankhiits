@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import FloatingDockDemo from "@/components/example/floating-dock-demo";
 import TypewriterLoader from "./loader";
+import DarkModeToggle from "./DarkModeToggle";
+import Logo from "./logo";
+import FloatingNav from "@/components/example/floating-navbar-demo";
 
 // AeonikTRIAL Regular
 const aeonikRegular = localFont({
@@ -41,7 +44,7 @@ const aeonikLight = localFont({
 
 // AeonikTRIAL Light Italic
 const aeonikLightItalic = localFont({
-src: "./fonts/AeonikTRIAL-LightItalic.otf",
+  src: "./fonts/AeonikTRIAL-LightItalic.otf",
   variable: "--font-aeonik-light-italic",
   weight: "300", // Italic version of Light weight
 });
@@ -59,6 +62,10 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${aeonikRegular.variable} ${aeonikBold.variable} ${aeonikItalic.variable} ${aeonikBoldItalic.variable} ${aeonikLight.variable} ${aeonikLightItalic.variable} antialiased dark:bg-black relative`}>
+          
+        <DarkModeToggle />
+        <Logo />
+        <FloatingNav />
         {children}
         <footer className="">
           <div className="container mx-auto pt-10 text-center">

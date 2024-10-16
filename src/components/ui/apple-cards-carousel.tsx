@@ -101,7 +101,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
             {items.map((item, index) => (
               <div
                 key={"card" + index}
-                className="last:pr-[5%] md:last:pr-[33%]  rounded-3xl">
+                className="last:pr-[5%]  md:last:pr-[33%]  ">
                 {item}
               </div>
             ))}
@@ -145,7 +145,7 @@ export const Card = ({
           <ModalContent>
             <div
               ref={containerRef}
-              className="max-w-5xl mx-auto  z-[60]  rounded-3xl font-sans relative">
+              className="max-w-5xl mx-auto  z-[60]   font-sans relative">
               <p className="text-base font-medium text-black dark:text-white">
                 {card.category}
               </p>
@@ -162,7 +162,7 @@ export const Card = ({
         <ModalTrigger>
           <motion.div
             layoutId={layout ? `card-${card.title}` : undefined}
-            className="rounded-3xl bg-gray-100  h-80 w-56 md:h-[40rem] md:w-96 overflow-hidden flex flex-col items-start justify-start relative z-10">
+            className=" bg-gray-100   w-56 aspect-video min-h-[350px] md:w-[450px] overflow-hidden flex flex-col items-start justify-start relative z-10">
             <div className="absolute h-full top-0 inset-x-0  via-transparent to-transparent z-30 pointer-events-none" />
             <div className="relative z-40 p-8">
               <motion.p className="text-white text-sm md:text-base font-medium font-sans text-left">

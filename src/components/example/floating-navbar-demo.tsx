@@ -7,29 +7,34 @@ import {
   IconMessage,
   IconUser,
 } from "@tabler/icons-react";
+import { HeartHandshake } from "lucide-react";
 export default function FloatingNavDemo() {
   const navItems = [
     {
       name: "Home",
       link: "/#",
-      icon: <IconHome className="h-4 w-4 text-neutral-500 dark:text-white" />,
+      icon: <IconHome className="h-4 w-4 text-white dark:text-black" />,
+    },
+    {
+      name: "Our service",
+      link: "/oursercive",
+      icon: <HeartHandshake className="h-4 w-4 text-white dark:text-black" />,
     },
     {
       name: "Projects",
       link: "/#projects",
-      icon: <IconUser className="h-4 w-4 text-neutral-500 dark:text-white" />,
+      icon: <IconUser className="h-4 w-4 text-white dark:text-black" />,
     },
     {
       name: "AI",
       link: "/ai",
-      icon: <IconBrain className="h-4 w-4 text-neutral-500 dark:text-white" />,
+      icon: <IconBrain className="h-4 w-4 text-white dark:text-black" />,
     },
+
     {
       name: "Contact",
       link: "/#contact",
-      icon: (
-        <IconMessage className="h-4 w-4 text-neutral-500 dark:text-white" />
-      ),
+      icon: <IconMessage className="h-4 w-4 text-white dark:text-black" />,
     },
   ];
   return (

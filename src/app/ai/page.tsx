@@ -121,23 +121,13 @@ export default function ImagePage() {
 
   return (
     <>
-      {" "}
-      <div
-        className={`fixed top-0 bg-white dark:bg-black ${
-          showLoader ? "opacity-100 z-[99999999]" : "opacity-0 z-[-1000]"
-        } left-0 right-0 bottom-0 z-10 transition-opacity duration-500 ease-in-out`}>
-        <TypewriterLoader />
-      </div>
-      <DarkModeToggle />
-      <Logo />
-      <FloatingNavDemo />
-      <div className="py-20 min-h-[calc( 100vh - 50px )] flex items-center justify-center">
+      <div className="py-20  min-h-[calc( 100vh - 50px )] flex items-center justify-center">
         <MultiStepLoader
           loadingStates={loadingStates}
           loading={loading}
           duration={2000}
         />
-        <div className="text-center w-full">
+        <div className="text-center pt-4 md:pt-10  w-full">
           <div className="relative h-20">
             <div className="absolute left-1/2 z-50 w-64 -translate-x-1/2">
               <Select

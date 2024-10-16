@@ -1,11 +1,4 @@
 "use client";
-import FloatingNavDemo from "@/components/example/floating-navbar-demo";
-import HeroParallaxDemo from "@/components/example/hero-parallax-demo";
-import { TracingBeam } from "@/components/ui/tracing-beam";
-import Image from "next/image";
-import DarkModeToggle from "./DarkModeToggle";
-import FloatingDockDemo from "@/components/example/floating-dock-demo";
-import ParallaxScrollDemo from "@/components/example/parallax-scroll-demo";
 import ThreeDCardDemo from "@/components/example/3d-card-demo";
 import StickyScrollRevealDemo from "@/components/example/sticky-scroll-reveal-demo";
 import TextRevealCardPreview from "@/components/example/text-reveal-card-demo";
@@ -13,11 +6,7 @@ import InfiniteMovingCardsDemo from "@/components/example/infinite-moving-cards-
 import AppleCardsCarouselDemo from "@/components/example/apple-cards-carousel-demo";
 import { useEffect, useState } from "react";
 import TypewriterLoader from "./loader";
-import Logo from "./logo";
-import ExpandableCardDemo from "@/components/blocks/expandable-card-demo-standard";
-import AnimatedModalDemo from "@/components/example/animated-modal-demo";
 import Hero from "./hero";
-import ImageSelector from "@/components/custom/aiimages";
 
 export default function Home() {
   const [showLoader, setShowLoader] = useState(true);
@@ -39,9 +28,7 @@ export default function Home() {
         } left-0 right-0 bottom-0 z-10 transition-opacity duration-500 ease-in-out`}>
         <TypewriterLoader />
       </div>
-      <DarkModeToggle />
-      <Logo />
-      <FloatingNavDemo />
+
       <Hero />
       <div className="container mx-auto">
         <AppleCardsCarouselDemo />
