@@ -37,7 +37,7 @@ const loadingStates = [
     text: "generate image",
   },
   {
-    text: "Send resume",
+    text: "Send generated image",
   },
 ];
 
