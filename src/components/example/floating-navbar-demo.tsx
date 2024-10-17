@@ -10,7 +10,7 @@ import {
 import { HeartHandshake } from "lucide-react";
 import { FlipWords } from "../ui/flip-words";
 export default function FloatingNavDemo() {
-  const words = ["Service", "History", "Feature", "Plan"];
+  const words = ["Our service", "About us"];
   const navItems = [
     {
       name: "Home",
@@ -18,12 +18,7 @@ export default function FloatingNavDemo() {
       icon: <IconHome className="h-4 w-4 text-white dark:text-black" />,
     },
     {
-      name: (
-        <>
-          Our
-          <FlipWords words={words} />
-        </>
-      ),
+      name: <FlipWords words={words} />,
       link: "/oursercive",
       icon: <HeartHandshake className="h-4 w-4 text-white dark:text-black" />,
     },

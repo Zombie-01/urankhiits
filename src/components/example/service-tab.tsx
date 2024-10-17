@@ -20,32 +20,32 @@ export default function ServiceTab() {
       ),
     },
     {
-      name: "History",
-      value: "history",
+      name: "About us",
+      value: "aboutus",
       children: (
         <div className="w-full overflow-hidden relative bg-white dark:bg-black h-full rounded-2xl text-xl md:text-4xl font-bold ">
           <TimelineDemo />
         </div>
       ),
     },
-    {
-      name: "Feature",
-      value: "feature",
-      children: (
-        <div className=" w-full overflow-hidden relative bg-white dark:bg-black h-full rounded-2xl text-xl md:text-4xl font-bold ">
-          <FeaturesSectionDemo />
-        </div>
-      ),
-    },
-    {
-      name: "Plan",
-      value: "plan",
-      children: (
-        <div className="w-full overflow-hidden relative bg-white dark:bg-black h-full rounded-2xl text-xl md:text-4xl font-bold ">
-          <CanvasRevealCard />
-        </div>
-      ),
-    },
+    // {
+    //   name: "Feature",
+    //   value: "feature",
+    //   children: (
+    //     <div className=" w-full overflow-hidden relative bg-white dark:bg-black h-full rounded-2xl text-xl md:text-4xl font-bold ">
+    //       <FeaturesSectionDemo />
+    //     </div>
+    //   ),
+    // },
+    // {
+    //   name: "Plan",
+    //   value: "plan",
+    //   children: (
+    //     <div className="w-full overflow-hidden relative bg-white dark:bg-black h-full rounded-2xl text-xl md:text-4xl font-bold ">
+    //       <CanvasRevealCard />
+    //     </div>
+    //   ),
+    // },
   ];
 
   return (
