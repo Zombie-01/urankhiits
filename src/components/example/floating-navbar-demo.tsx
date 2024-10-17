@@ -8,7 +8,9 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import { HeartHandshake } from "lucide-react";
+import { FlipWords } from "../ui/flip-words";
 export default function FloatingNavDemo() {
+  const words = ["Service", "History", "Feature", "Plan"];
   const navItems = [
     {
       name: "Home",
@@ -16,7 +18,12 @@ export default function FloatingNavDemo() {
       icon: <IconHome className="h-4 w-4 text-white dark:text-black" />,
     },
     {
-      name: "Our service",
+      name: (
+        <>
+          Our
+          <FlipWords words={words} />
+        </>
+      ),
       link: "/oursercive",
       icon: <HeartHandshake className="h-4 w-4 text-white dark:text-black" />,
     },

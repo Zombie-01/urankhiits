@@ -16,14 +16,14 @@ import {
   useTransform,
 } from "framer-motion";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 
 export const FloatingDock = ({
   items,
   desktopClassName,
   mobileClassName,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
+  items: { title: string | ReactNode; icon: React.ReactNode; href: string }[];
   desktopClassName?: string;
   mobileClassName?: string;
 }) => {
@@ -39,7 +39,11 @@ const FloatingDockMobile = ({
   items,
   className,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
+  items: {
+    title: string | React.ReactNode;
+    icon: React.ReactNode;
+    href: string;
+  }[];
   className?: string;
 }) => {
   const [open, setOpen] = useState(false);
@@ -52,7 +56,7 @@ const FloatingDockMobile = ({
             className="absolute bottom-full mb-2 inset-x-0 flex flex-col gap-2">
             {items.map((item, idx) => (
               <motion.div
-                key={item.title}
+                key={idx}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{
                   opacity: 1,
@@ -68,7 +72,7 @@ const FloatingDockMobile = ({
                 transition={{ delay: (items.length - 1 - idx) * 0.05 }}>
                 <Link
                   href={item.href}
-                  key={item.title}
+                  key={idx + 1000}
                   className="h-10 w-10 rounded-full bg-gray-50 dark:bg-neutral-900 flex items-center justify-center">
                   <div className="h-4 w-4">{item.icon}</div>
                 </Link>
@@ -90,7 +94,11 @@ const FloatingDockDesktop = ({
   items,
   className,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
+  items: {
+    title: string | React.ReactNode;
+    icon: React.ReactNode;
+    href: string;
+  }[];
   className?: string;
 }) => {
   let mouseX = useMotionValue(Infinity);
@@ -102,8 +110,8 @@ const FloatingDockDesktop = ({
         "mx-auto hidden md:flex h-16 gap-4 items-end  rounded-2xl bg-gray-50 dark:bg-neutral-900 px-4 pb-3",
         className
       )}>
-      {items.map((item) => (
-        <IconContainer mouseX={mouseX} key={item.title} {...item} />
+      {items.map((item, i) => (
+        <IconContainer mouseX={mouseX} key={i} {...item} />
       ))}
     </motion.div>
   );
@@ -116,7 +124,7 @@ function IconContainer({
   href,
 }: {
   mouseX: MotionValue;
-  title: string;
+  title: string | ReactNode;
   icon: React.ReactNode;
   href: string;
 }) {
