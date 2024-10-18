@@ -62,12 +62,11 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${aeonikRegular.variable} ${aeonikBold.variable} ${aeonikItalic.variable} ${aeonikBoldItalic.variable} ${aeonikLight.variable} ${aeonikLightItalic.variable} antialiased dark:bg-black relative`}>
-          
-        <DarkModeToggle />
+        {/* <DarkModeToggle />
         <Logo />
-        <FloatingNav />
+        <FloatingNav /> */}
         {children}
-        <footer className="">
+        {/* <footer className="">
           <div className="container mx-auto pt-10 text-center">
             <FloatingDockDemo />
           </div>
@@ -77,7 +76,7 @@ export default function RootLayout({
               URANKHIITS
             </p>
           </div>
-        </footer>
+        </footer> */}
       </body>
     </html>
   );

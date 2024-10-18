@@ -30,7 +30,7 @@ export default function Home() {
       </div>
 
       <Hero />
-      <div className="container mx-auto">
+      {/* <div className="container mx-auto">
         <AppleCardsCarouselDemo />
         <InfiniteMovingCardsDemo />
         <TextRevealCardPreview />
@@ -38,7 +38,7 @@ export default function Home() {
           <StickyScrollRevealDemo />
           <ThreeDCardDemo />
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
