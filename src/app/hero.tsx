@@ -10,20 +10,20 @@ const Hero = () => {
   const items = [
     {
       title: "Innovative",
-      thumbnail: "/publish_1.png",
+      thumbnail: "/pub_1.png",
       word: "Innovative",
     },
     {
       title: "Creative",
-      thumbnail: "/publish_2.png",
+      thumbnail: "/pub_2.png",
       word: "Creative",
     },
 
-    {
-      title: "Elegant",
-      thumbnail: "/publish_3.png",
-      word: "Elegant",
-    },
+    // {
+    //   title: "Elegant",
+    //   thumbnail: "/publish_3.png",
+    //   word: "Elegant",
+    // },
   ];
 
   const duration = 9000; // Time for each slide and word change
@@ -52,7 +52,7 @@ const Hero = () => {
   }, [items.length, duration]);
 
   return (
-    <div className="h-screen relative w-screen overflow-hidden flex justify-center items-center ">
+    <div className="h-screen relative w-screen overflow-hidden flex justify-center py-10 sm:py-20 md:py-28 ">
       {/* Image slider */}
       {items.map((item, index) => (
         <div
@@ -71,7 +71,7 @@ const Hero = () => {
       ))}
 
       {/* Slide controls */}
-      <div className="absolute flex gap-4 max-w-[900px] bottom-10 right-10">
+      {/* <div className="absolute flex gap-4 max-w-[900px] bottom-10 right-10">
         {items.map((item, index) => (
           <div
             key={item.title}
@@ -84,7 +84,7 @@ const Hero = () => {
             <span className="">{item.title}</span>
           </div>
         ))}
-      </div>
+      </div> */}
       <div className="absolute z-20 md:-right-[150px]">
         {" "}
         <div className="w-full h-full max-w-[500px] md:max-w-[700px] flex items-center justify-center">
@@ -95,24 +95,25 @@ const Hero = () => {
           />
         </div>
       </div>
-      <div className="absolute z-20 top-[20vh] md:top-1/2 md:-translate-y-1/2 translate-x-1/2 md:translate-x-0 right-1/2 md:right-40">
-        {" "}
-        <div className="w-full max-w-[100px] h-auto md:max-w-[250px]  flex items-center justify-center">
-          <img
-            src="/heo_logo.png"
-            alt={"svg"}
-            className="object-contain w-full h-full"
-          />
-        </div>
-      </div>
 
       {/* Word animation */}
       <div className="absolute inset-0 bg-black opacity-60 z-[10]"></div>
       <div className="w-full container z-10 mx-auto text-white flex flex-col gap-4 md:gap-10">
-        <p className="px-4 text-neutral-400">
-          Urankhiits is launching soon! Stay tuned for something exciting
+        <div className=" z-20 pb-8 md:pb-12 left-20 top-20 md:px-4">
+          {" "}
+          <div className="w-full max-w-[100px] h-auto md:max-w-[150px]  flex items-center justify-center">
+            <img
+              src="/heo_logo.png"
+              alt={"svg"}
+              className="object-contain w-full h-full"
+            />
+          </div>
+        </div>
+        <p className="md:px-4 text-bold text-xl md:text-3xl text-white">
+          Urankhiits is launching soon!
+          <br /> Stay tuned for something exciting
         </p>
-        <div className=" flex justify-start items-center px-4">
+        {/* <div className=" flex justify-start items-center px-4">
           <div className="text-4xl font-normal text-neutral-400">
             Build
             <AnimatePresence>
@@ -165,15 +166,19 @@ const Hero = () => {
             <br />
             Design with URANKHIITS
           </div>
-        </div>
+        </div> */}
         <Link href="/ai">
-          <button className="relative w-min whitespace-nowrap inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-[#212121] px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-              TRY Uran AI
-            </span>
+          <button className="w-min whitespace-nowrap py-2 px-4 text-xl md:text-3xl font-bold uppercase  rounded-sm bg-white text-black mix-blend-screen md:mx-4 ">
+            TRY Uran AI
           </button>
         </Link>
+      </div>
+      <div className="absolute md:px-4 font-semibold z-20 text-white bottom-8 md:bottom-12 left-0">
+        <div className="container mx-auto">
+          <p className="text-lg md:text-2xl font-bold">
+            <span>Contact us: </span>info@urankhiits.com
+          </p>
+        </div>
       </div>
 
       {/* Progress bar */}

@@ -126,13 +126,11 @@ export default function ImagePage() {
   return (
     <>
       <div className="py-20 relative  min-h-[calc( 100vh - 50px )] flex items-center justify-center">
-        <LinkPreview
-          url="/"
-          className="p-2 md:p-4 rounded-full absolute top-20 left-10">
-          <Link href="/" className=" w-full">
-            <MoveLeft />
-          </Link>
-        </LinkPreview>
+        <Link
+          href="/"
+          className="absolute left-10 top-20 rounded-full overflow-hidden w-full">
+          <MoveLeft />
+        </Link>
         <MultiStepLoader
           loadingStates={loadingStates}
           loading={loading}
