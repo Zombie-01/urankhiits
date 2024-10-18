@@ -139,10 +139,10 @@ const Logo = () => {
       </Link>
       <Link href="/" className="block lg:hidden">
         <Image
-          src="/images/logo-mini.png"
+          src="/heo_logo.png"
           alt="Uran khiits logo"
-          width={18}
-          height={18}
+          width={32}
+          height={32}
         />
       </Link>
     </button>

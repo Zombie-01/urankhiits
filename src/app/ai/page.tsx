@@ -9,6 +9,10 @@ import FloatingNavDemo from "@/components/example/floating-navbar-demo";
 import TypewriterLoader from "../loader";
 import DarkModeToggle from "../DarkModeToggle";
 import Logo from "../logo";
+import Link from "next/link";
+import { MoveLeft } from "lucide-react";
+import { FollowerPointerCard } from "@/components/ui/following-pointer";
+import { LinkPreview } from "@/components/ui/link-preview";
 
 const themes = ["Modern", "Vintage", "Minimalist", "Professional"];
 const rooms = ["Living Room", "Dining Room", "Bedroom", "Bathroom", "Office"];
@@ -121,7 +125,14 @@ export default function ImagePage() {
 
   return (
     <>
-      <div className="py-20  min-h-[calc( 100vh - 50px )] flex items-center justify-center">
+      <div className="py-20 relative  min-h-[calc( 100vh - 50px )] flex items-center justify-center">
+        <LinkPreview
+          url="/"
+          className="p-2 md:p-4 rounded-full absolute top-20 left-10">
+          <Link href="/" className=" w-full">
+            <MoveLeft />
+          </Link>
+        </LinkPreview>
         <MultiStepLoader
           loadingStates={loadingStates}
           loading={loading}

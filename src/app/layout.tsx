@@ -62,7 +62,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${aeonikRegular.variable} ${aeonikBold.variable} ${aeonikItalic.variable} ${aeonikBoldItalic.variable} ${aeonikLight.variable} ${aeonikLightItalic.variable} antialiased dark:bg-black relative`}>
-        <DarkModeToggle />
+        {/* <DarkModeToggle /> */}
         <Logo />
         {/* <FloatingNav /> */}
         {children}

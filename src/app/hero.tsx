@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -51,7 +52,7 @@ const Hero = () => {
   }, [items.length, duration]);
 
   return (
-    <div className="h-screen relative w-screen flex justify-center items-center ">
+    <div className="h-screen relative w-screen overflow-hidden flex justify-center items-center ">
       {/* Image slider */}
       {items.map((item, index) => (
         <div
@@ -84,10 +85,30 @@ const Hero = () => {
           </div>
         ))}
       </div>
+      <div className="absolute z-20 md:-right-[150px]">
+        {" "}
+        <div className="w-full h-full max-w-[500px] md:max-w-[700px] flex items-center justify-center">
+          <img
+            src="/svg.png"
+            alt={"svg"}
+            className="object-contain w-full h-full"
+          />
+        </div>
+      </div>
+      <div className="absolute z-20 top-[20vh] md:top-1/2 md:-translate-y-1/2 translate-x-1/2 md:translate-x-0 right-1/2 md:right-40">
+        {" "}
+        <div className="w-full max-w-[100px] h-auto md:max-w-[250px]  flex items-center justify-center">
+          <img
+            src="/heo_logo.png"
+            alt={"svg"}
+            className="object-contain w-full h-full"
+          />
+        </div>
+      </div>
 
       {/* Word animation */}
       <div className="absolute inset-0 bg-black opacity-60 z-[10]"></div>
-      <div className="w-full container z-10 mx-auto text-white flex flex-col gap-10">
+      <div className="w-full container z-10 mx-auto text-white flex flex-col gap-4 md:gap-10">
         <p className="px-4 text-neutral-400">
           Urankhiits is launching soon! Stay tuned for something exciting
         </p>
@@ -145,6 +166,14 @@ const Hero = () => {
             Design with URANKHIITS
           </div>
         </div>
+        <Link href="/ai">
+          <button className="relative w-min whitespace-nowrap inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-[#212121] px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+              TRY Uran AI
+            </span>
+          </button>
+        </Link>
       </div>
 
       {/* Progress bar */}
