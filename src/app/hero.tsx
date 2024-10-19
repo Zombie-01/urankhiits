@@ -52,7 +52,7 @@ const Hero = () => {
   }, [items.length, duration]);
 
   return (
-    <div className="h-screen relative w-screen overflow-hidden flex justify-center py-10 sm:py-20 md:py-28 ">
+    <div className="h-screen relative w-screen overflow-hidden flex justify-center items-center md:items-start py-10 sm:py-20 md:py-28 ">
       {/* Image slider */}
       {items.map((item, index) => (
         <div
