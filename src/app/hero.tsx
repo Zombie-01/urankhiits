@@ -180,14 +180,6 @@ const Hero = () => {
           </p>
         </div>
       </div>
-
-      {/* Progress bar */}
-      <div className="absolute bottom-0 z-20 left-0 right-0 h-2 ">
-        <div
-          className="h-[2] bg-white rounded-full dark:bg-black "
-          style={{ width: `${progress}%`, transition: "width 0.1s linear" }}
-        />
-      </div>
     </div>
   );
 };
