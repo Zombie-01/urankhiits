@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Data, CurrentSlideData } from "@/pages";
+import { CurrentSlideData, Data } from "./gallery";
 
 type Props = {
   transitionData: Data;
