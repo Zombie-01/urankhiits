@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Six_Caps, Poppins } from "next/font/google";
 import "./globals.css";
 import FloatingDockDemo from "@/components/example/floating-dock-demo";
 import TypewriterLoader from "./loader";
 import DarkModeToggle from "./DarkModeToggle";
 import Logo from "./logo";
-import FloatingNav from "@/components/example/floating-navbar-demo";
+import Header from "@/components/custom/header";
+import { Footer } from "@/components/custom/Footer/Footer";
+import FooterHero from "@/components/custom/Footer/FooterHero";
 
 // AeonikTRIAL Regular
 const aeonikRegular = localFont({
@@ -53,6 +56,21 @@ export const metadata: Metadata = {
   description: "Urankhiits .",
   keywords: "Urankhiits, ai generate, ai, generate image, iterior, ai interior",
 };
+
+const six_caps = Six_Caps({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-six-caps",
+  weight: "400",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
+  weight: ["400", "500", "700"],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -61,10 +79,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${aeonikRegular.variable} ${aeonikBold.variable} ${aeonikItalic.variable} ${aeonikBoldItalic.variable} ${aeonikLight.variable} ${aeonikLightItalic.variable} antialiased dark:bg-black relative`}>
-        {/* <DarkModeToggle /> */}
-        {/* <Logo /> */}
-        {/* <FloatingNav /> */}
+        className={`${aeonikRegular.variable} ${six_caps.variable} ${poppins.variable} ${aeonikBold.variable} ${aeonikItalic.variable} ${aeonikBoldItalic.variable} ${aeonikLight.variable} ${aeonikLightItalic.variable} antialiased dark:bg-black dark:text-white relative`}>
+        <Header />
         {children}
         {/* <footer className="">
           <div className="container mx-auto pt-10 text-center">
@@ -77,6 +93,7 @@ export default function RootLayout({
             </p>
           </div>
         </footer> */}
+        <Footer />
       </body>
     </html>
   );

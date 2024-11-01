@@ -1,13 +1,19 @@
 "use client";
-import { ButtonsCard } from "@/components/ui/tailwindcss-buttons";
-import useDarkMode from "@/lib/darkmode";
+import { motion, Variants } from "framer-motion";
 import { IconMoon, IconSun } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 
 const DarkModeToggle: React.FC = () => {
-  const { isDarkMode, setIsDarkMode } = useDarkMode();
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
-  // Toggle between dark and light modes
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      setIsDarkMode(true);
+    }
+  }, []);
+
   const toggleDarkMode = () => {
     if (isDarkMode) {
       document.documentElement.classList.remove("dark");
@@ -20,16 +26,31 @@ const DarkModeToggle: React.FC = () => {
     }
   };
 
+  const containerVariants: Variants = {};
+
+  const iconVariants: Variants = {
+    dark: { rotate: 180, color: "#FFD700" },
+    light: { rotate: 0, color: "#333" },
+  };
+
   return (
-    <button
+    <motion.button
       onClick={toggleDarkMode}
-      className="fixed top-4 right-4 lg:right-20 z-[999999999999999] bg-gray-200 rounded-full dark:bg-gray-800 text-black dark:text-white py-2 px-2 text-[9px]">
-      {isDarkMode ? (
-        <IconSun width={18} height={18} />
-      ) : (
-        <IconMoon width={18} height={18} />
-      )}
-    </button>
+      className="z-50 flex items-center justify-center  rounded-full "
+      animate={isDarkMode ? "dark" : "light"}
+      variants={containerVariants}
+      transition={{ duration: 0.5 }}>
+      <motion.div
+        className="flex items-center justify-center"
+        variants={iconVariants}
+        transition={{ duration: 0.3 }}>
+        {isDarkMode ? (
+          <IconSun width={20} height={20} />
+        ) : (
+          <IconMoon width={20} height={20} />
+        )}
+      </motion.div>
+    </motion.button>
   );
 };
 

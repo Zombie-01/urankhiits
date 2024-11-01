@@ -5,7 +5,7 @@ import { Select } from "@/app/select";
 import { MultiStepLoader } from "@/components/ui/multi-step-loader";
 import { Compare } from "@/components/ui/compare";
 import { FileUpload } from "@/components/ui/file-upload";
-import FloatingNavDemo from "@/components/example/floating-navbar-demo";
+import FloatingNavDemo from "@/components/custom/header";
 import TypewriterLoader from "../loader";
 import DarkModeToggle from "../DarkModeToggle";
 import Logo from "../logo";

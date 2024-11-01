@@ -37,8 +37,8 @@ export default function ThreeDCardDemo() {
     setLoad(false);
   };
   return (
-    <div className="inter-var">
-      <div className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+    <div className="inter-var w-full">
+      <div className="bg-gray-50 w-full relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1]  sm:w-[30rem] h-auto rounded-xl p-6 border  ">
         <div className="text-xl font-bold text-neutral-600 dark:text-white">
           Sent us email
         </div>

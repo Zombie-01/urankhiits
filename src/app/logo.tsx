@@ -6,9 +6,9 @@ import Link from "next/link";
 const Logo = () => {
   const { isDarkMode } = useDarkMode();
   return (
-    <button className="fixed top-4 left-4 lg:left-20 z-[999999999999999]  rounded-full py-2 px-2 text-[9px]">
-      <Link href="/" className="hidden lg:block">
-        <div className="w-[145px] h-[70px]">
+    <button className=" absolute rounded-full top-1 lg:top-2 z-[9999999] py-2 px-2 text-[9px]">
+      <Link href="/" className="block">
+        <div className="w-[75px] lg:w-[145px] h-auto">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.84 34.02">
             <defs>
               <style>
@@ -137,14 +137,14 @@ const Logo = () => {
           </svg>
         </div>
       </Link>
-      <Link href="/" className="block lg:hidden">
+      {/* <Link href="/" className="block lg:hidden">
         <Image
           src="/heo_logo.png"
           alt="Uran khiits logo"
           width={32}
           height={32}
         />
-      </Link>
+      </Link> */}
     </button>
   );
 };
