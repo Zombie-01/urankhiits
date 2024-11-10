@@ -2,13 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Six_Caps, Poppins } from "next/font/google";
 import "./globals.css";
-import FloatingDockDemo from "@/components/example/floating-dock-demo";
-import TypewriterLoader from "./loader";
-import DarkModeToggle from "./DarkModeToggle";
-import Logo from "./logo";
 import Header from "@/components/custom/header";
 import { Footer } from "@/components/custom/Footer/Footer";
-import FooterHero from "@/components/custom/Footer/FooterHero";
+import SessionProviderWrapper from "./ai/googleButton";
 
 // AeonikTRIAL Regular
 const aeonikRegular = localFont({
@@ -80,20 +76,22 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${aeonikRegular.variable} ${six_caps.variable} ${poppins.variable} ${aeonikBold.variable} ${aeonikItalic.variable} ${aeonikBoldItalic.variable} ${aeonikLight.variable} ${aeonikLightItalic.variable} antialiased dark:bg-black dark:text-white relative`}>
-        <Header />
-        {children}
-        {/* <footer className="">
+        <SessionProviderWrapper>
+          <Header />
+          {children}
+          {/* <footer className="">
           <div className="container mx-auto pt-10 text-center">
-            <FloatingDockDemo />
+          <FloatingDockDemo />
           </div>
           <div className="py-10 text-center">
-            <p className="text-xs  text-[#7D7F83] dark:text-white/70">
-              © Copyright {new Date().getFullYear()}, All Rights Reserved by
-              URANKHIITS
-            </p>
+          <p className="text-xs  text-[#7D7F83] dark:text-white/70">
+          © Copyright {new Date().getFullYear()}, All Rights Reserved by
+          URANKHIITS
+          </p>
           </div>
-        </footer> */}
-        <Footer />
+          </footer> */}
+          <Footer />
+        </SessionProviderWrapper>
       </body>
     </html>
   );

@@ -80,6 +80,7 @@ const config = {
       fontFamily: {
         poppins: ["var(--font-poppins)", "sans-serif"],
         caps: ["var(--font-six-caps)", "cursive"],
+        sans: ['"Helvetica Neue"', "Helvetica", "Arial", "sans-serif"],
       },
     },
   },

@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 interface Service {
   id: number;
@@ -22,7 +23,6 @@ const services: Service[] = [
     type: "title",
     description:
       "Designers create concepts and sketches which reflect the visual representation of the future interior. This stage includes the choice of color palette, materials, furniture, and basic style elements.",
-    // Example image path for the sketch.
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ const services: Service[] = [
   },
 ];
 
-const OurService: React.FC = () => {
+const OurServiceV: React.FC = () => {
   return (
     <section className="py-16">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-8">
@@ -54,9 +54,21 @@ const OurService: React.FC = () => {
           if (index === 3) gridPosition = "md:row-start-2 md:col-start-3"; // 2nd row, last column
 
           return (
-            <div
+            <motion.div
               key={service.id}
-              className={` ${gridPosition} relative border rounded-2xl overflow-hidden`}>
+              className={`relative border rounded-2xl overflow-hidden ${gridPosition}`}
+              initial={{
+                opacity: 0,
+                x: index % 2 === 0 ? -50 : 50, // Slide in from left or right based on index
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0, // Slide to original position
+                transition: {
+                  duration: 1, // Animation duration
+                },
+              }}
+              viewport={{ once: true }}>
               {service.type === "image" ? (
                 <img
                   src={service.imageUrl}
@@ -65,14 +77,14 @@ const OurService: React.FC = () => {
                 />
               ) : (
                 <div className="p-8 flex flex-col gap-8">
-                  <div className=" top-4 left-4 text-*+lg font-bold">
+                  <div className="top-4 left-4 text-*+lg font-bold">
                     {service.id < 10 ? `0${service.id}` : service.id}
                   </div>
-                  <h3 className="text-2xl font-semibold ">{service.title}</h3>
-                  <p className="text-gray-400 ">{service.description}</p>
+                  <h3 className="text-2xl font-semibold">{service.title}</h3>
+                  <p className="text-gray-400">{service.description}</p>
                 </div>
               )}
-            </div>
+            </motion.div>
           );
         })}
       </div>
@@ -80,4 +92,4 @@ const OurService: React.FC = () => {
   );
 };
 
-export default OurService;
+export default OurServiceV;

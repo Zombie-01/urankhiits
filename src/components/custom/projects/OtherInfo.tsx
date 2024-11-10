@@ -23,7 +23,7 @@ function OtherInfo({ data }: Props) {
         data={data?.location}
       />
       <AnimatedText
-        className=" my-1 text-4xl font-semibold md:my-3 md:text-8xl md:leading-[100px]"
+        className=" my-1 text-4xl font-semibold md:my-3 md:text-7xl md:leading-[90px]"
         data={data?.title}
       />
       <AnimatedText
@@ -48,9 +48,11 @@ const AnimatedText = ({
       style={{
         overflow: "hidden",
         display: "inline-block",
-      }}
-    >
-      <motion.p className={` ${className}`} variants={item} key={data}>
+      }}>
+      <motion.p
+        className={` ${className} font-sans `}
+        variants={item}
+        key={data}>
         {data}
       </motion.p>
     </span>

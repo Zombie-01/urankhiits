@@ -2,11 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://rsms.me/inter/inter.css");
+@import url("https://fonts.cdnfonts.com/css/helvetica-neue-55");
 
 html {
   scroll-behavior: smooth;
   overflow: scroll;
   overflow-x: hidden;
+  font-family: "Helvetica Neue";
+  font-style: normal;
 }
 ::-webkit-scrollbar {
   width: 0; /* Remove scrollbar space */

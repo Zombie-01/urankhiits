@@ -1,6 +1,15 @@
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
 
+// ESModule syntax
+// import { ImgurClient } from "imgur";
+
+// CommonJS syntax
+
+// all credentials with a refresh token, in order to get access tokens automatically
+// const client = new ImgurClient({
+// });
+
 // This function handles POST requests for the API route
 export async function POST(req: Request) {
   try {
@@ -52,6 +61,33 @@ export async function POST(req: Request) {
         { status: 500 }
       );
     }
+
+    // const response = await client.upload({
+    //   image: (output as any)[1],
+    //   title: "Meme",
+    //   description: "Dank Meme",
+    // });
+    // console.log(response.data?.link);
+
+    // 8. Upload the image to Pinterest using the access token
+    // const pinterestResponse = await fetch(
+    //   "https://api.pinterest.com/v1/pins/",
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       board: "<YOUR_BOARD_ID>", // Specify the board ID
+    //       note: "Generated Image for Interior Design",
+    //       link: "http://yourwebsite.com",
+    //       image_url: (output as any)[1],
+    //     }),
+    //   }
+    // );
+
+    // const pinterestData = await pinterestResponse.json();
+    // console.log(pinterestData);
 
     // 7. Return the output back to the client
     return NextResponse.json({ output }, { status: 201 });

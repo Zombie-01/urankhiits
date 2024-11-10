@@ -1,6 +1,6 @@
 "use client";
 import styles from "./style.module.scss";
-import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { opacity, background } from "./anim";
@@ -10,6 +10,7 @@ import DarkModeToggle from "@/app/DarkModeToggle";
 import { useParams, usePathname } from "next/navigation";
 
 export default function Header() {
+  const { data: session, status } = useSession();
   const [isActive, setIsActive] = useState(false);
   const path = usePathname();
   useEffect(() => {
@@ -17,6 +18,7 @@ export default function Header() {
     setIsActive(false);
   }, [path]);
 
+  console.log(session?.user?.image);
   return (
     <div
       className={`${styles.header} relative z-[9999999999] bg-[#f4f0ea] dark:bg-black`}>
@@ -52,6 +54,18 @@ export default function Header() {
           animate={!isActive ? "open" : "closed"}
           className={styles.shopContainer}>
           <DarkModeToggle />
+          {session?.user?.image && (
+            <motion.div
+              variants={opacity}
+              animate={!isActive ? "open" : "closed"}
+              className={""}>
+              <img
+                src={session?.user?.image}
+                alt
+                className=" w-6 h-6 sm:w-8 sm:h-8 rounded-full"
+              />
+            </motion.div>
+          )}
         </motion.div>
       </div>
       <motion.div

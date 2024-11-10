@@ -36,9 +36,9 @@
 
     .shopContainer {
       display: flex;
-      gap: 30px;
       position: absolute;
-      right: 0;
+      right: 5px;
+      gap: 4px;
 
       .shop {
         display: none;

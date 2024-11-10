@@ -6,6 +6,7 @@ import InfiniteMovingCardsDemo from "@/components/example/infinite-moving-cards-
 import AppleCardsCarouselDemo from "@/components/example/apple-cards-carousel-demo";
 import { useEffect, useState } from "react";
 import TypewriterLoader from "./loader";
+import Gallery from "@/components/custom/projects/gallery";
 import Hero from "./hero";
 import { motion } from "framer-motion";
 import Dvider from "@/components/custom/dvider";
@@ -15,6 +16,8 @@ import FooterHero from "@/components/custom/Footer/FooterHero";
 import MaskText from "@/components/custom/mask";
 import Aniamted from "@/components/custom/service/section/animated";
 import { BannerCards } from "@/components/custom/bannercard/BannerCards";
+import OurService from "@/components/custom/service/section/service";
+import OurServiceV from "@/components/custom/our-service";
 
 export default function Home() {
   const [showLoader, setShowLoader] = useState(true);
@@ -42,17 +45,16 @@ export default function Home() {
       </div> */}
 
       <Hero />
-      {/* <OurService /> */}
-      <MaskText />
       <FooterHero
         title="EXPLORING OUR WORLD OF VISUAL AND INTERACTIVE DESIGN."
         word="OUR SERVICE"
         id="ourservice"
       />
-      <Aniamted />
+      <OurServiceV />
+      {/* <Aniamted /> */}
 
       <FooterHero title="EXPLORING OUR PRJECTS." word="PROJECTS" id="project" />
-      <BannerCards />
+      <Gallery />
       <FooterHero
         title="EXPLORING OUR WORLD OF VISUAL AND INTERACTIVE DESIGN."
         word="ABOUT US"

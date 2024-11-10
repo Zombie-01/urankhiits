@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Progress from "./Progress";
 import { CurrentSlideData, Data } from "./gallery";
@@ -55,6 +55,14 @@ function Controls({
       ]);
     }, 500);
   };
+
+  useEffect(() => {
+    const interval = setTimeout(() => {
+      handleNext();
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearTimeout(interval); // Cleanup on component unmount
+  }, [currentSlideData]);
 
   return (
     <div className="flex items-center gap-3 px-0 py-3 md:px-1 md:py-5">

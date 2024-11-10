@@ -1,25 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { saveAs } from "file-saver";
 import { Select } from "@/app/select";
 import { MultiStepLoader } from "@/components/ui/multi-step-loader";
 import { Compare } from "@/components/ui/compare";
 import { FileUpload } from "@/components/ui/file-upload";
-import FloatingNavDemo from "@/components/custom/header";
-import TypewriterLoader from "../loader";
-import DarkModeToggle from "../DarkModeToggle";
-import Logo from "../logo";
 import Link from "next/link";
 import { MoveLeft } from "lucide-react";
-import { FollowerPointerCard } from "@/components/ui/following-pointer";
-import { LinkPreview } from "@/components/ui/link-preview";
+
+import { signIn, useSession } from "next-auth/react";
 
 const themes = ["Modern", "Vintage", "Minimalist", "Professional"];
 const rooms = ["Living Room", "Dining Room", "Bedroom", "Bathroom", "Office"];
 
-const acceptedFileTypes = {
-  "image/jpeg": [".jpeg", ".jpg", ".png"],
-};
 export type ImageAreaProps = {
   title: string;
   icon: React.ForwardRefExoticComponent<
@@ -48,6 +40,8 @@ const loadingStates = [
 export default function ImagePage() {
   const [showLoader, setShowLoader] = useState(true);
 
+  const { data: session, status } = useSession();
+
   const [outputImage, setOutputImage] = useState<string | null>(null);
   const [base64Image, setBase64Image] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -66,8 +60,33 @@ export default function ImagePage() {
     };
   }
 
-  function downloadOutputImage(): void {
-    saveAs(outputImage as string, "output.png");
+  async function downloadOutputImage() {
+    const response = await fetch("/api/watermark", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        imageUrl: outputImage,
+        watermarkText: "URANKHIITS",
+      }),
+    });
+
+    const link = document.createElement("a");
+    const blob = await response.blob(); // Get the response as a blob
+
+    // Create an object URL for the image blob
+    const imageObjectURL = URL.createObjectURL(blob);
+
+    // Set the download attribute with the desired filename
+    link.href = imageObjectURL;
+    link.download = "watermarked_image.png"; // Set the filename
+
+    // Programmatically click the link to trigger the download
+    link.click();
+
+    // Clean up the object URL after the download
+    URL.revokeObjectURL(imageObjectURL);
   }
 
   async function submitImage(): Promise<void> {
@@ -75,6 +94,23 @@ export default function ImagePage() {
       if (!file) {
         setError("Please upload an image.");
         return;
+      }
+
+      // Check if the user is logged in
+      if (!session?.user?.image) {
+        const text = "Do you want to log in with Google?";
+        if (confirm(text)) {
+          const res = await signIn("google", { redirect: false });
+
+          // If sign-in fails, return early
+          if (!res?.ok) {
+            setError("Login failed, please try again.");
+            return;
+          }
+        } else {
+          setError("You must be logged in to submit an image.");
+          return;
+        }
       }
 
       setLoading(true);
