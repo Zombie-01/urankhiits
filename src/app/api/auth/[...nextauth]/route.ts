@@ -1,8 +1,10 @@
+// src/app/api/auth/[...nextauth]/route.ts
+
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { JWT } from "next-auth/jwt"; // Optional: To get proper types for the JWT
 
-export const handler = NextAuth({
+// Define the NextAuth handler
+const authHandler = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -32,4 +34,6 @@ export const handler = NextAuth({
   },
 });
 
-export { handler as GET, handler as POST };
+// Export GET and POST handlers directly
+export const GET = authHandler;
+export const POST = authHandler;
