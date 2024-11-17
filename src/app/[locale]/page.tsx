@@ -2,7 +2,6 @@
 import ThreeDCardDemo from "@/components/example/3d-card-demo";
 import StickyScrollRevealDemo from "@/components/example/sticky-scroll-reveal-demo";
 import TextRevealCardPreview from "@/components/example/text-reveal-card-demo";
-import InfiniteMovingCardsDemo from "@/components/example/infinite-moving-cards-demo";
 import AppleCardsCarouselDemo from "@/components/example/apple-cards-carousel-demo";
 import { useEffect, useState } from "react";
 import TypewriterLoader from "./loader";

@@ -23,7 +23,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-100 py-12">
+    <footer className=" py-12">
       {/* Top Section */}
       <div className="container mx-auto flex flex-wrap justify-between  items-center px-4">
         {/* Logo and Tagline */}
@@ -34,7 +34,7 @@ export const Footer = () => {
               alt="Urankhiits Logo"
               className="h-auto w-[130px] object-contain"
             />
-            <span className="h-[80px] w-[1px] bg-black"></span>
+            <span className="h-[80px] w-[1px] bg-black dark:bg-white"></span>
             <div className="ml-3">
               <h3 className="text-lg font-bold uppercase">URANKHIITS</h3>
               <p className="text-sm">Interior & Lighting</p>
