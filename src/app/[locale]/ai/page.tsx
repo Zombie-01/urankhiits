@@ -137,8 +137,8 @@ export default function ImagePage() {
         return;
       }
 
-      if (result.output && result.output.length >= 2) {
-        setOutputImage(result.output[1]);
+      if (result.output) {
+        setOutputImage(result.output);
       } else {
         console.error("Unexpected result format. Unable to display image.");
       }

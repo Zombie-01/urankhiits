@@ -9,12 +9,12 @@ const items = [
 
 const AboutUs = () => {
   return (
-    <section className="bg-white py-12 px-6 flex justify-center items-center sm:px-12 lg:px-24">
+    <section className="py-12 px-6 flex justify-center items-center sm:px-12 lg:px-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Section: Statistics */}
         <div className="space-y-6 my-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">ABOUT US</h2>
-          <p className="text-gray-700 mb-8 max-w-4xl">
+          <h2 className="text-3xl font-bold mb-6">ABOUT US</h2>
+          <p className=" mb-8 max-w-4xl">
             Urankhilts LLC was established in 2018 and operates in the fields of
             architecture, interior and exterior design, and technical
             engineering services. Our company has successfully completed over
@@ -27,20 +27,20 @@ const AboutUs = () => {
           <div className="flex gap-8">
             {" "}
             <div className="border border-gray-300 rounded-lg p-6 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-300 mb-2">
                 60+ interior design projects
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-400">
                 Our team has delivered creative interior solutions for 60
                 diverse spaces, from coffee shops and stores to luxury homes and
                 corporate offices.
               </p>
             </div>
             <div className="border border-gray-300 rounded-lg p-6 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-300 mb-2">
                 120+ completed projects
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-400">
                 Urankhilts has completed a total of over 120 unique projects,
                 contributing to the development of Mongolia's architectural and
                 interior design landscape.

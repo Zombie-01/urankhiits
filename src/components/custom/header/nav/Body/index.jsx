@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import Link from "next/link";
 import styles from "./style.module.scss";
 import { blur, translate } from "../../anim";
+import { Link } from "@/i18n/routing";
 
 export default function Body({ links, selectedLink, setSelectedLink }) {
   const getChars = (word) => {

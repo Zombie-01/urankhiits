@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export const UranAIDemo = () => {
   return (
-    <section className="bg-[#FAF8F5] py-12">
+    <section className="bg-[#FAF8F5] dark:bg-[#FAF8F5]/10 py-12">
       <div className="container mx-auto px-4 flex flex-wrap justify-between items-center">
         {/* Left Side: Image with Label */}
         <div className="relative w-full lg:w-1/2">
@@ -14,7 +14,7 @@ export const UranAIDemo = () => {
             alt="Interior Renovation"
             className="w-full rounded-lg shadow-lg"
           />
-          <div className="absolute bottom-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 rounded-md text-sm">
+          <div className="absolute bottom-4 left-4 bg-black dark:bg-white bg-opacity-70 text-white dark:text-black px-3 py-1 rounded-md text-sm">
             Interior renovation
           </div>
         </div>

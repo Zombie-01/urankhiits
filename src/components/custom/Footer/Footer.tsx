@@ -10,6 +10,7 @@ import {
   IconBrandTwitter,
 } from "@tabler/icons-react";
 import SlideText from "../UI/SlideText";
+import Logo from "@/app/[locale]/logo";
 
 export const Footer = () => {
   const backToTop = () => {
@@ -27,13 +28,9 @@ export const Footer = () => {
       {/* Top Section */}
       <div className="container mx-auto flex flex-wrap justify-between  items-center px-4">
         {/* Logo and Tagline */}
-        <div className="flex flex-col w-3/5 pr-8 space-y-2">
+        <div className="flex flex-col w-full md:w-3/5 pr-8 space-y-2">
           <div className="flex items-center gap-2">
-            <img
-              src="/images/logo.png"
-              alt="Urankhiits Logo"
-              className="h-auto w-[130px] object-contain"
-            />
+            <Logo />
             <span className="h-[80px] w-[1px] bg-black dark:bg-white"></span>
             <div className="ml-3">
               <h3 className="text-lg font-bold uppercase">URANKHIITS</h3>
@@ -49,7 +46,7 @@ export const Footer = () => {
         </div>
 
         {/* Navigation Links */}
-        <div className="sm:w-2/5 flex gap-8">
+        <div className="w-full md:w-2/5 flex gap-8">
           <div className="flex flex-col space-y-2 text-sm">
             <h4 className="font-semibold">Холбоосууд</h4>
             <ul className="space-y-1">

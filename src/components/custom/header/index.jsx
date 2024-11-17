@@ -54,9 +54,12 @@ export default function Header() {
         <motion.div
           variants={opacity}
           animate={!isActive ? "open" : "closed"}
-          className={styles.shopContainer}>
-          <DarkModeToggle />
-          <LanguageToggle />
+          className={`${styles.shopContainer} `}>
+          <div className=" relative gap-2 items-center flex ">
+            {" "}
+            <DarkModeToggle />
+            <LanguageToggle />
+          </div>
           {session?.user?.image && (
             <motion.div
               variants={opacity}

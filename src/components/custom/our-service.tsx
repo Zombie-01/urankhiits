@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useTransition } from "react";
 import { motion } from "framer-motion";
 
 interface Service {
@@ -51,8 +51,8 @@ const OurServiceV: React.FC = () => {
 
   return (
     <section id="ourservice" className="py-16 relative min-h-screen w-screen">
-      <div className="container mx-auto flex gap-8 justify-between">
-        <div className="w-full md:w-1/3 max-w-[380px] flex flex-col">
+      <div className="container mx-auto flex flex-col md:flex-row gap-8 justify-between">
+        <div className="w-full md:w-1/3 ms:max-w-[380px] flex flex-col">
           <h1 className="font-[800] font-roboto md:text-[64px] text-center">
             Our service
           </h1>
@@ -135,7 +135,7 @@ const OurServiceV: React.FC = () => {
           })}
         </div>
       </div>
-      <div className="absolute z-20 md:left-[150px]">
+      <div className="absolute z-20 top-40   md:-left-[150px]">
         {" "}
         <div className="w-full h-full max-w-[500px] md:max-w-[700px] flex items-center justify-center">
           <img
