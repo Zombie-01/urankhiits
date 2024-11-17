@@ -6,45 +6,46 @@ import { height } from "../anim";
 import Body from "./Body";
 import Footer from "./Footer";
 import Image from "./Image";
-
-const links = [
-  {
-    title: "Home",
-    href: "/",
-    src: "hero_1.png",
-  },
-  {
-    title: "Project",
-    href: "/#project",
-    src: "hero_2.png",
-  },
-  {
-    title: "About Us",
-    href: "/#contact",
-    src: "hero_3.png",
-  },
-  {
-    title: "Our Service",
-    href: "/#ourservice",
-    src: "hero_3.png",
-  },
-  {
-    title: "Ai",
-    href: "/ai",
-    src: "hero_4.png",
-  },
-  {
-    title: "Contact",
-    href: "/#contact",
-    src: "pub_1.png",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function Index() {
+  const t = useTranslations("Header");
   const [selectedLink, setSelectedLink] = useState({
     isActive: false,
     index: 0,
   });
+  const links = [
+    {
+      title: t("HOME"),
+      href: "/",
+      src: "hero_1.png",
+    },
+    {
+      title: t("PROJECTS"),
+      href: "/#project",
+      src: "hero_2.png",
+    },
+    {
+      title: t("ABOUTUS"),
+      href: "/#contact",
+      src: "hero_3.png",
+    },
+    {
+      title: t("OURSERVICE"),
+      href: "/#ourservice",
+      src: "hero_3.png",
+    },
+    {
+      title: t("AI"),
+      href: "/ai",
+      src: "hero_4.png",
+    },
+    {
+      title: t("CONTACT"),
+      href: "/#contact",
+      src: "pub_1.png",
+    },
+  ];
 
   return (
     <motion.div

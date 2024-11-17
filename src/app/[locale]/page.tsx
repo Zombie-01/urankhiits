@@ -18,6 +18,8 @@ import Aniamted from "@/components/custom/service/section/animated";
 import { BannerCards } from "@/components/custom/bannercard/BannerCards";
 import OurService from "@/components/custom/service/section/service";
 import OurServiceV from "@/components/custom/our-service";
+import AboutUs from "@/components/custom/aboutUs";
+import { UranAIDemo } from "@/components/custom/UranAI";
 
 export default function Home() {
   const [showLoader, setShowLoader] = useState(true);
@@ -45,47 +47,18 @@ export default function Home() {
       </div> */}
 
       <Hero />
-      <FooterHero
+      {/* <FooterHero
         title="EXPLORING OUR WORLD OF VISUAL AND INTERACTIVE DESIGN."
         word="OUR SERVICE"
         id="ourservice"
-      />
+      /> */}
       <OurServiceV />
+      <UranAIDemo />
       {/* <Aniamted /> */}
 
-      <FooterHero title="EXPLORING OUR PRJECTS." word="PROJECTS" id="project" />
+      {/* <FooterHero title="EXPLORING OUR PRJECTS." word="PROJECTS" id="project" /> */}
       <Gallery />
-      <FooterHero
-        title="EXPLORING OUR WORLD OF VISUAL AND INTERACTIVE DESIGN."
-        word="ABOUT US"
-        id="contact"
-      />
-      <ZoomParallax />
-      <div className="flex container w-full mx-auto flex-col md:flex-row items-center justify-between">
-        {components.map((item, index) => (
-          <motion.div
-            key={index}
-            className={`md:w-1/2 w-full md:h-1/2 flex items-center justify-center my-5 ${
-              index % 2 !== 0 ? "self-start " : "self-end "
-            }`}
-            initial={{
-              opacity: 0,
-              x: index % 2 !== 0 ? 50 : -50, // Slide in from left or right based on index
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0, // Slide in to original position
-              transition: {
-                duration: 1, // Animation duration
-              },
-            }}
-            viewport={{ once: true }}>
-            {item.component}
-          </motion.div>
-        ))}
-      </div>
-
-      <ContactSection />
+      <AboutUs />
     </>
   );
 }

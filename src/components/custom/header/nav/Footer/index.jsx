@@ -1,8 +1,10 @@
 import styles from "./style.module.scss";
 import { translate } from "../../anim";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
+  const t = useTranslations("Header");
   return (
     <div className={styles.footer}>
       <ul>
@@ -12,7 +14,8 @@ export default function Footer() {
           initial="initial"
           animate="enter"
           exit="exit">
-          <span>Made by:</span>Urankhiits
+          <span>{t("MADEBY")}:</span>
+          {t("URAN")}
         </motion.li>
       </ul>
       <ul>
@@ -22,7 +25,7 @@ export default function Footer() {
           initial="initial"
           animate="enter"
           exit="exit">
-          <span>Design:</span> Urankhiits
+          <span>{t("DESIGN")}:</span> {t("URAN")}
         </motion.li>
       </ul>
       <ul>
@@ -32,7 +35,7 @@ export default function Footer() {
           initial="initial"
           animate="enter"
           exit="exit">
-          <span>Developer:</span> Zombie
+          <span>{t("DEVELOPER")}:</span> {t("ZOMBIE")}
         </motion.li>
       </ul>
       <ul>
@@ -42,7 +45,7 @@ export default function Footer() {
           initial="initial"
           animate="enter"
           exit="exit">
-          Privacy Policy
+          {t("POLICY")}
         </motion.li>
         <motion.li
           custom={[0.3, 0]}
@@ -50,7 +53,7 @@ export default function Footer() {
           initial="initial"
           animate="enter"
           exit="exit">
-          Terms & Conditions
+          {t("TERMS")}
         </motion.li>
       </ul>
     </div>

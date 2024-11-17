@@ -9,84 +9,141 @@ interface Service {
   type: "title" | "image";
 }
 
-const services: Service[] = [
-  {
-    id: 1,
-    title: "Discussion & analysis of needs",
-    type: "title",
-    description:
-      "The studio team meets with the client to understand in more detail his preferences, goals, budget and project features. It is important to determine the style, functional requirements and aesthetic preferences of the customer.",
-  },
-  {
-    id: 2,
-    title: "Concept & sketch development",
-    type: "title",
-    description:
-      "Designers create concepts and sketches which reflect the visual representation of the future interior. This stage includes the choice of color palette, materials, furniture, and basic style elements.",
-  },
-  {
-    id: 3,
-    title: "Discussion & analysis of needs",
-    type: "image",
-    imageUrl: "/hero_1.png",
-    description:
-      "The studio team meets with the client to understand in more detail his preferences, goals, budget and project features. It is important to determine the style, functional requirements and aesthetic preferences of the customer.",
-  },
-  {
-    id: 4,
-    title: "3D visualisation and design",
-    type: "title",
-    description:
-      "We develop detailed 3D models and visualization so that you can see how the interiors and exteriors will look after the completion of the project. This allows changes and refinements to be made before the actual implementation begins.",
-  },
-];
-
 const OurServiceV: React.FC = () => {
-  return (
-    <section className="py-16">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-8">
-        {services.map((service, index) => {
-          // Define the specific grid positioning
-          let gridPosition = "";
-          if (index === 0) gridPosition = "md:col-start-2 md:col-span-1"; // 1st row, 2nd column
-          if (index === 1) gridPosition = "md:row-start-2 md:col-start-1"; // 2nd row, 1st column
-          if (index === 2) gridPosition = "md:row-start-2 md:col-start-2"; // 2nd row, 2nd column
-          if (index === 3) gridPosition = "md:row-start-2 md:col-start-3"; // 2nd row, last column
+  const services = [
+    {
+      title: "Discussion & Analysis of Needs",
+      description:
+        "The design team collaborates with the client to understand their preferences, goals, budget, and project features.",
+      imageUrl: "/hero_1.png",
+    },
+    {
+      title: "Concept & Sketch Development",
+      description:
+        "Designers create preliminary concepts and sketches that reflect the desired interior style, including color palettes and material selections.",
+      imageUrl: "/hero_1.png",
+    },
+    {
+      title: "3D Visualization and Design",
+      description:
+        "Detailed 3D models and visualizations are developed to help clients visualize the final design.",
+      imageUrl: "/hero_1.png",
+    },
+    {
+      title: "Coordination and Approval",
+      description:
+        "A detailed budget and work schedule are formulated, incorporating project requirements and material costs, and client approval is obtained.",
+      imageUrl: "/hero_1.png",
+    },
+    {
+      title: "Interior renovation work",
+      description:
+        "Commencement of the interior construction, managing all tasks to ensure alignment with the approved design and specifications.",
+      imageUrl: "/hero_1.png",
+    },
+    {
+      title: "Handover of the Completed Project",
+      description:
+        "Final review and handover of the completed project to the client, ensuring it meets all expectations and addressing any final adjustments.",
+      imageUrl: "/hero_1.png",
+    },
+  ];
 
-          return (
-            <motion.div
-              key={service.id}
-              className={`relative border rounded-2xl overflow-hidden ${gridPosition}`}
-              initial={{
-                opacity: 0,
-                x: index % 2 === 0 ? -50 : 50, // Slide in from left or right based on index
-              }}
-              whileInView={{
-                opacity: 1,
-                x: 0, // Slide to original position
-                transition: {
-                  duration: 1, // Animation duration
-                },
-              }}
-              viewport={{ once: true }}>
-              {service.type === "image" ? (
-                <img
-                  src={service.imageUrl}
-                  alt={service.title}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="p-8 flex flex-col gap-8">
-                  <div className="top-4 left-4 text-*+lg font-bold">
-                    {service.id < 10 ? `0${service.id}` : service.id}
+  return (
+    <section id="ourservice" className="py-16 relative min-h-screen w-screen">
+      <div className="container mx-auto flex gap-8 justify-between">
+        <div className="w-full md:w-1/3 max-w-[380px] flex flex-col">
+          <h1 className="font-[800] font-roboto md:text-[64px] text-center">
+            Our service
+          </h1>
+          <div className="flex flex-col  gap-4 md:gap-8">
+            <p className=" text-justify ">
+              In today’s fast-paced business world, companies recognize the
+              strategic importance of well-designed environments that reflect
+              their values and identity. Interior design has become essential in
+              shaping spaces that foster success and brand alignment.
+              <br />
+              <br /> As Ulaanbaatar grows, the demand for personalized home
+              renovations is on the rise. At Urankhiits LLC, we specialize in
+              transforming living spaces into unique sanctuaries that promote
+              comfort and well-being. <br />
+              <br />
+              To meet this growing demand, Uran AI has been launched to provide
+              fast, AI-powered interior design solutions. With Uran AI,
+              customers can quickly receive customized designs, ensuring
+              high-quality results delivered with speed and efficiency.
+            </p>
+          </div>
+        </div>
+        <div className="w-full md:w-2/3 grid grid-cols-1 xl:grid-cols-2  gap-4 sm:gap-8">
+          {services.map((service, index) => {
+            // Define the specific grid positioning
+
+            return (
+              <div
+                className={`flex gap-2 sm:gap-4  ${
+                  index === 2 || index === 3 ? "flex-row-reverse" : ""
+                }`}>
+                {" "}
+                <motion.div
+                  key={service.title}
+                  className={`relative border w-1/2 rounded-2xl max-h-[266px] overflow-hidden `}
+                  initial={{
+                    opacity: 0,
+                    x: index % 2 === 0 ? -50 : 50, // Slide in from left or right based on index
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    x: 0, // Slide to original position
+                    transition: {
+                      duration: 1, // Animation duration
+                    },
+                  }}
+                  viewport={{ once: true }}>
+                  <div className="px-2 pb-2 pt-4 flex flex-col gap-4">
+                    <h3 className="text-sm sm:text-[21px] font-semibold text-center">
+                      {service.title}
+                    </h3>
+                    <p className="text-center text-sm ">
+                      {service.description}
+                    </p>
                   </div>
-                  <h3 className="text-2xl font-semibold">{service.title}</h3>
-                  <p className="text-gray-400">{service.description}</p>
-                </div>
-              )}
-            </motion.div>
-          );
-        })}
+                </motion.div>
+                <motion.div
+                  key={service.title}
+                  className={`relative border w-1/2 rounded-2xl max-h-[266px] overflow-hidden `}
+                  initial={{
+                    opacity: 0,
+                    x: index % 2 === 0 ? 50 : -50, // Slide in from left or right based on index
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    x: 0, // Slide to original position
+                    transition: {
+                      duration: 1, // Animation duration
+                    },
+                  }}
+                  viewport={{ once: true }}>
+                  <img
+                    src={service.imageUrl}
+                    alt={service.title}
+                    className="w-full h-full aspect-square object-cover"
+                  />
+                </motion.div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className="absolute z-20 md:left-[150px]">
+        {" "}
+        <div className="w-full h-full max-w-[500px] md:max-w-[700px] flex items-center justify-center">
+          <img
+            src="/svg.png"
+            alt={"svg"}
+            className="object-contain w-full h-full"
+          />
+        </div>
       </div>
     </section>
   );

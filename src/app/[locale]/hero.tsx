@@ -2,20 +2,23 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const t = useTranslations("Hero");
+
   const items = [
     {
-      title: "Innovative",
+      title: t("innovative"),
       thumbnail: "/pub_1.png",
-      word: "Innovative",
+      word: t("innovative"),
     },
     {
-      title: "Creative",
+      title: t("creative"),
       thumbnail: "/pub_2.png",
-      word: "Creative",
+      word: t("creative"),
     },
 
     // {
@@ -92,7 +95,7 @@ const Hero = () => {
       <div className="w-full container z-10 h-full mx-auto text-white flex flex-col gap-4 md:gap-10">
         <div className=" flex justify-start h-full  items-center px-4">
           <div className="text-4xl font-normal text-neutral-400">
-            Build
+            {t("headlinePrefix")}
             <AnimatePresence>
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -141,12 +144,12 @@ const Hero = () => {
               </motion.div>
             </AnimatePresence>{" "}
             <br />
-            Design with URANKHIITS
+            {t("headlineSuffix")}
           </div>
         </div>
         <Link href="/ai">
           <button className="w-min whitespace-nowrap py-2 px-4 text-xl md:text-3xl font-bold uppercase  rounded-sm bg-white text-black mix-blend-screen md:mx-4 ">
-            TRY Uran AI
+            {t("buttonText")}
           </button>
         </Link>
       </div>

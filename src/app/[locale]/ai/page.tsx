@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Select } from "@/app/select";
+import { Select } from "@/app/[locale]/select";
 import { MultiStepLoader } from "@/components/ui/multi-step-loader";
 import { Compare } from "@/components/ui/compare";
 import { FileUpload } from "@/components/ui/file-upload";

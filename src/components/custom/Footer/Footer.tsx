@@ -1,7 +1,14 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { IconChevronUp, IconShare } from "@tabler/icons-react";
+import {
+  IconChevronUp,
+  IconShare,
+  IconBrandInstagram,
+  IconBrandFacebook,
+  IconBrandLinkedin,
+  IconBrandTwitter,
+} from "@tabler/icons-react";
 import SlideText from "../UI/SlideText";
 
 export const Footer = () => {
@@ -16,89 +23,104 @@ export const Footer = () => {
   };
 
   return (
-    <div
-      className="min-h-[4rem] container flex items-center justify-between 
-    sm:mt-[2rem]  md:mt-[2rem]   lg:mt-[12rem] xl:mt-[12rem] 
-    bottom-0 left-0 right-0  w-full 
-    box-border cursor-pointer  z-10 ">
-      <div
-        //    className="flex items-center text-[1rem] min-w-[10rem]"
-        className="flex items-center 
-            xs:text-sm sm:text-sm md:text-base lg:text-lg xl:text-[1rem] 
-            min-w-[5rem] sm:min-w-[7rem] md:min-w-[9rem] lg:min-w-[10rem]"
-        onClick={backToTop}>
-        <motion.div
-          className="w-full h-full pointer-events-auto scale: hover:scale-130 transition-transform"
-          whileHover={{ scale: 1.3 }}>
-          <IconChevronUp />
-        </motion.div>
-        <SlideText text="Back Top" styleClass={"footer"} />
+    <footer className="bg-gray-100 py-12">
+      {/* Top Section */}
+      <div className="container mx-auto flex flex-wrap justify-between  items-center px-4">
+        {/* Logo and Tagline */}
+        <div className="flex flex-col w-3/5 pr-8 space-y-2">
+          <div className="flex items-center gap-2">
+            <img
+              src="/images/logo.png"
+              alt="Urankhiits Logo"
+              className="h-auto w-[130px] object-contain"
+            />
+            <span className="h-[80px] w-[1px] bg-black"></span>
+            <div className="ml-3">
+              <h3 className="text-lg font-bold uppercase">URANKHIITS</h3>
+              <p className="text-sm">Interior & Lighting</p>
+            </div>
+          </div>
+          <p className="text-sm">Build Innovative Design with URANKHIITS</p>
+          <img
+            src="/Bg assets/For ai bg bl 2.png"
+            alt="Urankhiits Logo"
+            className="h-[80px] w-full  object-cover"
+          />
+        </div>
+
+        {/* Navigation Links */}
+        <div className="sm:w-2/5 flex gap-8">
+          <div className="flex flex-col space-y-2 text-sm">
+            <h4 className="font-semibold">Холбоосууд</h4>
+            <ul className="space-y-1">
+              <li>
+                <a href="#services" className="hover:underline">
+                  Our Service
+                </a>
+              </li>
+              <li>
+                <a href="#uran-ai" className="hover:underline">
+                  Uran AI
+                </a>
+              </li>
+              <li>
+                <a href="#about-us" className="hover:underline">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="#projects" className="hover:underline">
+                  Projects
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div className="flex flex-col space-y-2 text-sm">
+            <h4 className="font-semibold">Холбоо барих</h4>
+            <p>
+              Улаанбаатар хот, Хан уул дүүрэг 11-р хороо, Чингисийн өргөн
+              чөлөө-61 Оргил стадион, 1 тоот
+            </p>
+            <p>+976 9901-7905</p>
+            <p>contact@urankhiits.mn</p>
+            <div className="flex space-x-4 mt-2">
+              <a href="#" aria-label="Facebook">
+                <IconBrandFacebook size={20} />
+              </a>
+              <a href="#" aria-label="Instagram">
+                <IconBrandInstagram size={20} />
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <IconBrandLinkedin size={20} />
+              </a>
+              <a href="#" aria-label="Twitter">
+                <IconBrandTwitter size={20} />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="text-center text-[10px] sm:text-[0.9rem]  mt-1 tracking-tighter ">
-        {new Date().getFullYear()} &copy; &nbsp;
-        <motion.span
-          initial="initial"
-          whileHover="hovered"
-          variants={{
-            initial: { textDecoration: "none" },
-            hovered: { textDecoration: "underline" },
-          }}>
-          URANKHIITS
-        </motion.span>
-        . All rights reserved.
+      {/* Bottom Section */}
+      <div className="container mx-auto mt-8 px-4 text-center">
+        <div className="flex justify-between items-center border-t border-gray-300 pt-4">
+          <motion.div
+            className="flex items-center cursor-pointer"
+            onClick={backToTop}
+            whileHover={{ scale: 1.1 }}>
+            <IconChevronUp size={20} />
+            <SlideText text="Back to Top" styleClass={"ml-2 text-sm"} />
+          </motion.div>
+          <p className="text-sm">
+            &copy; {new Date().getFullYear()} URANKHIITS. All rights reserved.
+          </p>
+          <motion.div whileHover={{ scale: 1.1 }} className="cursor-pointer">
+            <IconShare size={20} />
+          </motion.div>
+        </div>
       </div>
-
-      {/* <motion.div >ClatPat
-      <motion.span
-        className="w-full h-0.5 bg-white"
-        initial={{ width: '0%' }}
-        whileHover={{ width: '100%' }}
-        transition={{ duration: 0.5 }}
-      >
-      
-      </motion.span>
-    </motion.div> */}
-
-      <motion.div
-        initial="initial"
-        whileHover="hovered"
-        className="sm:flex hidden flex-col items-center text-sm -mr-12">
-        <motion.div
-          variants={{
-            initial: { translateY: 0 },
-            hovered: { translateX: 50, translateY: -30 },
-          }}
-          className="flex items-center justify-end">
-          <span className="mr-6 text-[1rem] mt-1 tracking-tight ">
-            Follow Us
-          </span>
-
-          <motion.span
-            variants={{
-              initial: { opacity: 1 },
-              hovered: { opacity: 0 },
-            }}>
-            <IconShare />
-          </motion.span>
-        </motion.div>
-
-        <motion.div
-          variants={{
-            initial: { opacity: 0, height: 0 },
-            hovered: { opacity: 1, height: "auto", translateY: -20 },
-          }}
-          className="flex mt-2">
-          {["In", "Fb", "Be", "Tw", "Db"].map((e) => (
-            <motion.p
-              whileHover={{ scale: 1.3, y: -3 }}
-              key={e}
-              className="mr-8 text-[0.9rem] mt-1 tracking-tight ">
-              {e}
-            </motion.p>
-          ))}
-        </motion.div>
-      </motion.div>
-    </div>
+    </footer>
   );
 };

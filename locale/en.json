@@ -1,0 +1,95 @@
+{
+  "HomePage": {
+    "ourService": "OUR SERVICE",
+    "serviceDescription": "In today’s fast-paced business world, competitive success hinges on the ability to adapt to rapid and sometimes unpredictable changes. As a company that values progress, we make it our mission to stay on the cutting edge by continuously enhancing our services.",
+    "serviceGoal": "We undertake projects in a client-centered manner, tailoring our services to meet the specific needs of each client. Our expertise in diverse areas enables us to provide solutions that drive business success.",
+    "services": {
+      "discussion": {
+        "title": "Discussion & Analysis of Needs",
+        "description": "We begin every project with a comprehensive analysis to understand and outline your vision and requirements."
+      },
+      "conceptDesign": {
+        "title": "Concept & Design Development",
+        "description": "We create initial design concepts to give you an early glimpse of what the finished project will look like."
+      },
+      "visualization": {
+        "title": "3D Visualization and Styling",
+        "description": "Experience a detailed 3D visualization to help you better understand the design."
+      },
+      "coordination": {
+        "title": "Coordination and Approval",
+        "description": "We work closely with you to finalize and approve all elements before moving into implementation."
+      },
+      "materialSelection": {
+        "title": "Interior Material Selection",
+        "description": "Our team assists in selecting the most suitable materials that fit both style and budget."
+      },
+      "projectOverview": {
+        "title": "Overview of the Construction Project",
+        "description": "A comprehensive review is conducted at the completion phase to ensure that all elements align with your expectations."
+      }
+    }
+  },
+  "AboutPage": {
+    "aboutUs": "ABOUT US",
+    "aboutDescription": "Livestudio LLC was established in 2018 and operates in the fields of architecture, interior and exterior design, with technical engineering services. Our company has successfully completed over 100 projects. Our expertise aims to revolutionize the architectural space by utilizing sustainable and effective solutions. We continue to expand our range of work, fully understanding project objectives, carefully analyzing client requirements, and bringing in creative ideas.",
+    "aboutDetails": {
+      "experience": {
+        "title": "Our experience",
+        "description": "More than 5 years of experience in architecture and design. We have been implementing various creative projects."
+      },
+      "sustainableProjects": {
+        "title": "Ultra-sustainable projects",
+        "description": "Our company uses sustainable solutions that benefit the environment and the people who use these spaces."
+      },
+      "reliableTeam": {
+        "title": "Reliable Team",
+        "description": "With a team of experienced professionals, we work to provide exceptional results for every project."
+      },
+      "clientSatisfaction": {
+        "title": "Passion for Client Satisfaction",
+        "description": "We prioritize understanding client needs and fulfilling their requirements for a successful partnership."
+      }
+    }
+  },
+  "ServicePage": {
+    "title": "OUR SERVICE",
+    "description": "In today’s fast-paced business world, companies recognize the strategic importance of well-designed environments that reflect their values and identity. Interior design has become essential in shaping spaces that foster success and brand alignment. As Ulaanbaatar grows, the demand for personalized home renovations is on the rise. At UranKhiits LLC, we specialize in transforming living spaces into unique sanctuaries that promote comfort and well-being. To meet this growing demand, Uran AI has been launched to provide fast, AI-powered interior design solutions. With Uran AI, customers can quickly receive customized designs, ensuring high-quality results delivered with speed and efficiency.",
+    "service1Title": "Discussion & Analysis of Needs",
+    "service1Description": "The design team collaborates with the client to understand their preferences, goals, budget, and project features.",
+    "service2Title": "Concept & Sketch Development",
+    "service2Description": "Designers create preliminary concepts and sketches that reflect the desired interior style, including color palettes and material selections.",
+    "service3Title": "3D Visualization and Design",
+    "service3Description": "Detailed 3D models and visualizations are developed to help clients visualize the final design.",
+    "service4Title": "Coordination and Approval",
+    "service4Description": "A detailed budget and work schedule are formulated, incorporating project requirements and material costs, and client approval is obtained.",
+    "service5Title": "Interior renovation work",
+    "service5Description": "Commencement of the interior construction, managing all tasks to ensure alignment with the approved design and specifications.",
+    "service6Title": "Handover of the Completed Project",
+    "service6Description": "Final review and handover of the completed project to the client, ensuring it meets all expectations and addressing any final adjustments."
+  },
+  "Hero": {
+    "innovative": "Innovative",
+    "creative": "Creative",
+    "headlinePrefix": "Build",
+    "headlineSuffix": "Design with URANKHIITS",
+    "buttonText": "TRY Uran AI"
+  },
+  "Header": {
+    "HOME": "HOME",
+    "MENU": "MENU",
+    "CLOSE": "CLOSE",
+    "PROJECTS": "PROJECTS",
+    "ABOUTUS": "ABOUTUS",
+    "OURSERVICE": "OURSERVICE",
+    "AI": "AI",
+    "CONTACT": "CONTACT",
+    "MADEBY": "MADE BY",
+    "DEVELOPER": "DEVELOPER",
+    "DESIGN": "DESIGN",
+    "POLICY": "Privacy Policy",
+    "TERMS": "Terms & Conditions",
+    "URAN": "URANKHIITS",
+    "ZOMBIE": "ZOMBIE"
+  }
+}

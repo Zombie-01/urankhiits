@@ -5,16 +5,18 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { opacity, background } from "./anim";
 import Nav from "./nav";
-import Logo from "@/app/logo";
-import DarkModeToggle from "@/app/DarkModeToggle";
+import Logo from "@/app/[locale]/logo";
+import DarkModeToggle from "@/app/[locale]/DarkModeToggle";
 import { useParams, usePathname } from "next/navigation";
+import LanguageToggle from "@/app/[locale]/langToggle";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
   const { data: session, status } = useSession();
+  const t = useTranslations("Header");
   const [isActive, setIsActive] = useState(false);
   const path = usePathname();
   useEffect(() => {
-    console.log(path);
     setIsActive(false);
   }, [path]);
 
@@ -42,10 +44,10 @@ export default function Header() {
             <motion.p
               variants={opacity}
               animate={!isActive ? "open" : "closed"}>
-              Menu
+              {t("MENU")}
             </motion.p>
             <motion.p variants={opacity} animate={isActive ? "open" : "closed"}>
-              Close
+              {t("CLOSE")}
             </motion.p>
           </div>
         </div>
@@ -54,6 +56,7 @@ export default function Header() {
           animate={!isActive ? "open" : "closed"}
           className={styles.shopContainer}>
           <DarkModeToggle />
+          <LanguageToggle />
           {session?.user?.image && (
             <motion.div
               variants={opacity}

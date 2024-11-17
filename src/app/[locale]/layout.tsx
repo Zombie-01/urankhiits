@@ -1,49 +1,53 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Six_Caps, Poppins } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
+import { notFound } from "next/navigation";
+import { NextIntlClientProvider } from "next-intl";
 import Header from "@/components/custom/header";
 import { Footer } from "@/components/custom/Footer/Footer";
 import SessionProviderWrapper from "./ai/googleButton";
+import { getMessages } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 
 // AeonikTRIAL Regular
 const aeonikRegular = localFont({
-  src: "./fonts/AeonikTRIAL-Regular.otf",
+  src: "../fonts/AeonikTRIAL-Regular.otf",
   variable: "--font-aeonik-regular",
   weight: "400", // Regular weight
 });
 
 // AeonikTRIAL Bold
 const aeonikBold = localFont({
-  src: "./fonts/AeonikTRIAL-Bold.otf",
+  src: "../fonts/AeonikTRIAL-Bold.otf",
   variable: "--font-aeonik-bold",
   weight: "700", // Bold weight
 });
 
 // AeonikTRIAL Regular Italic
 const aeonikItalic = localFont({
-  src: "./fonts/AeonikTRIAL-RegularItalic.otf",
+  src: "../fonts/AeonikTRIAL-RegularItalic.otf",
   variable: "--font-aeonik-italic",
   weight: "400", // Italic version of Regular weight
 });
 
 // AeonikTRIAL Bold Italic
 const aeonikBoldItalic = localFont({
-  src: "./fonts/AeonikTRIAL-BoldItalic.otf",
+  src: "../fonts/AeonikTRIAL-BoldItalic.otf",
   variable: "--font-aeonik-bold-italic",
   weight: "700", // Italic version of Bold weight
 });
 
 // AeonikTRIAL Light
 const aeonikLight = localFont({
-  src: "./fonts/AeonikTRIAL-Light.otf",
+  src: "../fonts/AeonikTRIAL-Light.otf",
   variable: "--font-aeonik-light",
   weight: "300", // Light weight
 });
 
 // AeonikTRIAL Light Italic
 const aeonikLightItalic = localFont({
-  src: "./fonts/AeonikTRIAL-LightItalic.otf",
+  src: "../fonts/AeonikTRIAL-LightItalic.otf",
   variable: "--font-aeonik-light-italic",
   weight: "300", // Italic version of Light weight
 });
@@ -67,19 +71,29 @@ const poppins = Poppins({
   weight: ["400", "500", "700"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
+
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages = await getMessages();
   return (
     <html lang="en">
       <body
         className={`${aeonikRegular.variable} ${six_caps.variable} ${poppins.variable} ${aeonikBold.variable} ${aeonikItalic.variable} ${aeonikBoldItalic.variable} ${aeonikLight.variable} ${aeonikLightItalic.variable} antialiased dark:bg-black dark:text-white relative`}>
-        <SessionProviderWrapper>
-          <Header />
-          {children}
-          {/* <footer className="">
+        <NextIntlClientProvider messages={messages}>
+          <SessionProviderWrapper>
+            <Header />
+            {children}
+            {/* <footer className="">
           <div className="container mx-auto pt-10 text-center">
           <FloatingDockDemo />
           </div>
@@ -90,8 +104,9 @@ export default function RootLayout({
           </p>
           </div>
           </footer> */}
-          <Footer />
-        </SessionProviderWrapper>
+            <Footer />
+          </SessionProviderWrapper>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -1,0 +1,95 @@
+{
+  "HomePage": {
+    "ourService": "ҮЙЛЧИЛГЭЭ",
+    "serviceDescription": "Өнөөгийн хурдтай хөгжиж буй бизнесийн орчинд өрсөлдөөний амжилт нь гэнэтийн өөрчлөлтүүдэд дасан зохицох чадвараас хамаарна. Бидний эрхэм зорилго бол үйлчилгээний чанарыг тасралтгүй сайжруулж, салбартаа тэргүүлэгч байх явдал юм.",
+    "serviceGoal": "Бид төслүүдийг үйлчлүүлэгчийн хэрэгцээнд тохируулан гүйцэтгэдэг ба тэдгээрийн зорилтод хүрэхэд туслах шийдлүүдийг санал болгодог.",
+    "services": {
+      "discussion": {
+        "title": "Хэрэгцээ тодорхойлох",
+        "description": "Бид төслийг эхлүүлэхийн тулд таны хүсэл зорилгыг тодорхойлж, анхан шатны анализ хийдэг."
+      },
+      "conceptDesign": {
+        "title": "Концепц ба зураг төсөл",
+        "description": "Эцсийн төсөл ямар харагдах талаар анхны концепцыг бий болгодог."
+      },
+      "visualization": {
+        "title": "3D дүрслэл ба загвар",
+        "description": "Төслийг гүнзгий ойлгохын тулд 3D дүрслэлийг танилцуулна."
+      },
+      "coordination": {
+        "title": "Зохицуулалт ба баталгаа",
+        "description": "Бид бүх элементүүдийг баталж, төслийг хэрэгжүүлэхээс өмнө нарийвчлан харилцдаг."
+      },
+      "materialSelection": {
+        "title": "Материалын сонголт",
+        "description": "Манай баг стиль ба төсөвт тохирсон материалуудыг сонгоход тусалдаг."
+      },
+      "projectOverview": {
+        "title": "Төсөл хүлээлгэх",
+        "description": "Бүх элементүүд таны хүсэлд нийцэж байгаа эсэхийг шалгах зорилгоор төслийн дүгнэлт хийдэг."
+      }
+    }
+  },
+  "AboutPage": {
+    "aboutUs": "БИДНИЙ ТУХАЙ",
+    "aboutDescription": "ЛайвСтудио ХХК нь 2018 онд байгуулагдсан бөгөөд архитектур, интерьер болон экстерьер дизайн, инженерийн үйлчилгээний чиглэлээр үйл ажиллагаа явуулдаг. Манай компани 100-аас дээш төслийг амжилттай хэрэгжүүлсэн туршлагатай. Бид архитектурын салбарт үр ашигтай, тогтвортой шийдлүүдийг ашиглан өөрчлөлт хийхээр зорьж байна. Төслийн зорилтуудыг ойлгож, үйлчлүүлэгчийн шаардлагыг анхаарч, шинэлэг санааг санал болгоход бүрэн хүчин чармайлт гаргаж ажилладаг.",
+    "aboutDetails": {
+      "experience": {
+        "title": "Манай туршлага",
+        "description": "Архитектур, дизайны салбарт 5-аас дээш жил ажилласан туршлагатай. Бид төрөл бүрийн бүтээлч төслүүдийг хэрэгжүүлдэг."
+      },
+      "sustainableProjects": {
+        "title": "Тогтвортой төслүүд",
+        "description": "Манай компани байгаль орчинд ээлтэй, тогтвортой шийдлүүдийг ашиглаж ажилладаг."
+      },
+      "reliableTeam": {
+        "title": "Найдвартай баг",
+        "description": "Туршлагатай мэргэжлийн багтай хамтран ажиллаж, бүхий л төсөлд онцгой үр дүнг хүргэдэг."
+      },
+      "clientSatisfaction": {
+        "title": "Үйлчлүүлэгчийн сэтгэл ханамж",
+        "description": "Бид үйлчлүүлэгчдийн хэрэгцээг ойлгож, тэдний шаардлагыг биелүүлэхэд онцгой анхаарал хандуулдаг."
+      }
+    }
+  },
+  "ServicePage": {
+    "title": "ҮЙЛЧИЛГЭЭ",
+    "description": "In today’s fast-paced business world, companies recognize the strategic importance of well-designed environments that reflect their values and identity. Interior design has become essential in shaping spaces that foster success and brand alignment. As Ulaanbaatar grows, the demand for personalized home renovations is on the rise. At UranKhiits LLC, we specialize in transforming living spaces into unique sanctuaries that promote comfort and well-being. To meet this growing demand, Uran AI has been launched to provide fast, AI-powered interior design solutions. With Uran AI, customers can quickly receive customized designs, ensuring high-quality results delivered with speed and efficiency.",
+    "service1Title": "Discussion & Analysis of Needs",
+    "service1Description": "The design team collaborates with the client to understand their preferences, goals, budget, and project features.",
+    "service2Title": "Concept & Sketch Development",
+    "service2Description": "Designers create preliminary concepts and sketches that reflect the desired interior style, including color palettes and material selections.",
+    "service3Title": "3D Visualization and Design",
+    "service3Description": "Detailed 3D models and visualizations are developed to help clients visualize the final design.",
+    "service4Title": "Coordination and Approval",
+    "service4Description": "A detailed budget and work schedule are formulated, incorporating project requirements and material costs, and client approval is obtained.",
+    "service5Title": "Interior renovation work",
+    "service5Description": "Commencement of the interior construction, managing all tasks to ensure alignment with the approved design and specifications.",
+    "service6Title": "Handover of the Completed Project",
+    "service6Description": "Final review and handover of the completed project to the client, ensuring it meets all expectations and addressing any final adjustments."
+  },
+  "Hero": {
+    "innovative": "Инноваци",
+    "creative": "Бүтээлч",
+    "headlinePrefix": "Бүтээ",
+    "headlineSuffix": "Уран Хийцтэй Дизайн",
+    "buttonText": "URAN AI-г турших"
+  },
+  "Header": {
+    "HOME": "НҮҮР",
+    "MENU": "ЦЭС",
+    "CLOSE": "ХААХ",
+    "PROJECTS": "АЖИЛ",
+    "ABOUTUS": "БИДНИЙ ТУХАЙ",
+    "OURSERVICE": "ҮЙЛЧИЛГЭЭ",
+    "AI": "ХЙИМЭЛ ОЮУН",
+    "CONTACT": "ХОЛБОО БАРИХ",
+    "MADEBY": "БҮТЭЭСЭН",
+    "DEVELOPER": "ХӨГЖҮҮЛЭГЧ",
+    "DESIGN": "ДИЗАЙН",
+    "POLICY": "Нууцлалын бодлого",
+    "TERMS": "Үйлчилгээний нөхцөл",
+    "URAN": "УРАНХИЙЦ",
+    "ZOMBIE": "ЗОМБИ"
+  }
+}
