@@ -1,5 +1,6 @@
 import React, { useTransition } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 interface Service {
   id: number;
@@ -10,41 +11,36 @@ interface Service {
 }
 
 const OurServiceV: React.FC = () => {
+  const t = useTranslations("ServicePage");
   const services = [
     {
-      title: "Discussion & Analysis of Needs",
-      description:
-        "The design team collaborates with the client to understand their preferences, goals, budget, and project features.",
+      title: t("service1Title"),
+      description: t("service1Description"),
       imageUrl: "/hero_1.png",
     },
     {
-      title: "Concept & Sketch Development",
-      description:
-        "Designers create preliminary concepts and sketches that reflect the desired interior style, including color palettes and material selections.",
+      title: t("service2Title"),
+      description: t("service2Description"),
       imageUrl: "/hero_1.png",
     },
     {
-      title: "3D Visualization and Design",
-      description:
-        "Detailed 3D models and visualizations are developed to help clients visualize the final design.",
+      title: t("service3Title"),
+      description: t("service3Description"),
       imageUrl: "/hero_1.png",
     },
     {
-      title: "Coordination and Approval",
-      description:
-        "A detailed budget and work schedule are formulated, incorporating project requirements and material costs, and client approval is obtained.",
+      title: t("service4Title"),
+      description: t("service4Description"),
       imageUrl: "/hero_1.png",
     },
     {
-      title: "Interior renovation work",
-      description:
-        "Commencement of the interior construction, managing all tasks to ensure alignment with the approved design and specifications.",
+      title: t("service5Title"),
+      description: t("service5Description"),
       imageUrl: "/hero_1.png",
     },
     {
-      title: "Handover of the Completed Project",
-      description:
-        "Final review and handover of the completed project to the client, ensuring it meets all expectations and addressing any final adjustments.",
+      title: t("service6Title"),
+      description: t("service6Description"),
       imageUrl: "/hero_1.png",
     },
   ];
@@ -54,24 +50,15 @@ const OurServiceV: React.FC = () => {
       <div className="container mx-auto flex flex-col md:flex-row gap-8 justify-between">
         <div className="w-full md:w-1/3 ms:max-w-[380px] flex flex-col">
           <h1 className="font-[800] font-roboto md:text-[64px] text-center">
-            Our service
+            {t("title")}
           </h1>
           <div className="flex flex-col  gap-4 md:gap-8">
             <p className=" text-justify ">
-              In today’s fast-paced business world, companies recognize the
-              strategic importance of well-designed environments that reflect
-              their values and identity. Interior design has become essential in
-              shaping spaces that foster success and brand alignment.
+              {t("description")}
               <br />
-              <br /> As Ulaanbaatar grows, the demand for personalized home
-              renovations is on the rise. At Urankhiits LLC, we specialize in
-              transforming living spaces into unique sanctuaries that promote
-              comfort and well-being. <br />
+              <br /> {t("description1")} <br />
               <br />
-              To meet this growing demand, Uran AI has been launched to provide
-              fast, AI-powered interior design solutions. With Uran AI,
-              customers can quickly receive customized designs, ensuring
-              high-quality results delivered with speed and efficiency.
+              {t("description2")}{" "}
             </p>
           </div>
         </div>

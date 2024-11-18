@@ -6,21 +6,11 @@ import { Compare } from "@/components/ui/compare";
 import { FileUpload } from "@/components/ui/file-upload";
 import Link from "next/link";
 import { MoveLeft } from "lucide-react";
-
 import { signIn, useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 const themes = ["Modern", "Vintage", "Minimalist", "Professional"];
 const rooms = ["Living Room", "Dining Room", "Bedroom", "Bathroom", "Office"];
-
-export type ImageAreaProps = {
-  title: string;
-  icon: React.ForwardRefExoticComponent<
-    Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
-      title?: string | undefined;
-      titleId?: string | undefined;
-    } & React.RefAttributes<SVGSVGElement>
-  >;
-};
 
 const loadingStates = [
   {
@@ -38,18 +28,25 @@ const loadingStates = [
 ];
 
 export default function ImagePage() {
-  const [showLoader, setShowLoader] = useState(true);
-
-  const { data: session, status } = useSession();
-
-  const [outputImage, setOutputImage] = useState<string | null>(null);
-  const [base64Image, setBase64Image] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [theme, setTheme] = useState<string>(themes[0]);
   const [room, setRoom] = useState<string>(rooms[0]);
-  const [error, setError] = useState<string | null>("");
+  const [outputImage, setOutputImage] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
+  const [base64Image, setBase64Image] = useState<string | null>(null);
+
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    // Apply the dark class to the <html> element when dark mode is enabled
+    const html = document.documentElement;
+    if (isDarkMode) {
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+    }
+  }, [isDarkMode]);
 
   function convertImageToBase64(file: File): void {
     const reader = new FileReader();
@@ -73,45 +70,36 @@ export default function ImagePage() {
     });
 
     const link = document.createElement("a");
-    const blob = await response.blob(); // Get the response as a blob
+    const blob = await response.blob();
 
-    // Create an object URL for the image blob
     const imageObjectURL = URL.createObjectURL(blob);
-
-    // Set the download attribute with the desired filename
     link.href = imageObjectURL;
-    link.download = "watermarked_image.png"; // Set the filename
+    link.download = "watermarked_image.png";
 
-    // Programmatically click the link to trigger the download
     link.click();
-
-    // Clean up the object URL after the download
     URL.revokeObjectURL(imageObjectURL);
   }
 
   async function submitImage(): Promise<void> {
     try {
       if (!file) {
-        setError("Please upload an image.");
+        toast.error("Please upload an image.");
         return;
       }
 
-      // Check if the user is logged in
-      if (!session?.user?.image) {
-        const text = "Do you want to log in with Google?";
-        if (confirm(text)) {
-          const res = await signIn("google", { redirect: false });
-
-          // If sign-in fails, return early
-          if (!res?.ok) {
-            setError("Login failed, please try again.");
-            return;
-          }
-        } else {
-          setError("You must be logged in to submit an image.");
-          return;
-        }
-      }
+      // if (!session?.user?.image) {
+      //   const text = "Do you want to log in with Google?";
+      //   if (confirm(text)) {
+      //     const res = await signIn("google", { redirect: false });
+      //     if (!res?.ok) {
+      //       toast.error("Login failed, please try again.");
+      //       return;
+      //     }
+      //   } else {
+      //     toast.error("You must be logged in to submit an image.");
+      //     return;
+      //   }
+      // }
 
       setLoading(true);
 
@@ -128,11 +116,10 @@ export default function ImagePage() {
       });
 
       const result = await response.json();
-      console.log(result);
 
       if (result.error) {
         console.error(result.error);
-        setError(result.error);
+        toast.error(result.error);
         setLoading(false);
         return;
       }
@@ -149,86 +136,132 @@ export default function ImagePage() {
     }
   }
 
-  useEffect(() => {
-    // Set a timeout to hide the loader after 4 seconds
-    const timer = setTimeout(() => {
-      setShowLoader(false);
-    }, 4000);
-
-    // Cleanup the timer when the component is unmounted
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <>
-      <div className="py-20 relative  min-h-[calc( 100vh - 50px )] flex items-center justify-center">
-        <Link
-          href="/"
-          className="absolute left-10 top-20 rounded-full overflow-hidden w-full">
-          <MoveLeft />
-        </Link>
-        <MultiStepLoader
-          loadingStates={loadingStates}
-          loading={loading}
-          duration={2000}
-        />
-        <div className="text-center pt-4 md:pt-10  w-full">
-          <div className="relative h-20">
-            <div className="absolute left-1/2 z-50 w-64 -translate-x-1/2">
-              <Select
-                theme={theme}
-                themes={themes}
-                room={room}
-                rooms={rooms}
-                setTheme={setTheme}
-                setRoom={setRoom}
-              />
-            </div>
-          </div>
+    <div className="min-h-screen  p-8">
+      <MultiStepLoader
+        duration={2000}
+        loading={isLoading}
+        loadingStates={loadingStates}
+      />
+      <div className="flex justify-end">
+        <button
+          onClick={() => setIsDarkMode(!isDarkMode)}
+          className="mb-4 px-4 py-2 bg-gray-200 dark:bg-slate-500 text-black dark:text-white rounded-md">
+          Toggle {isDarkMode ? "Light" : "Dark"} Mode
+        </button>
+      </div>
 
-          <div className="flex z-40 justify-center w-full h-full items-center my-8">
-            {file ? (
-              <Compare
-                firstImage={URL.createObjectURL(file as any) as any}
-                secondImage={outputImage as any}
-              />
-            ) : (
+      <div className="max-w-6xl flex flex-col gap-4 my-16 mx-auto">
+        <div className="bg-gray-200 dark:bg-gray-800 rounded-lg flex items-start justify-center p-4 flex-col">
+          <h2 className="text-lg font-bold mb-4 dark:text-white">
+            1. Choose your building type
+          </h2>
+          <div className="flex gap-4">
+            {["Residential", "Commercial", "Exterior"].map((type) => (
+              <button
+                key={type}
+                className="px-4 py-2 border rounded-md bg-white dark:bg-slate-500 hover:bg-gray-100 dark:hover:bg-gray-600 text-black dark:text-white">
+                {type}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-gray-200 dark:bg-gray-800 rounded-lg flex items-start justify-center p-4 flex-col">
+          <h2 className="text-lg font-bold mb-4 dark:text-white">
+            2. Choose Room Type
+          </h2>
+          <div className="flex gap-4 py-2 overflow-x-auto">
+            {rooms.map((r) => (
+              <button
+                key={r}
+                onClick={() => setRoom(r)}
+                className={`flex flex-col items-center min-w-[120px] p-4 rounded-md shadow-md bg-white dark:bg-slate-500 hover:bg-gray-100 dark:hover:bg-gray-600 ${
+                  room === r ? "border-2 border-blue-600" : ""
+                }`}>
+                <div className="h-16 w-16 bg-gray-200 dark:bg-gray-600 mb-2"></div>
+                <span className="text-black dark:text-white">{r}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="bg-gray-200 dark:bg-gray-800 rounded-lg flex items-start justify-center p-4 flex-col">
+          <h2 className="text-lg font-bold dark:text-white mt-4">
+            3. Choose Theme
+          </h2>
+          <div className="flex gap-4">
+            {themes.map((t) => (
+              <button
+                key={t}
+                onClick={() => setTheme(t)}
+                className={`px-4 py-2 rounded-md bg-white dark:bg-slate-500 hover:bg-gray-100 dark:hover:bg-gray-600 text-black dark:text-white ${
+                  theme === t ? "border-2 border-blue-600" : ""
+                }`}>
+                {t}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-6">
+          <div>
+            <h2 className="text-lg font-bold dark:text-white">
+              3. Upload Your Image
+            </h2>
+            <div className="border-2 relative h-full border-dashed rounded-md flex items-center justify-center">
               <FileUpload
                 onChange={(e) => {
                   convertImageToBase64(e[0]);
                   setFile(e[0]);
                 }}
               />
-            )}
+            </div>
           </div>
 
-          <div className="gap-4 flex justify-center">
-            <button
-              onClick={() => {
-                setFile(null);
-                setOutputImage(null);
-                setBase64Image(null);
-              }}
-              className="px-2 py-1 bg-gray-200 text-black dark:bg-black dark:border-black dark:text-white border border-gray-300 rounded-md text-sm w-28">
-              Reset
-            </button>
-
-            {outputImage ? (
-              <button
-                onClick={() => downloadOutputImage()}
-                className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28">
-                Download
-              </button>
-            ) : (
-              <button
-                onClick={() => submitImage()}
-                className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28">
-                Generate
-              </button>
-            )}
+          <div>
+            <h2 className="text-lg font-bold dark:text-white">
+              Uran AI Generated
+            </h2>
+            <div className="border rounded-md overflow-hidden h-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+              {outputImage ? (
+                <Compare
+                  firstImage={URL.createObjectURL(file as any) as any}
+                  secondImage={outputImage as any}
+                />
+              ) : (
+                <span className="text-black dark:text-white">
+                  Generated image will appear here
+                </span>
+              )}
+            </div>
           </div>
         </div>
+
+        <div className="flex justify-end gap-4 mt-6">
+          <button
+            onClick={() => {
+              setFile(null);
+              setOutputImage(null);
+              setBase64Image(null);
+            }}
+            className="px-4 py-2 bg-gray-200 dark:bg-slate-500 text-black dark:text-white rounded-md">
+            Reset
+          </button>
+          {outputImage ? (
+            <button
+              onClick={() => downloadOutputImage()}
+              className="px-4 py-2 bg-blue-600 text-white rounded-md">
+              Download
+            </button>
+          ) : (
+            <button
+              onClick={() => submitImage()}
+              className="px-4 py-2 bg-green-600 text-white rounded-md">
+              Generate
+            </button>
+          )}
+        </div>
       </div>
-    </>
+    </div>
   );
 }

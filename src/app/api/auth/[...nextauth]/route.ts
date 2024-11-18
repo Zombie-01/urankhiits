@@ -11,20 +11,20 @@ const authHandler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET, // Add the secret here
   pages: {
     signIn: "/auth/signin", // Optional: Custom sign-in page
     error: "/auth/error", // Optional: Custom error page
   },
   callbacks: {
-    async jwt({ token, account }) {
-      // Ensure account is properly typed
+    async jwt({ token, account }: any) {
       if (account?.provider === "google") {
         token.id = account.id;
-        token.email = account.email as string | null; // Explicitly type the email as string | null
+        token.email = account.email as string | null; // Explicitly type the email
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: any) {
       if (session?.user) {
         session.user.name = token.id as string;
         session.user.email = token.email as string | null;

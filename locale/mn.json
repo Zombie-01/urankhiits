@@ -31,42 +31,30 @@
     }
   },
   "AboutPage": {
-    "aboutUs": "БИДНИЙ ТУХАЙ",
-    "aboutDescription": "ЛайвСтудио ХХК нь 2018 онд байгуулагдсан бөгөөд архитектур, интерьер болон экстерьер дизайн, инженерийн үйлчилгээний чиглэлээр үйл ажиллагаа явуулдаг. Манай компани 100-аас дээш төслийг амжилттай хэрэгжүүлсэн туршлагатай. Бид архитектурын салбарт үр ашигтай, тогтвортой шийдлүүдийг ашиглан өөрчлөлт хийхээр зорьж байна. Төслийн зорилтуудыг ойлгож, үйлчлүүлэгчийн шаардлагыг анхаарч, шинэлэг санааг санал болгоход бүрэн хүчин чармайлт гаргаж ажилладаг.",
-    "aboutDetails": {
-      "experience": {
-        "title": "Манай туршлага",
-        "description": "Архитектур, дизайны салбарт 5-аас дээш жил ажилласан туршлагатай. Бид төрөл бүрийн бүтээлч төслүүдийг хэрэгжүүлдэг."
-      },
-      "sustainableProjects": {
-        "title": "Тогтвортой төслүүд",
-        "description": "Манай компани байгаль орчинд ээлтэй, тогтвортой шийдлүүдийг ашиглаж ажилладаг."
-      },
-      "reliableTeam": {
-        "title": "Найдвартай баг",
-        "description": "Туршлагатай мэргэжлийн багтай хамтран ажиллаж, бүхий л төсөлд онцгой үр дүнг хүргэдэг."
-      },
-      "clientSatisfaction": {
-        "title": "Үйлчлүүлэгчийн сэтгэл ханамж",
-        "description": "Бид үйлчлүүлэгчдийн хэрэгцээг ойлгож, тэдний шаардлагыг биелүүлэхэд онцгой анхаарал хандуулдаг."
-      }
-    }
+    "aboutUs": "Бидний тухай",
+    "aboutDescription": "Уран Хийц ХХК нь 2018 онд байгуулагдсан бөгөөд архитектур, интерьер болон экстерьер дизайн, техникийн инженерийн чиглэлээр үйл ажиллагаа явуулдаг. Манай компани 120 гаруй төслийг амжилттай хэрэгжүүлсэн туршлагатай. Шинэлэг санаа, өндөр стандартыг баримтлан, үр дүнтэй хамтын ажиллагаагаар ажилдаг маань бидний давуу тал юм. Төслийн зорилгыг гүнзгий ойлгон, үйлчлүүлэгчийн шаардлагыг нягт нямбай шинжилж, шинэлэг санааг авчрах зорилгоор үйл ажиллагаагаа явуулсаар байна.",
+    "experience-title": "60+ интерьерийн дизайн төслүүд",
+    "experience-description": "Тансаг зэрэглэлийн орон сууц кофе шоп, дэлгүүр,  оффисын зэрэг олон төрлийн 60 гаруй интерьерийн шийдлүүдийг амжилттай хэрэгжүүлсэн.",
+    "sustainableProjects-title": "120+ хэрэгжүүлсэн төсөл",
+    "sustainableProjects-description": "Бид интерьер дизайны салбарт хувь нэмрээ оруулж, нийт 120 гаруй  төслийг амжилттай хэрэгжүүлсэн."
   },
   "ServicePage": {
     "title": "ҮЙЛЧИЛГЭЭ",
-    "description": "In today’s fast-paced business world, companies recognize the strategic importance of well-designed environments that reflect their values and identity. Interior design has become essential in shaping spaces that foster success and brand alignment. As Ulaanbaatar grows, the demand for personalized home renovations is on the rise. At UranKhiits LLC, we specialize in transforming living spaces into unique sanctuaries that promote comfort and well-being. To meet this growing demand, Uran AI has been launched to provide fast, AI-powered interior design solutions. With Uran AI, customers can quickly receive customized designs, ensuring high-quality results delivered with speed and efficiency.",
-    "service1Title": "Discussion & Analysis of Needs",
-    "service1Description": "The design team collaborates with the client to understand their preferences, goals, budget, and project features.",
-    "service2Title": "Concept & Sketch Development",
-    "service2Description": "Designers create preliminary concepts and sketches that reflect the desired interior style, including color palettes and material selections.",
-    "service3Title": "3D Visualization and Design",
-    "service3Description": "Detailed 3D models and visualizations are developed to help clients visualize the final design.",
-    "service4Title": "Coordination and Approval",
-    "service4Description": "A detailed budget and work schedule are formulated, incorporating project requirements and material costs, and client approval is obtained.",
-    "service5Title": "Interior renovation work",
-    "service5Description": "Commencement of the interior construction, managing all tasks to ensure alignment with the approved design and specifications.",
-    "service6Title": "Handover of the Completed Project",
-    "service6Description": "Final review and handover of the completed project to the client, ensuring it meets all expectations and addressing any final adjustments."
+    "description": "Орчин үеийн хурдтай өөрчлөгдөж буй бизнесийн ертөнцөд компаниуд үнэт зүйлс, өнгө төрхөө илэрхийлэх орчинд анхаарал хандуулах нь чухал ач холбогдолтой болж байна",
+    "description1": "Интерьер дизайн нь орчныг амжилттай уялдуулж, брэндийн уялдаа холбоог бий болгоход чухал үүрэгтэй болж",
+    "description2": "мөн түүнчлэн хувь хүн бүрийн хүсэл сонирхолд нийцсэн тав тухтай орон гэрийн  дотоод заслын эрэлт нэмэгдсээр байна. Уран Хийц ХХК нь таны ажиллаж амьдрах орчны тав тух, үнэ цэнийг бүтээж ажиллахад бэлэн байна.",
+    "service1Title": "Төслийн Судалгаа & Уулзалт ",
+    "service1Description": "Дизайны баг нь үйлчлүүлэгчийн сонголт, зорилго, төсөв, төслийн онцлогийг ойлгохын тулд уулзалт зохион байгуулж шаардлагатай мэдээллийг цуглуулан хамтран ажилладаг.",
+    "service2Title": "Концепц ба  хөгжүүлэлт",
+    "service2Description": "Дизайнерууд интерьерийн хэв маягийг илэрхийлэх урьдчилсан концепц болон нооргуудыг бий болгож, өнгөний сонголт, материалын сонголтыг тодорхойлох болно.",
+    "service3Title": "3D дүрслэл ба дизайн",
+    "service3Description": "Эцсийн дизайныг харуулахын тулд нарийвчилсан 3D загвар болон дүрслэлийг боловсруулах.",
+    "service4Title": "Зохицуулалт ба Зөвшөөрөл",
+    "service4Description": "Төслийн шаардлага болон материалын зардлыг тусгасан нарийвчилсан төсөв, ажлын хуваарийг боловсруулж, үйлчлүүлэгчийн зөвшөөрлийг авах болно.",
+    "service5Title": "Интерьер заслын ажил",
+    "service5Description": " Батлагдсан дизайн болон техникийн шаардлагад нийцүүлэхийн тулд бүх ажлыг зохион байгуулан  заслын ажлыг эхлүүлнэ.",
+    "service6Title": "Төсөл хүлээлгэн өгөх",
+    "service6Description": "Эцсийн шалгалтуудыг хийж, үйлчлүүлэгчид төслийг хүлээлгэн өгөх бөгөөд бүх шаардлагад нийцсэн эсэхийг баталгаажуулж түлхүүр гардуулах."
   },
   "Hero": {
     "innovative": "Инноваци",

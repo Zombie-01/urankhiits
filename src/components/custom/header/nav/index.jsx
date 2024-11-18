@@ -22,7 +22,7 @@ export default function Index() {
     },
     {
       title: t("PROJECTS"),
-      href: "/#project",
+      href: "/project",
       src: "hero_2.png",
     },
     {

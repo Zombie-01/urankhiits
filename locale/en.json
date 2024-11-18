@@ -32,29 +32,17 @@
   },
   "AboutPage": {
     "aboutUs": "ABOUT US",
-    "aboutDescription": "Livestudio LLC was established in 2018 and operates in the fields of architecture, interior and exterior design, with technical engineering services. Our company has successfully completed over 100 projects. Our expertise aims to revolutionize the architectural space by utilizing sustainable and effective solutions. We continue to expand our range of work, fully understanding project objectives, carefully analyzing client requirements, and bringing in creative ideas.",
-    "aboutDetails": {
-      "experience": {
-        "title": "Our experience",
-        "description": "More than 5 years of experience in architecture and design. We have been implementing various creative projects."
-      },
-      "sustainableProjects": {
-        "title": "Ultra-sustainable projects",
-        "description": "Our company uses sustainable solutions that benefit the environment and the people who use these spaces."
-      },
-      "reliableTeam": {
-        "title": "Reliable Team",
-        "description": "With a team of experienced professionals, we work to provide exceptional results for every project."
-      },
-      "clientSatisfaction": {
-        "title": "Passion for Client Satisfaction",
-        "description": "We prioritize understanding client needs and fulfilling their requirements for a successful partnership."
-      }
-    }
+    "aboutDescription": "Urankhiits LLC was established in 2018 and operates in the fields of architecture, interior and exterior design, and technical engineering services. Our company has successfully completed over 120 projects. Our strengths lie in our innovative ideas, adherence to high standards, and effective collaboration. We continue to operate with the goal of thoroughly understanding project objectives, carefully analyzing client requirements, and bringing in creative ideas.",
+    "experience-title": "60+ interior design projects",
+    "experience-description": "Our team has delivered creative interior solutions for 60 diverse spaces, from coffee shops and stores to luxury homes and corporate offices",
+    "sustainableProjects-title": "120+ completed projects",
+    "sustainableProjects-description": "Urankhiits has completed a total of over 120 unique projects, contributing to the development of Mongolia’s architectural and interior design landscape."
   },
   "ServicePage": {
     "title": "OUR SERVICE",
-    "description": "In today’s fast-paced business world, companies recognize the strategic importance of well-designed environments that reflect their values and identity. Interior design has become essential in shaping spaces that foster success and brand alignment. As Ulaanbaatar grows, the demand for personalized home renovations is on the rise. At UranKhiits LLC, we specialize in transforming living spaces into unique sanctuaries that promote comfort and well-being. To meet this growing demand, Uran AI has been launched to provide fast, AI-powered interior design solutions. With Uran AI, customers can quickly receive customized designs, ensuring high-quality results delivered with speed and efficiency.",
+    "description": "In today’s fast-paced business world, companies recognize the strategic importance of well-designed environments that reflect their values and identity. Interior design has become essential in shaping spaces that foster success and brand alignment.",
+    "description1": "As Ulaanbaatar grows, the demand for personalized home renovations is on the rise. At UranKhiits LLC, we specialize in transforming living spaces into unique sanctuaries that promote comfort and well-being. ",
+    "description2": "To meet this growing demand, Uran AI has been launched to provide fast, AI-powered interior design solutions. With Uran AI, customers can quickly receive customized designs, ensuring high-quality results delivered with speed and efficiency.",
     "service1Title": "Discussion & Analysis of Needs",
     "service1Description": "The design team collaborates with the client to understand their preferences, goals, budget, and project features.",
     "service2Title": "Concept & Sketch Development",
