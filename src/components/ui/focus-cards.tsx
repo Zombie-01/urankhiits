@@ -23,10 +23,9 @@ export const Card = React.memo(
         "rounded-[10px] relative bg-gray-100 aspect-video dark:bg-neutral-900 overflow-hidden w-full transition-all duration-300 ease-out",
         hovered !== null && hovered !== index && "blur-sm scale-[0.98]"
       )}>
-      <Image
+      <img
         src={card.src}
         alt={card.title}
-        fill
         className="object-cover absolute inset-0"
       />
       <div
@@ -47,33 +46,48 @@ Card.displayName = "Card";
 type Card = {
   title: string;
   src: string;
+  id: string;
 };
+const tabs = ["Show All", "Commercial", "Luxury House", "Residential"];
 
 export function FocusCards({ cards }: { cards: Card[] }) {
+  const [selectedTab, setSelectedTab] = useState("Show All");
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <div className="max-w-7xl py-[80px] mx-auto px-4 md:px-8">
+    <div className="max-w-7xl py-[100px] mx-auto px-4 md:px-8">
       {/* Title and Description */}
       <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">
-          Villa Des Project
-        </h1>
-        <p className="text-gray-600 text-start dark:text-gray-400">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        <div
+          className="w-full "
+          style={{
+            background:
+              "url(/Bg%20assets/For%20ai%20bg%20bl%202.png) center center/cover",
+          }}>
+          <h1 className="text-[#5A5A5A] text-[85px] font-[900] tracking-[27px] leading-[121%]">
+            PROJECTS
+          </h1>
+        </div>
+        <div className="flex space-x-4 justify-center py-6">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setSelectedTab(tab)}
+              className={`${
+                selectedTab === tab
+                  ? "bg-gray-300 text-black"
+                  : "bg-transparent text-gray-600"
+              } py-2 px-6 rounded-lg font-bold transition duration-300 hover:bg-gray-200`}>
+              {tab}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Card Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {cards.map((card, index) => (
-          <Link key={card.title} href={`/project/${card.title}`}>
+          <Link key={card.title} href={`/project/${card.id}`}>
             <Card
               card={card}
               index={index}

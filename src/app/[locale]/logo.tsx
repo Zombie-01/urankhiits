@@ -6,7 +6,7 @@ import Link from "next/link";
 const Logo = () => {
   const { isDarkMode } = useDarkMode();
   return (
-    <button className=" absolute rounded-full top-1 lg:top-2 z-[9999999] py-2 px-2 text-[9px]">
+    <button className="  rounded-full  z-[9999999] py-2 px-2 text-[9px]">
       <Link href="/" className="block">
         <div className="w-[75px] lg:w-[145px] h-auto">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.84 34.02">

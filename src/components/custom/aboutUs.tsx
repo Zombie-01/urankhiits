@@ -18,7 +18,7 @@ const AboutUs = () => {
           <p className=" mb-8 max-w-4xl">{t("aboutDescription")}</p>
           <div className="flex gap-8">
             {" "}
-            <div className="border border-gray-300 rounded-lg p-6 shadow-sm">
+            <div className="border-l border-gray-300 pl-4 shadow-sm">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-300 mb-2">
                 {t("experience-title")}{" "}
               </h3>
@@ -26,7 +26,7 @@ const AboutUs = () => {
                 {t("experience-description")}{" "}
               </p>
             </div>
-            <div className="border border-gray-300 rounded-lg p-6 shadow-sm">
+            <div className="border-l border-gray-300 pl-4 shadow-sm">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-300 mb-2">
                 {t("sustainableProjects-title")}{" "}
               </h3>
