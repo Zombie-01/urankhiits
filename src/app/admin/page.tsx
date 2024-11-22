@@ -20,10 +20,7 @@ export default function Home() {
     if (!e.target.files) return;
 
     const files = Array.from(e.target.files);
-    if (files.length + selectedFiles.length > 5) {
-      alert("You can only upload a maximum of 5 images.");
-      return;
-    }
+
     setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
