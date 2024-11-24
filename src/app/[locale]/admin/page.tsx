@@ -10,6 +10,12 @@ interface Project {
   title: string;
   desc: string;
   imgs: string[];
+  category: string; // Added categoryId field
+}
+
+interface Category {
+  id: string;
+  category_name: string;
 }
 
 export default function Home() {
@@ -19,10 +25,12 @@ export default function Home() {
   const [desc, setDesc] = useState<string>("");
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [categories, setCategories] = useState<Category[]>([]); // State for categories
+  const [selectedCategory, setSelectedCategory] = useState<string>(""); // State for selected category
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  // Fetch projects from Supabase
+  // Fetch projects and categories from Supabase
   useEffect(() => {
     const fetchProjects = async () => {
       const { data, error } = await supabase.from("projects").select("*");
@@ -32,7 +40,18 @@ export default function Home() {
         setProjects(data as any);
       }
     };
+
+    const fetchCategories = async () => {
+      const { data, error } = await supabase.from("category").select("*");
+      if (error) {
+        console.error("Error fetching categories:", error.message);
+      } else {
+        setCategories(data as any);
+      }
+    };
+
     fetchProjects();
+    fetchCategories();
   }, []);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,8 +61,8 @@ export default function Home() {
   };
 
   const handleUpload = async () => {
-    if (!title || !desc) {
-      alert("Please fill in both the title and description.");
+    if (!title || !desc || !selectedCategory) {
+      alert("Please fill in the title, description, and select a category.");
       return;
     }
 
@@ -80,7 +99,8 @@ export default function Home() {
     const { data: project, error } = await supabase.from("projects").insert({
       title,
       desc,
-      imgs: imageUrls
+      imgs: imageUrls,
+      category: selectedCategory // Save categoryId
     });
 
     if (error) {
@@ -88,10 +108,11 @@ export default function Home() {
     } else {
       console.log("Project saved successfully:", project);
       alert("Project uploaded successfully!");
-      setProjects((prev) => [...prev, ...project as any]);
+      setProjects((prev) => [...prev, ...(project as any)]);
       setSelectedFiles([]);
       setTitle("");
       setDesc("");
+      setSelectedCategory(""); // Reset category selection
       if (inputRef.current) inputRef.current.value = "";
     }
   };
@@ -141,6 +162,22 @@ export default function Home() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
+                Category
+              </label>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none">
+                <option value="">Select Category</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.category_name}>
+                    {category.category_name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Images (Max 5)
               </label>
               <input
@@ -178,6 +215,10 @@ export default function Home() {
                   Description
                 </th>
                 <th className="border border-gray-300 px-4 py-2">Images</th>
+                <th className="border border-gray-300 px-4 py-2">
+                  Category
+                </th>{" "}
+                {/* Added Category column */}
               </tr>
             </thead>
             <tbody>
@@ -195,6 +236,9 @@ export default function Home() {
                   <td className="border border-gray-300 px-4 py-2 text-center">
                     {project.imgs.length}
                   </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {project.category}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -202,36 +246,36 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Modal */}
-      {isModalOpen && selectedProject && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-bold text-gray-800 mb-2">
-              {selectedProject.title}
-            </h3>
-            <p className="text-gray-700 mb-4">{selectedProject.desc}</p>
-            <div className="grid grid-cols-2 gap-4">
-              {selectedProject.imgs.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`Image ${index + 1}`}
-                  className="w-full h-auto rounded-lg shadow-md"
-                />
-              ))}
+      {/* Modal for Selected Project */}
+      {selectedProject && isModalOpen && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex justify-center items-center">
+          <div className="bg-white p-8 rounded-lg max-w-lg w-full">
+            <h3 className="text-xl font-bold mb-4">Project Details</h3>
+            <div>
+              <h4 className="text-lg font-semibold">{selectedProject.title}</h4>
+              <p>{selectedProject.desc}</p>
+              <div className="mt-4">
+                <h5 className="font-medium">Images:</h5>
+                <div className="flex space-x-2">
+                  {selectedProject.imgs.map((img, index) => (
+                    <img
+                      key={index}
+                      src={img}
+                      alt={`Project Image ${index + 1}`}
+                      className="w-16 h-16 object-cover rounded"
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
             <button
-              className="mt-4 bg-red-500 hover:bg-red-400 text-white rounded-lg px-4 py-2"
+              className="mt-5 bg-blue-600 text-white px-4 py-2 rounded"
               onClick={closeModal}>
               Close
             </button>
           </div>
         </div>
       )}
-
-      <Head>
-        <title>Admin Dashboard</title>
-      </Head>
     </>
   );
 }
