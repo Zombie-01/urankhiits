@@ -45,6 +45,7 @@ export default function FocusCardsDemo() {
   useEffect(() => {
     const fetchProjects = async () => {
       setLoading(true); // Start loading
+      setCards([]);
 
       try {
         let query = supabase
@@ -53,12 +54,8 @@ export default function FocusCardsDemo() {
 
         if (selectedTab !== "Show All") {
           // Get the categoryId for the selected tab
-          const selectedCategory = categories.find(
-            (cat) => cat.category_name === selectedTab
-          );
-          if (selectedCategory) {
-            query = query.eq("category", selectedCategory.id); // Filter by categoryId
-          }
+
+          query = query.eq("category", selectedTab.toLowerCase()); // Filter by categoryId
         }
 
         const { data, error } = await query;
@@ -83,14 +80,6 @@ export default function FocusCardsDemo() {
 
     fetchProjects();
   }, [selectedTab, categories]); // Rerun effect when selectedTab or categories change
-
-  if (loading) {
-    return <div className="text-center">Loading projects...</div>;
-  }
-
-  if (cards.length === 0) {
-    return <div className="text-center">No projects found.</div>;
-  }
 
   return (
     <div className="py-[100px]">
@@ -120,7 +109,26 @@ export default function FocusCardsDemo() {
           </button>
         ))}
       </div>
-      <FocusCards cards={cards} />
+      {cards.length === 0 && !loading && (
+        <div className="text-center text-xl text-gray-600 dark:text-gray-300 py-8">
+          No projects available
+        </div>
+      )}
+      {loading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {Array(6)
+            .fill(null)
+            .map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+        </div>
+      ) : (
+        <FocusCards cards={cards} />
+      )}
     </div>
   );
 }
+
+const SkeletonCard = () => (
+  <div className="rounded-[10px] bg-gray-300 dark:bg-neutral-700 aspect-video w-full animate-pulse" />
+);
