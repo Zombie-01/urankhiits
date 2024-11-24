@@ -6,8 +6,10 @@ import { Compare } from "@/components/ui/compare";
 import { FileUpload } from "@/components/ui/file-upload";
 import Link from "next/link";
 import { MoveLeft } from "lucide-react";
+import { nanoid } from "nanoid";
 import { signIn, useSession } from "next-auth/react";
 import { toast } from "sonner";
+import { supabase } from "../../../../utils/supabase/client";
 
 const themes = ["Modern", "Vintage", "Minimalist", "Professional"];
 const rooms = [
@@ -17,22 +19,22 @@ const rooms = [
   "Bathroom",
   "Office",
   "Sasdasd",
-  "AasdA",
+  "AasdA"
 ];
 
 const loadingStates = [
   {
-    text: "Upload image",
+    text: "Upload image"
   },
   {
-    text: "Detect specs",
+    text: "Detect specs"
   },
   {
-    text: "generate image",
+    text: "generate image"
   },
   {
-    text: "Send generated image",
-  },
+    text: "Send generated image"
+  }
 ];
 
 const building = ["Residential", "Commercial", "Exterior"];
@@ -72,12 +74,12 @@ export default function ImagePage() {
     const response = await fetch("/api/watermark", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         imageUrl: outputImage,
-        watermarkText: "URANKHIITS",
-      }),
+        watermarkText: "URANKHIITS"
+      })
     });
 
     const link = document.createElement("a");
@@ -98,32 +100,19 @@ export default function ImagePage() {
         return;
       }
 
-      // if (!session?.user?.image) {
-      //   const text = "Do you want to log in with Google?";
-      //   if (confirm(text)) {
-      //     const res = await signIn("google", { redirect: false });
-      //     if (!res?.ok) {
-      //       toast.error("Login failed, please try again.");
-      //       return;
-      //     }
-      //   } else {
-      //     toast.error("You must be logged in to submit an image.");
-      //     return;
-      //   }
-      // }
-
       setLoading(true);
 
+      // Call the API to process the image
       const response = await fetch("/api/replicate", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           image: base64Image,
-          theme: theme,
-          room: room,
-        }),
+          theme,
+          room
+        })
       });
 
       const result = await response.json();
@@ -131,17 +120,72 @@ export default function ImagePage() {
       if (result.error) {
         console.error(result.error);
         toast.error(result.error);
-        setLoading(false);
         return;
       }
 
       if (result.output) {
         setOutputImage(result.output);
+
+        // Fetch the generated image file from the URL
+        const resSt = await fetch(result.output);
+        if (!resSt.ok) {
+          throw new Error("Failed to fetch the file from the URL.");
+        }
+
+        // Convert response to Blob
+        const blob = await resSt.blob();
+
+        // Generate unique filename
+        const extension = file.name.split(".").pop();
+        const filename = `${Date.now()}_${Math.random()
+          .toString(36)
+          .substring(2)}`;
+
+        // Upload Blob to Supabase Storage
+        const { data: storageData, error: storageError } =
+          await supabase.storage
+            .from("projects")
+            .upload(`${filename}.${extension}`, blob, {
+              contentType: blob.type // Set the content type from the blob
+            });
+
+        if (storageError) {
+          console.error("Error uploading file:", storageError.message);
+          toast.error("Failed to upload image. Please try again.");
+          return;
+        }
+
+        // Get the public URL for the uploaded image
+        const { data: publicUrlData } = supabase.storage
+          .from("projects")
+          .getPublicUrl(`${filename}.${extension}`);
+        const publicUrl = publicUrlData?.publicUrl;
+
+        if (!publicUrl) {
+          toast.error("Failed to generate image URL.");
+          return;
+        }
+
+        // Save metadata to Supabase database
+        const { error: dbError } = await supabase.from("generated").insert({
+          image: publicUrl,
+          prompt: `A ${theme} ${room} Editorial Style Photo, Symmetry, Straight On, Modern Living Room, Large Window (balanced with walls if window not detected then don't add window), Leather, Glass, Metal, Wood Paneling, Neutral Palette, Ikea, Natural Light, Apartment, Afternoon, Serene, Contemporary, 4k`,
+          user: session?.user?.name || null // Add user ID or null if unavailable
+        });
+
+        if (dbError) {
+          console.error("Error saving metadata:", dbError.message);
+          toast.error("Failed to save metadata. Please try again.");
+          return;
+        }
+
+        toast.success("Image processed and saved successfully!");
       } else {
         console.error("Unexpected result format. Unable to display image.");
       }
     } catch (error) {
       console.error("Error submitting image:", error);
+      toast.error("An error occurred while submitting the image.");
     } finally {
       setLoading(false);
     }

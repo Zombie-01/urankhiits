@@ -9,7 +9,7 @@ export const Card = React.memo(
     card,
     index,
     hovered,
-    setHovered,
+    setHovered
   }: {
     card: any;
     index: number;
@@ -50,7 +50,13 @@ type Card = {
 };
 const tabs = ["Show All", "Commercial", "Luxury House", "Residential"];
 
-export function FocusCards({ cards }: { cards: Card[] }) {
+export function FocusCards({
+  cards,
+  title
+}: {
+  cards: Card[];
+  title?: string;
+}) {
   const [selectedTab, setSelectedTab] = useState("Show All");
   const [hovered, setHovered] = useState<number | null>(null);
 
@@ -62,10 +68,10 @@ export function FocusCards({ cards }: { cards: Card[] }) {
           className="w-full "
           style={{
             background:
-              "url(/Bg%20assets/For%20ai%20bg%20bl%202.png) center center/cover",
+              "url(/Bg%20assets/For%20ai%20bg%20bl%202.png) center center/cover"
           }}>
           <h1 className="text-[#5A5A5A] text-[85px] font-[900] tracking-[27px] leading-[121%]">
-            PROJECTS
+            {title ? title : "PROJECTS"}
           </h1>
         </div>
         <div className="flex space-x-4 justify-center py-6">
