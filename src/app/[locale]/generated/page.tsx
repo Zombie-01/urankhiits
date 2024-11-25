@@ -50,5 +50,5 @@ export default function FocusCardsDemo() {
     return <div className="text-center">No projects found.</div>;
   }
 
-  return <FocusCards title="AI" cards={cards} />;
+  return <FocusCards cards={cards} />;
 }

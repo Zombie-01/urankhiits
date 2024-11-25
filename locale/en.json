@@ -39,7 +39,8 @@
     "sustainableProjects-description": "Interior renovation project"
   },
   "ServicePage": {
-    "title": "OUR SERVICE",
+    "title": "SERVICE",
+    "work_process": "WORK PROCESS",
     "description": "We offer high-quality services in architectural planning, interior design, and interior renovation. Our services focus on creating perfectly organized spaces, incorporating the latest design solutions, and tailoring environments to meet your needs and preferences. We are committed to delivering the best quality and maximum efficiency, working together to create the ideal solution for your work and living spaces, while enhancing their value.",
     "description1": "As Ulaanbaatar grows, the demand for personalized home renovations is on the rise. At UranKhiits LLC, we specialize in transforming living spaces into unique sanctuaries that promote comfort and well-being. ",
     "description2": "To meet this growing demand, Uran AI has been launched to provide fast, AI-powered interior design solutions. With Uran AI, customers can quickly receive customized designs, ensuring high-quality results delivered with speed and efficiency.",
@@ -64,14 +65,14 @@
     "buttonText": "TRY Uran AI"
   },
   "Header": {
-    "HOME": "HOME",
+    "HOME": "Home",
     "MENU": "MENU",
     "CLOSE": "CLOSE",
-    "PROJECTS": "PROJECTS",
-    "ABOUTUS": "ABOUTUS",
-    "OURSERVICE": "OURSERVICE",
+    "PROJECTS": "Projects",
+    "ABOUTUS": "About us",
+    "OURSERVICE": "Our service",
     "AI": "AI",
-    "CONTACT": "CONTACT",
+    "CONTACT": "Contact",
     "MADEBY": "MADE BY",
     "DEVELOPER": "DEVELOPER",
     "DESIGN": "DESIGN",

@@ -3,10 +3,9 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 import Logo from "@/app/[locale]/logo";
 import DarkModeToggle from "@/app/[locale]/DarkModeToggle";
-import { usePathname } from "next/navigation";
 import LanguageToggle from "@/app/[locale]/langToggle";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 
 export default function Header() {
   const { data: session } = useSession();
@@ -24,8 +23,8 @@ export default function Header() {
   ];
 
   return (
-    <div className="fixed w-full bg-[#f4f0ea] dark:bg-black p-4 z-[99999999] shadow-md">
-      <div className="flex justify-between items-center">
+    <div className="fixed w-full bg-white dark:bg-black p-4 z-[99999999] shadow-md">
+      <div className="flex justify-between items-center ">
         <Logo />
         {/* Burger Menu */}
         <button
@@ -47,15 +46,16 @@ export default function Header() {
           </div>
         </button>
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-6">
           {links.map((link, index) => (
             <Link
               key={`l_${index}`}
               href={link.href}
-              className={`text-black dark:text-white text-[22px] hover:underline ${
-                path.includes(link.href) && "font-bold"
-              }`}>
+              className={`text-black relative dark:text-white text-[22px]  `}>
               {link.title}
+              {path === link.href && (
+                <span className="absolute -bottom-0 left-1/2 -translate-x-1/2 rounded-full h-[4px] w-[34px] bg-[#dfdfdf]"></span>
+              )}
             </Link>
           ))}
           <DarkModeToggle />
