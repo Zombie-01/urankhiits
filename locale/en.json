@@ -80,5 +80,12 @@
     "TERMS": "Terms & Conditions",
     "URAN": "URANKHIITS",
     "ZOMBIE": "ZOMBIE"
+  },
+  "Projects": {
+    "Projects": "Projects",
+    "show_all": "Show all",
+    "commercial": "Commercial",
+    "lux_house": "Luxury house",
+    "residential": "Residential"
   }
 }

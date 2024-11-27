@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { FocusCards } from "@/components/ui/focus-cards";
 import { supabase } from "../../../utils/supabase/client";
+import { useTranslations } from "next-intl";
 
 interface Project {
   id: string;
@@ -15,14 +16,19 @@ interface Category {
   category_name: string;
 }
 
-const tabs = ["Show All", "Commercial", "Luxury House", "Residential"];
-
 export default function FocusCardsDemo() {
+  const t = useTranslations("Projects");
   const [cards, setCards] = useState<Project[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedTab, setSelectedTab] = useState("Show All");
   const [loading, setLoading] = useState<boolean>(true);
 
+  const tabs = [
+    { key: "Show All", name: t("show_all") },
+    { key: "Commercial", name: t("commercial") },
+    { key: "Luxury House", name: t("lux_house") },
+    { key: "Residential", name: t("residential") }
+  ];
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -53,9 +59,8 @@ export default function FocusCardsDemo() {
           .select("id, title, imgs, category");
 
         if (selectedTab !== "Show All") {
-          // Get the categoryId for the selected tab
-
-          query = query.eq("category", selectedTab.toLowerCase()); // Filter by categoryId
+          // Filter by selectedTab key instead of name
+          query = query.eq("category", selectedTab.toLowerCase());
         }
 
         const { data, error } = await query;
@@ -91,21 +96,21 @@ export default function FocusCardsDemo() {
               "url(/Bg%20assets/For%20ai%20bg%20bl%202.png) center center/cover"
           }}>
           <h1 className="text-[#5A5A5A] text-[85px] font-[900] tracking-[27px] leading-[121%]">
-            {"PROJECTS"}
+            {t("Projects")}
           </h1>
         </div>
       </div>
       <div className="flex space-x-4 justify-center py-6">
         {tabs.map((tab) => (
           <button
-            key={tab}
-            onClick={() => setSelectedTab(tab)}
+            key={tab.key}
+            onClick={() => setSelectedTab(tab.key)}
             className={`${
-              selectedTab === tab
+              selectedTab === tab.key
                 ? "bg-gray-300 text-black"
                 : "bg-transparent text-gray-600"
             } py-2 px-6 rounded-lg font-bold transition duration-300 hover:bg-gray-200`}>
-            {tab}
+            {tab.name}
           </button>
         ))}
       </div>
@@ -115,7 +120,7 @@ export default function FocusCardsDemo() {
         </div>
       )}
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {Array(6)
             .fill(null)
             .map((_, index) => (

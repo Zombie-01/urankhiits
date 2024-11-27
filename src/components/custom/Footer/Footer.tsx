@@ -7,7 +7,7 @@ import {
   IconBrandInstagram,
   IconBrandFacebook,
   IconBrandLinkedin,
-  IconBrandTwitter,
+  IconBrandTwitter
 } from "@tabler/icons-react";
 import SlideText from "../UI/SlideText";
 import Logo from "@/app/[locale]/logo";
@@ -18,7 +18,7 @@ export const Footer = () => {
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
-        block: "start",
+        block: "start"
       });
     }
   };
