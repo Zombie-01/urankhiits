@@ -28,6 +28,7 @@ export default function Home() {
   const [categories, setCategories] = useState<Category[]>([]); // State for categories
   const [selectedCategory, setSelectedCategory] = useState<string>(""); // State for selected category
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [confirmDelete, setConfirmDelete] = useState<string | null>(null); // State to track deletion confirmation
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   // Fetch projects and categories from Supabase
@@ -127,6 +128,27 @@ export default function Home() {
     setSelectedProject(null);
   };
 
+  const handleDelete = async (projectId: string) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this project?"
+    );
+    if (isConfirmed) {
+      const { data, error } = await supabase
+        .from("projects")
+        .delete()
+        .eq("id", projectId);
+
+      if (error) {
+        console.error("Error deleting project:", error.message);
+      } else {
+        setProjects((prev) =>
+          prev.filter((project) => project.id !== projectId)
+        );
+        alert("Project deleted successfully.");
+      }
+    }
+  };
+
   return (
     <>
       <div className="container mx-auto p-4 bg-gray-100">
@@ -215,10 +237,11 @@ export default function Home() {
                   Description
                 </th>
                 <th className="border border-gray-300 px-4 py-2">Images</th>
+                <th className="border border-gray-300 px-4 py-2">Category</th>
                 <th className="border border-gray-300 px-4 py-2">
-                  Category
+                  Actions
                 </th>{" "}
-                {/* Added Category column */}
+                {/* Added actions column */}
               </tr>
             </thead>
             <tbody>
@@ -233,11 +256,25 @@ export default function Home() {
                   <td className="border border-gray-300 px-4 py-2">
                     {project.desc}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
-                    {project.imgs.length}
+                  <td className="border border-gray-300 px-4 py-2">
+                    <img
+                      src={project.imgs[0]}
+                      alt="Project Image"
+                      className="w-16 h-16 object-cover"
+                    />
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
                     {project.category}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    <button
+                      className="bg-red-600 text-white px-4 py-2 rounded-lg"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent row click
+                        handleDelete(project.id);
+                      }}>
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -246,30 +283,26 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Modal for Selected Project */}
-      {selectedProject && isModalOpen && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex justify-center items-center">
-          <div className="bg-white p-8 rounded-lg max-w-lg w-full">
-            <h3 className="text-xl font-bold mb-4">Project Details</h3>
-            <div>
-              <h4 className="text-lg font-semibold">{selectedProject.title}</h4>
-              <p>{selectedProject.desc}</p>
-              <div className="mt-4">
-                <h5 className="font-medium">Images:</h5>
-                <div className="flex space-x-2">
-                  {selectedProject.imgs.map((img, index) => (
-                    <img
-                      key={index}
-                      src={img}
-                      alt={`Project Image ${index + 1}`}
-                      className="w-16 h-16 object-cover rounded"
-                    />
-                  ))}
-                </div>
-              </div>
+      {/* Modal for selected project */}
+      {isModalOpen && selectedProject && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-md max-w-lg">
+            <h3 className="text-xl font-semibold mb-4">
+              {selectedProject.title}
+            </h3>
+            <p>{selectedProject.desc}</p>
+            <div className="mt-4">
+              {selectedProject.imgs.map((imgUrl, idx) => (
+                <img
+                  key={idx}
+                  src={imgUrl}
+                  alt={`Project Image ${idx + 1}`}
+                  className="w-full h-auto mb-4"
+                />
+              ))}
             </div>
             <button
-              className="mt-5 bg-blue-600 text-white px-4 py-2 rounded"
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4"
               onClick={closeModal}>
               Close
             </button>

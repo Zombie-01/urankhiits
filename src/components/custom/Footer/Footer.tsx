@@ -99,25 +99,6 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-
-      {/* Bottom Section */}
-      <div className="container mx-auto mt-8 px-4 text-center">
-        <div className="flex justify-between items-center border-t border-gray-300 pt-4">
-          <motion.div
-            className="flex items-center cursor-pointer"
-            onClick={backToTop}
-            whileHover={{ scale: 1.1 }}>
-            <IconChevronUp size={20} />
-            <SlideText text="Back to Top" styleClass={"ml-2 text-sm"} />
-          </motion.div>
-          <p className="text-sm">
-            &copy; {new Date().getFullYear()} URANKHIITS. All rights reserved.
-          </p>
-          <motion.div whileHover={{ scale: 1.1 }} className="cursor-pointer">
-            <IconShare size={20} />
-          </motion.div>
-        </div>
-      </div>
     </footer>
   );
 };

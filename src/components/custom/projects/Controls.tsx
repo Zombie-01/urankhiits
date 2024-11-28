@@ -25,18 +25,18 @@ function Controls({
   handleData,
   handleTransitionData,
   handleCurrentSlideData,
-  initData,
+  initData
 }: Props) {
   const handlePrev = () => {
     handleData((prevData) => [
       transitionData ? transitionData : initData,
-      ...prevData.slice(0, prevData.length - 1),
+      ...prevData.slice(0, prevData.length - 1)
     ]);
     handleCurrentSlideData({
       data: transitionData ? transitionData : sliderData[0],
       index: sliderData.findIndex(
         (ele) => ele.img === data[data.length - 1].img
-      ),
+      )
     });
     handleTransitionData(data[data.length - 1]);
   };
@@ -45,13 +45,13 @@ function Controls({
     handleData((prev) => prev.slice(1));
     handleCurrentSlideData({
       data: transitionData ? transitionData : initData,
-      index: sliderData.findIndex((ele) => ele.img === data[0].img),
+      index: sliderData.findIndex((ele) => ele.img === data[0].img)
     });
     handleTransitionData(data[0]);
     setTimeout(() => {
       handleData((newData) => [
         ...newData,
-        transitionData ? transitionData : initData,
+        transitionData ? transitionData : initData
       ]);
     }, 500);
   };
@@ -72,7 +72,6 @@ function Controls({
       <SliderButton handleClick={handleNext}>
         <IoIosArrowForward className=" text-xl" />
       </SliderButton>
-      <Progress curIndex={currentSlideData.index} length={sliderData.length} />
     </div>
   );
 }
@@ -81,7 +80,7 @@ export default Controls;
 
 const SliderButton = ({
   children,
-  handleClick,
+  handleClick
 }: {
   children: React.ReactNode;
   handleClick: () => void;

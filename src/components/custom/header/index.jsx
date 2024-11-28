@@ -51,10 +51,10 @@ export default function Header() {
             <Link
               key={`l_${index}`}
               href={link.href}
-              className={`text-black relative dark:text-white text-[22px]  `}>
+              className={`text-black relative dark:text-white font-aeonik text-[16px]  `}>
               {link.title}
               {path === link.href && (
-                <span className="absolute -bottom-0 left-1/2 -translate-x-1/2 rounded-full h-[4px] w-[34px] bg-[#dfdfdf]"></span>
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full h-[3px] w-[34px] bg-[#dfdfdf]"></span>
               )}
             </Link>
           ))}
@@ -71,12 +71,12 @@ export default function Header() {
       </div>
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="flex flex-col md:hidden bg-[#f4f0ea] dark:bg-black mt-4 gap-2 p-4 rounded shadow-lg">
+        <div className="flex flex-col md:hidden  dark:bg-black mt-4 gap-2 p-4 ">
           {links.map((link, index) => (
             <Link
               key={`m_${index}`}
               href={link.href}
-              className={`text-black dark:text-white text-[18px] hover:underline ${
+              className={`text-black dark:text-white text-[14px] font-aeonik hover:underline ${
                 path.includes(link.href) && "font-bold"
               }`}
               onClick={() => setIsMenuOpen(false)} // Close menu on link click
