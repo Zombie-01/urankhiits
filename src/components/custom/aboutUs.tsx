@@ -10,7 +10,9 @@ const AboutUs = () => {
     { id: 3, imageSrc: "/hero_3.png", altText: "Project visualization 3" }
   ];
   return (
-    <section className="py-12 px-6 flex justify-center items-center sm:px-12 lg:px-24">
+    <section
+      id="aboutus"
+      className="py-12 px-6 flex justify-center items-center sm:px-12 lg:px-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Section: Statistics */}
         <div className="space-y-6 my-auto">

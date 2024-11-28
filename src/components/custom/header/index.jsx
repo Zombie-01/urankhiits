@@ -16,10 +16,10 @@ export default function Header() {
   const links = [
     { title: t("HOME"), href: "/", src: "hero_1.png" },
     { title: t("PROJECTS"), href: "/project", src: "hero_2.png" },
-    { title: t("ABOUTUS"), href: "/#contact", src: "hero_3.png" },
+    { title: t("ABOUTUS"), href: "/#aboutus", src: "hero_3.png" },
     { title: t("OURSERVICE"), href: "/#ourservice", src: "hero_3.png" },
-    { title: t("AI"), href: "/ai", src: "hero_4.png" },
-    { title: t("CONTACT"), href: "/#contact", src: "pub_1.png" }
+    { title: t("AI"), href: "/ai", src: "hero_4.png" }
+    // { title: t("CONTACT"), href: "/#contact", src: "pub_1.png" }
   ];
 
   return (
