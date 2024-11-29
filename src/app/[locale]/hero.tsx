@@ -33,7 +33,7 @@ const Hero = () => {
   return (
     <div
       id="home"
-      className="relative h-screen container mx-auto w-screen overflow-hidden flex items-center bg-black">
+      className="relative h-screen  w-screen overflow-hidden flex items-center bg-black">
       {/* Background Image Slider */}
       {items.map((item, index) => (
         <div
@@ -53,7 +53,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black bg-opacity-50 z-[5]"></div>
 
       {/* Text Content */}
-      <div className="relative z-10 text-start text-white px-4 max-w-3xl">
+      <div className="relative container mx-auto w-full z-10 text-start text-white px-4 ">
         <h1 className="text-4xl md:text-6xl font-bold leading-tight">
           {t("headlinePrefix")} <br />
           <span className="text-[#e0e0e0]">
