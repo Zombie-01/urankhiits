@@ -90,17 +90,17 @@ export default function FocusCardsDemo() {
     <div className="py-[100px]">
       <div className="text-center mb-8">
         <div
-          className="w-full "
+          className="w-full py-4"
           style={{
             background:
               "url(/Bg%20assets/For%20ai%20bg%20bl%202.png) center center/cover"
           }}>
-          <h1 className="text-[#5A5A5A] text-[85px] font-[900] tracking-[27px] leading-[121%]">
+          <h1 className="text-[#5A5A5A] text-center font-aeonikBold uppercase text-3xl sm:text-[85px] font-[900] tracking-[20px] sm:tracking-[27px] leading-[121%]">
             {t("Projects")}
           </h1>
         </div>
       </div>
-      <div className="flex space-x-4 justify-center py-6">
+      <div className="flex px-4 flex-col sm:flex-row space-x-2 sm:space-x-4 justify-center py-6">
         {tabs.map((tab) => (
           <button
             key={tab.key}
@@ -109,7 +109,7 @@ export default function FocusCardsDemo() {
               selectedTab === tab.key
                 ? "bg-gray-300 text-black"
                 : "bg-transparent text-gray-600"
-            } py-2 px-6 rounded-lg font-bold transition duration-300 hover:bg-gray-200`}>
+            } py-2 px-2 sm:px-6 rounded-lg font-bold transition duration-300 hover:bg-gray-200`}>
             {tab.name}
           </button>
         ))}

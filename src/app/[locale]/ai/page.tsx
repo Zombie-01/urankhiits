@@ -13,13 +13,31 @@ import { supabase } from "../../../../utils/supabase/client";
 
 const themes = ["Modern", "Vintage", "Minimalist", "Professional"];
 const rooms = [
-  "Living Room",
-  "Dining Room",
-  "Bedroom",
-  "Bathroom",
-  "Office",
-  "Sasdasd",
-  "AasdA"
+  {
+    title: "Living Room",
+    image: "/rooms/Living Room.png"
+  },
+
+  {
+    title: "Bedroom",
+    image: "/rooms/Bedroom.jpg"
+  },
+  {
+    title: "Bathroom",
+    image: "/rooms/Bathroom.jpg"
+  },
+  {
+    title: "Office",
+    image: "/rooms/office.png"
+  },
+  {
+    title: "Kitchen",
+    image: "/rooms/Kitchen.png"
+  },
+  {
+    title: "Other",
+    image: "/rooms/Other.jpg"
+  }
 ];
 
 const loadingStates = [
@@ -43,7 +61,7 @@ export default function ImagePage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [theme, setTheme] = useState<string>("");
-  const [room, setRoom] = useState<string>(rooms[0]);
+  const [room, setRoom] = useState<{ title: string; image: string }>(rooms[0]);
   const [build, setBuild] = useState<string>(building[0]);
   const [outputImage, setOutputImage] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
@@ -111,7 +129,7 @@ export default function ImagePage() {
         body: JSON.stringify({
           image: base64Image,
           theme,
-          room
+          room: room.title
         })
       });
 
@@ -204,12 +222,12 @@ export default function ImagePage() {
           <h2 className=" mb-4 dark:text-white">
             1. Choose your building type
           </h2>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             {building.map((type) => (
               <button
                 onClick={() => setBuild(type)}
                 key={type}
-                className={`items-center relative min-w-[200px] overflow-hidden rounded-md shadow-md bg-white dark:bg-slate-500 hover:bg-gray-100 dark:hover:bg-gray-600 ${
+                className={`items-center w-full sm:w-auto relative min-w-[200px] overflow-hidden rounded-md shadow-md bg-white dark:bg-slate-500 hover:bg-gray-100 dark:hover:bg-gray-600 ${
                   build === type ? "border-2 border-blue-600" : ""
                 }`}>
                 {type}
@@ -223,26 +241,26 @@ export default function ImagePage() {
           <div className="flex  gap-4 py-2 overflow-auto max-w-full">
             {rooms.map((r) => (
               <div
-                key={r}
+                key={r.title}
                 onClick={() => setRoom(r)}
                 className={`items-center relative min-w-[200px] overflow-hidden rounded-md shadow-md bg-white dark:bg-slate-500 hover:bg-gray-100 dark:hover:bg-gray-600 ${
                   room === r ? "border-2 border-blue-600" : ""
                 }`}>
                 <img
-                  src="/hero_1.png"
+                  src={r.image}
                   alt="hero"
                   className="w-full h-full object-cover aspect-video"
                 />
                 <span className="text-white absolute bottom-4 left-4 ">
-                  {r}
+                  {r.title}
                 </span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="flex w-full  gap-6">
-          <div className="w-1/3 flex flex-col gap-4">
+        <div className="flex flex-col md:flex-row w-full  gap-6">
+          <div className="md:w-1/3 flex flex-col gap-4">
             <h2 className=" dark:text-white">3. Upload Your Image</h2>
             <div className="border-2 relative h-full border-dashed rounded-md flex items-center justify-center">
               <FileUpload
@@ -262,18 +280,18 @@ export default function ImagePage() {
             </div>
           </div>
 
-          <div className="w-2/3">
+          <div className="md:w-2/3 min-h-[200px]">
             <h2 className="text-lg font-bold dark:text-white">
               Uran AI Generated
             </h2>
-            <div className="border rounded-md overflow-hidden h-full w-full bg-gray-100 dark:bg-white/10 flex items-center justify-center">
+            <div className="border rounded-md min-h-[200px] overflow-hidden h-full w-full bg-gray-100 dark:bg-white/10 flex items-center justify-center">
               {outputImage ? (
                 <Compare
                   firstImage={URL.createObjectURL(file as any) as any}
                   secondImage={outputImage as any}
                 />
               ) : (
-                <span className="text-black dark:text-white">
+                <span className="text-black  h-full dark:text-white">
                   Generated image will appear here
                 </span>
               )}

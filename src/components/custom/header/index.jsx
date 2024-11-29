@@ -5,25 +5,30 @@ import Logo from "@/app/[locale]/logo";
 import DarkModeToggle from "@/app/[locale]/DarkModeToggle";
 import LanguageToggle from "@/app/[locale]/langToggle";
 import { useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/routing";
+import { Link } from "@/i18n/routing";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export default function Header() {
   const { data: session } = useSession();
   const t = useTranslations("Header");
   const path = usePathname();
+  const searchParams = useSearchParams();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const links = [
-    { title: t("HOME"), href: "/", src: "hero_1.png" },
-    { title: t("PROJECTS"), href: "/project", src: "hero_2.png" },
     { title: t("ABOUTUS"), href: "/#aboutus", src: "hero_3.png" },
     { title: t("OURSERVICE"), href: "/#ourservice", src: "hero_3.png" },
-    { title: t("AI"), href: "/ai", src: "hero_4.png" }
-    // { title: t("CONTACT"), href: "/#contact", src: "pub_1.png" }
+    { title: t("PROJECTS"), href: "/project", src: "hero_2.png" },
+    { title: t("AI"), href: "/ai", src: "hero_4.png", className: true },
+    { title: t("CONTACT"), href: "/#contact", src: "pub_1.png" }
   ];
 
+  const fullPath = `${path}${
+    searchParams.toString() ? "?" + searchParams.toString() : ""
+  }`;
+
   return (
-    <div className="fixed w-full bg-white dark:bg-black p-4 z-[99999999] shadow-md">
+    <div className="fixed w-full bg-white opacity-[91%] dark:bg-black p-4 z-[99999999] shadow-md">
       <div className="flex justify-between items-center ">
         <Logo />
         {/* Burger Menu */}
@@ -33,7 +38,7 @@ export default function Header() {
           <div className="space-y-1">
             <span
               className={`block h-1 w-6 bg-black dark:bg-white transition-transform ${
-                isMenuOpen ? "rotate-45 translate-y-1.5" : ""
+                isMenuOpen ? "rotate-45 translate-y-[0.50rem]" : ""
               }`}></span>
             <span
               className={`block h-1 w-6 bg-black dark:bg-white transition-opacity ${
@@ -41,7 +46,7 @@ export default function Header() {
               }`}></span>
             <span
               className={`block h-1 w-6 bg-black dark:bg-white transition-transform ${
-                isMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
+                isMenuOpen ? "-rotate-45 -translate-y-[0.50rem]" : ""
               }`}></span>
           </div>
         </button>
@@ -51,9 +56,11 @@ export default function Header() {
             <Link
               key={`l_${index}`}
               href={link.href}
-              className={`text-black relative dark:text-white font-aeonik text-[16px]  `}>
+              className={`text-black relative dark:text-white ${
+                link.className ? " font-aeonikBold font-bold" : "font-aeonik"
+              }  text-[16px]  `}>
               {link.title}
-              {path === link.href && (
+              {fullPath.includes(link.href?.replaceAll("/#", "#")) && (
                 <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full h-[3px] w-[34px] bg-[#dfdfdf]"></span>
               )}
             </Link>
@@ -76,9 +83,9 @@ export default function Header() {
             <Link
               key={`m_${index}`}
               href={link.href}
-              className={`text-black dark:text-white text-[14px] font-aeonik hover:underline ${
-                path.includes(link.href) && "font-bold"
-              }`}
+              className={`text-black dark:text-white text-[14px] ${
+                link.className ? " font-aeonikBold font-bold" : "font-aeonik"
+              } hover:underline ${path.includes(link.href) && ""}`}
               onClick={() => setIsMenuOpen(false)} // Close menu on link click
             >
               {link.title}

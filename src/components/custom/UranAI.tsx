@@ -58,7 +58,9 @@ export const UranAIDemo = () => {
     <section className=" relative flex flex-col justify-center items-center min-h-[750px] py-12">
       <div className="container mx-auto px-4 flex flex-wrap justify-start gap-4  items-center">
         {/* Left Side: Image with Label */}
-        <div ref={constraintsRef} className="w-full overflow-hidden lg:w-1/2">
+        <div
+          ref={constraintsRef}
+          className="w-full h-full overflow-hidden lg:w-1/2">
           <h2 className="text-[48px] font-bold mb-4">URAN AI</h2>
           <motion.div
             drag="x"

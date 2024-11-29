@@ -60,7 +60,7 @@ export default function ProjectDetail() {
 
   return (
     <section className="max-w-7xl min-h-screen flex flex-col gap-8 py-[100px] mx-auto px-4 md:px-8">
-      <div className="flex gap-8">
+      <div className="flex gap-8 flex-col md:flex-row">
         <div className="w-full sm:w-1/3 flex flex-col justify-center gap-4 items-start h-full">
           <h1 className="font-bold text-[48px]">{project.title}</h1>
           <span className="w-[200px] h-[2px] bg-black dark:bg-white"></span>
@@ -79,7 +79,7 @@ export default function ProjectDetail() {
         .map((image: any, index: Key | null | undefined) => (
           <div
             key={index}
-            className="bg-cover bg-no-repeat w-full h-full bg-center aspect-video bg-lightgray"
+            className="bg-cover rounded-lg bg-no-repeat w-full h-full bg-center aspect-video bg-lightgray"
             style={{ backgroundImage: `url(${image})` }}></div>
         ))}
     </section>
