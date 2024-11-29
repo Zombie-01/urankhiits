@@ -28,7 +28,7 @@ const rooms = [
   },
   {
     title: "Office",
-    image: "/rooms/office.png"
+    image: "/rooms/Office.png"
   },
   {
     title: "Kitchen",
