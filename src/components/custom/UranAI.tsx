@@ -55,13 +55,13 @@ export const UranAIDemo = () => {
   };
 
   return (
-    <section className=" relative flex flex-col justify-center items-center min-h-[750px] py-12">
-      <div className="container mx-auto px-4 flex flex-wrap justify-start gap-4  items-center">
+    <section className="bg-[#161616] relative flex flex-col justify-center items-center min-h-[750px] py-12">
+      <div className="container mx-auto px-4 flex flex-wrap justify-start items-center">
         {/* Left Side: Image with Label */}
         <div
           ref={constraintsRef}
-          className="w-full h-full overflow-hidden lg:w-1/2">
-          <h2 className="text-[48px] font-bold mb-4">URAN AI</h2>
+          className="w-full h-full overflow-hidden lg:w-3/5">
+          <h2 className="text-[48px] font-bold mb-4 text-white">URAN AI</h2>
           <motion.div
             drag="x"
             onDragEnd={dragEndHandler}
@@ -74,16 +74,18 @@ export const UranAIDemo = () => {
             style={{ x }}
             className="relative flex w-full">
             {slides?.map((slide) => (
-              <img
-                key={slide.buttonText}
-                src={slide.image}
-                alt="Interior Renovation"
-                className="w-full rounded-lg shadow-lg"
-              />
+              <div className="relative flex-shrink-0 w-full">
+                <img
+                  key={slide.buttonText}
+                  src={slide.image}
+                  alt="Interior Renovation"
+                  className="w-full h-full mah-h-[350px] object-cover object-center overflow-hidden rounded-lg shadow-lg"
+                />
+                <div className="absolute bottom-4 left-4 bg-opacity-70 text-white dark:text-black px-3 py-1 rounded-md text-sm">
+                  Interior renovation
+                </div>
+              </div>
             ))}
-            <div className="absolute bottom-4 left-4 bg-black dark:bg-white bg-opacity-70 text-white dark:text-black px-3 py-1 rounded-md text-sm">
-              Interior renovation
-            </div>
           </motion.div>
           {/* Carousel Dots */}
           <div className="flex gap-2 my-4 md:gap-4 justify-center">
@@ -98,23 +100,22 @@ export const UranAIDemo = () => {
           </div>
         </div>
         {/* Right Side: Text and Button */}
-        <div className="w-full lg:w-1/3 mt-8 lg:mt-0 flex flex-col gap-4 md:gap-6 items-start justify-end">
+        <div className="w-full lg:w-2/5 mt-8 lg:mt-0 flex flex-col gap-4 md:gap-6 items-start p-4 md:p-10 justify-end">
           <Link
             href="/ai"
-            className="border-black font-bold dark:border-white border px-6 py-3 rounded-[12px] z-[21]">
+            className="font-bold border-white border px-6 py-2 rounded-[12px] z-[21] text-white">
             Uran AI DEMO
           </Link>
           <div>
             <p className="text-gray-600 ">
-              Explore{" "}
-              <span className="text-black dark:text-white"> Uran AI.</span>
+              Explore <span className="text-white"> Uran AI DEMO</span>
             </p>
             <p className="text-gray-600 ">Remodel your home in minutes!</p>
           </div>
         </div>
       </div>
 
-      <div className="absolute z-20 top-0 md:-right-[150px]">
+      <div className="absolute z-20 -top-40 sm:-right-[150px]">
         <div className="w-full h-full max-w-[500px] md:max-w-[700px] flex items-center justify-center">
           <img
             src="/svg.png"
