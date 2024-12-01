@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
