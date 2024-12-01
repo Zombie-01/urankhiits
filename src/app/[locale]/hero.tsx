@@ -56,17 +56,11 @@ const Hero = () => {
       <div className="relative container mx-auto w-full z-10 text-start text-white px-4 ">
         <h1 className="text-4xl md:text-6xl font-bold leading-tight">
           {t("headlinePrefix")} <br />
-          <span className="text-[#e0e0e0]">
-            {items[currentIndex].title}
-          </span>{" "}
-          <br />
           {t("headlineSuffix")}
         </h1>
-        <p className="mt-4 text-lg md:text-xl text-gray-300">
-          {t("description")}
-        </p>
+
         <Link href="/ai">
-          <button className="mt-6 py-3 px-8 bg-white text-black rounded-full font-bold text-lg hover:scale-105 transition-transform">
+          <button className="mt-6 py-2 px-8 font-bold border-[2px] border-white text-white rounded-xl  text-xl hover:scale-105 transition-transform">
             {t("buttonText")}
           </button>
         </Link>

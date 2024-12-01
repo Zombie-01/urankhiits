@@ -59,7 +59,7 @@ const OurServiceV: React.FC = () => {
     <section
       id="ourservice"
       className="py-16 relative w-screen overflow-hidden flex justify-center items-center md:min-h-[600px]">
-      <div className="container relative mx-auto flex flex-col md:flex-row gap-8 justify-between h-full items-start">
+      <div className="container relative mx-auto flex flex-col md:flex-row gap-8 sm:gap-20 xl:gap-32 justify-between h-full items-start">
         <div className="w-full sm:w-1/2 flex flex-col gap-6 max-w-[630px]">
           <h1 className="font-[800] font-roboto md:text-[30px] leading-[120%] py-2 text-start">
             {t("title")}
@@ -68,67 +68,69 @@ const OurServiceV: React.FC = () => {
             <p className="text-justify">{t("description")}</p>
           </div>
         </div>
-        <div
-          ref={constraintsRef}
-          className="w-full sm:w-1/2 overflow-y-hidden relative flex flex-col gap-8">
+        <div className="flex flex-col gap-2 w-full sm:w-1/2 overflow-hidden">
           <h1 className="font-[800] font-roboto md:text-[30px] leading-[120%] py-2 text-start">
             {t("work_process")}
           </h1>
-          <motion.div
-            drag="x"
-            onDragEnd={dragEndHandler}
-            dragConstraints={{
-              left: -containerWidth * (services.length - 1),
-              right: 0
-            }}
-            animate={{ x: -containerWidth * currentIndex }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="flex gap-"
-            style={{ x }}>
-            {services.map((service, index) => (
-              <div
+          <div
+            ref={constraintsRef}
+            className=" overflow-y-hidden relative flex flex-col gap-8">
+            <motion.div
+              drag="x"
+              onDragEnd={dragEndHandler}
+              dragConstraints={{
+                left: -containerWidth * (services.length - 1),
+                right: 0
+              }}
+              animate={{ x: -containerWidth * currentIndex }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="flex gap-"
+              style={{ x }}>
+              {services.map((service, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full flex-shrink-0"
+                  style={{ width: containerWidth }}>
+                  <div className="relative border w-full sm:w-1/3 rounded-2xl max-h-[266px] overflow-hidden">
+                    <div className="px-4 pb-4 pt-4 flex flex-col gap-2">
+                      <h3 className="text-[10px] sm:text-base font-semibold">
+                        {service.title}
+                      </h3>
+                      <p className="text-[10px]">{service.description}</p>
+                    </div>
+                  </div>
+                  <div className="relative border w-full sm:w-1/3 rounded-2xl max-h-[266px] overflow-hidden">
+                    <img
+                      src={service.imageUrl}
+                      alt={service.title}
+                      className="w-full h-full aspect-video object-cover"
+                    />
+                  </div>
+                  <div className="relative border w-full sm:w-1/3 rounded-2xl max-h-[266px] overflow-hidden">
+                    <div className="px-4 pb-4 pt-4 flex flex-col gap-4">
+                      <h3 className="text-[10px] sm:text-base font-semibold">
+                        {service.title2}
+                      </h3>
+                      <p className="text-[10px]">{service.description2}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+          <div className=" flex gap-4 justify-center">
+            {services.map((_, index) => (
+              <button
                 key={index}
-                className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full flex-shrink-0"
-                style={{ width: containerWidth }}>
-                <div className="relative border w-full sm:w-1/3 rounded-2xl max-h-[266px] overflow-hidden">
-                  <div className="px-4 pb-4 pt-4 flex flex-col gap-4">
-                    <h3 className="text-[10px] sm:text-base font-semibold">
-                      {service.title}
-                    </h3>
-                    <p className="text-[10px]">{service.description}</p>
-                  </div>
-                </div>
-                <div className="relative border w-full sm:w-1/3 rounded-2xl max-h-[266px] overflow-hidden">
-                  <img
-                    src={service.imageUrl}
-                    alt={service.title}
-                    className="w-full h-full aspect-video object-cover"
-                  />
-                </div>
-                <div className="relative border w-full sm:w-1/3 rounded-2xl max-h-[266px] overflow-hidden">
-                  <div className="px-4 pb-4 pt-4 flex flex-col gap-4">
-                    <h3 className="text-[10px] sm:text-base font-semibold">
-                      {service.title2}
-                    </h3>
-                    <p className="text-[10px]">{service.description2}</p>
-                  </div>
-                </div>
-              </div>
+                className={`w-[60px] h-[6px] rounded-full ${
+                  currentIndex === index ? "bg-[#D9D9D9]" : "bg-[#D9D9D9]/90"
+                }`}
+                onClick={() => setCurrentIndex(index)}></button>
             ))}
-          </motion.div>
-        </div>
-        <div className="absolute -bottom-8 left-1/2 flex gap-4 -translate-x-1/2">
-          {services.map((_, index) => (
-            <button
-              key={index}
-              className={`w-[60px] h-[6px] rounded-full ${
-                currentIndex === index ? "bg-blue-500" : "bg-[#D9D9D9]"
-              }`}
-              onClick={() => setCurrentIndex(index)}></button>
-          ))}
+          </div>
         </div>
       </div>
-      <div className="absolute z-20 top-0 left-0">
+      <div className="absolute z-20 bottom-0 left-0">
         <svg
           width="522"
           height="506"

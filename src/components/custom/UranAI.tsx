@@ -61,7 +61,9 @@ export const UranAIDemo = () => {
         <div
           ref={constraintsRef}
           className="w-full h-full overflow-hidden lg:w-3/5">
-          <h2 className="text-[48px] font-bold mb-4 text-white">URAN AI</h2>
+          <h2 className="text-[48px] font-bold mb-4 text-white md:text-[64px]">
+            URAN AI
+          </h2>
           <motion.div
             drag="x"
             onDragEnd={dragEndHandler}
@@ -79,7 +81,7 @@ export const UranAIDemo = () => {
                   key={slide.buttonText}
                   src={slide.image}
                   alt="Interior Renovation"
-                  className="w-full h-full mah-h-[350px] object-cover object-center overflow-hidden rounded-lg shadow-lg"
+                  className="w-full h-full h-[350px] object-cover object-center overflow-hidden rounded-lg shadow-lg"
                 />
                 <div className="absolute bottom-4 left-4 bg-opacity-70 text-white dark:text-black px-3 py-1 rounded-md text-sm">
                   Interior renovation
@@ -103,11 +105,11 @@ export const UranAIDemo = () => {
         <div className="w-full lg:w-2/5 mt-8 lg:mt-0 flex flex-col gap-4 md:gap-6 items-start p-4 md:p-10 justify-end">
           <Link
             href="/ai"
-            className="font-bold border-white border px-6 py-2 rounded-[12px] z-[21] text-white">
+            className="font-bold md:text-[35px] border-white border px-6 py-2 rounded-[12px] z-[21] text-white">
             Uran AI DEMO
           </Link>
           <div>
-            <p className="text-gray-600 ">
+            <p className="text-gray-600 md:text-[23px]">
               Explore <span className="text-white"> Uran AI DEMO</span>
             </p>
             <p className="text-gray-600 ">Remodel your home in minutes!</p>

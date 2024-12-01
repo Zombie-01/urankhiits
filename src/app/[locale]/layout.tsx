@@ -14,66 +14,66 @@ import { routing } from "@/i18n/routing";
 const aeonikRegular = localFont({
   src: "../fonts/AeonikTRIAL-Regular.otf",
   variable: "--font-aeonik-regular",
-  weight: "400", // Regular weight
+  weight: "400" // Regular weight
 });
 
 // AeonikTRIAL Bold
 const aeonikBold = localFont({
   src: "../fonts/AeonikTRIAL-Bold.otf",
   variable: "--font-aeonik-bold",
-  weight: "700", // Bold weight
+  weight: "700" // Bold weight
 });
 
 // AeonikTRIAL Regular Italic
 const aeonikItalic = localFont({
   src: "../fonts/AeonikTRIAL-RegularItalic.otf",
   variable: "--font-aeonik-italic",
-  weight: "400", // Italic version of Regular weight
+  weight: "400" // Italic version of Regular weight
 });
 
 // AeonikTRIAL Bold Italic
 const aeonikBoldItalic = localFont({
   src: "../fonts/AeonikTRIAL-BoldItalic.otf",
   variable: "--font-aeonik-bold-italic",
-  weight: "700", // Italic version of Bold weight
+  weight: "700" // Italic version of Bold weight
 });
 
 // AeonikTRIAL Light
 const aeonikLight = localFont({
   src: "../fonts/AeonikTRIAL-Light.otf",
   variable: "--font-aeonik-light",
-  weight: "300", // Light weight
+  weight: "300" // Light weight
 });
 
 // AeonikTRIAL Light Italic
 const aeonikLightItalic = localFont({
   src: "../fonts/AeonikTRIAL-LightItalic.otf",
   variable: "--font-aeonik-light-italic",
-  weight: "300", // Italic version of Light weight
+  weight: "300" // Italic version of Light weight
 });
 export const metadata: Metadata = {
   title: "Urankhiits | Design",
   description: "Urankhiits .",
-  keywords: "Urankhiits, ai generate, ai, generate image, iterior, ai interior",
+  keywords: "Urankhiits, ai generate, ai, generate image, iterior, ai interior"
 };
 
 const six_caps = Six_Caps({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-six-caps",
-  weight: "400",
+  weight: "400"
 });
 
 const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-poppins",
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "700"]
 });
 
 export default async function RootLayout({
   children,
-  params: { locale },
+  params: { locale }
 }: Readonly<{
   children: React.ReactNode;
   params: { locale: string };
