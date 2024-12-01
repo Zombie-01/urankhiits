@@ -81,7 +81,7 @@ export const UranAIDemo = () => {
                   key={slide.buttonText}
                   src={slide.image}
                   alt="Interior Renovation"
-                  className="w-full h-full h-[350px] object-cover object-center overflow-hidden rounded-lg shadow-lg"
+                  className="w-full  h-[350px] object-cover object-center overflow-hidden rounded-lg shadow-lg"
                 />
                 <div className="absolute bottom-4 left-4 bg-opacity-70 text-white dark:text-black px-3 py-1 rounded-md text-sm">
                   Interior renovation
@@ -111,8 +111,9 @@ export const UranAIDemo = () => {
           <div>
             <p className="text-gray-600 md:text-[23px]">
               Explore <span className="text-white"> Uran AI DEMO</span>
+              <br />
+              Remodel your home in minutes!
             </p>
-            <p className="text-gray-600 ">Remodel your home in minutes!</p>
           </div>
         </div>
       </div>
