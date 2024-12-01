@@ -272,11 +272,33 @@ export default function ImagePage() {
             </div>
             <div className="bg-gray-200 dark:bg-white/10 rounded-lg flex items-start justify-center p-4 flex-col">
               <h2 className="mb-4">4. Choose Color Tone</h2>
-              <input
-                onChange={(e) => setTheme(e.target.value)}
-                placeholder="Өөрийн дуртай өнгө сонгоорой"
-                className={`px-4 py-[2px] w-full rounded-md bg-white font-bold dark:bg-slate-500 hover:bg-gray-100 dark:hover:bg-gray-600 text-black dark:text-white`}
-              />
+              <div className="grid grid-cols-5 gap-4">
+                {/* Define color options with names */}
+                {[
+                  { color: "#FF5733", name: "Vibrant Orange" },
+                  { color: "#33FF57", name: "Green" },
+                  { color: "#3357FF", name: "Blue" },
+                  { color: "#FF33A1", name: "Pink" },
+                  { color: "#FFD733", name: "Smooth Yellow" },
+                  { color: "#6A33FF", name: "Purple" },
+                  { color: "#FF6F33", name: "Warm Orange" },
+                  { color: "#33FFF5", name: "Cyan" },
+                  { color: "#333333", name: "Black" },
+                  { color: "#FFFFFF", name: "White" }
+                ].map(({ color, name }) => (
+                  <button
+                    key={color}
+                    onClick={() => setTheme(name)} // Update your theme state here
+                    style={{ backgroundColor: color }}
+                    className={`w-12 h-12 rounded-full shadow-md border-2 border-gray-300 dark:border-gray-700 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ${
+                      name === theme ? "border-4 border-black" : "" // Highlight selected color
+                    }`}
+                    aria-label={`Select color ${name}`}>
+                    <span className="sr-only">{name}</span>{" "}
+                    {/* Hidden text for accessibility */}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
