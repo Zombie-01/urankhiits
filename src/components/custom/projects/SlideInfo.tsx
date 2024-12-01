@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import OtherInfo from "./OtherInfo";
 import { IoMdBookmark } from "react-icons/io";
 import { CurrentSlideData, Data } from "./gallery";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 type Props = {
   transitionData: Data;
