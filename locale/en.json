@@ -87,5 +87,10 @@
     "commercial": "Commercial",
     "lux_house": "Luxury house",
     "residential": "Residential"
+  },
+  "Uran_ai": {
+    "ai_demo_button": "Uran AI DEMO",
+    "ai_demo_description": "Explore Uran AI DEMO",
+    "ai_demo_slogan": "Remodel your home in minutes!"
   }
 }

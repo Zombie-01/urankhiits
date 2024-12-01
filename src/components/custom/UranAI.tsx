@@ -4,11 +4,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { clamp } from "lodash";
+import { useTranslations } from "next-intl";
 
 export const UranAIDemo = () => {
   const constraintsRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const x = useMotionValue(0);
+  const t = useTranslations("Uran_ai");
 
   const [containerWidth, setContainerWidth] = useState(0);
   const slides = [
@@ -106,13 +108,13 @@ export const UranAIDemo = () => {
           <Link
             href="/ai"
             className="font-bold md:text-[35px] border-white border px-6 py-2 rounded-[12px] z-[21] text-white">
-            Uran AI DEMO
+            {t("ai_demo_button")}
           </Link>
           <div>
             <p className="text-gray-600 md:text-[23px]">
-              Explore <span className="text-white"> Uran AI DEMO</span>
+              {t("ai_demo_description")}
               <br />
-              Remodel your home in minutes!
+              {t("ai_demo_slogan")}
             </p>
           </div>
         </div>
