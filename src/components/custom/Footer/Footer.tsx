@@ -24,7 +24,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className=" py-12">
+    <footer className=" py-12" id="contact">
       {/* Top Section */}
       <div className="container mx-auto flex flex-wrap justify-between  items-center px-4">
         {/* Logo and Tagline */}
