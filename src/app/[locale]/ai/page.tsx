@@ -263,12 +263,19 @@ export default function ImagePage() {
           <div className="md:w-1/3 flex flex-col gap-4">
             <h2 className=" dark:text-white">3. Upload Your Image</h2>
             <div className="border-2 relative h-full border-dashed rounded-md flex items-center justify-center">
-              <FileUpload
-                onChange={(e) => {
-                  convertImageToBase64(e[0]);
-                  setFile(e[0]);
-                }}
-              />
+              {!base64Image ? (
+                <FileUpload
+                  onChange={(e) => {
+                    convertImageToBase64(e[0]);
+                    setFile(e[0]);
+                  }}
+                />
+              ) : (
+                <img
+                  src={base64Image}
+                  className="w-full h-full object-cover "
+                />
+              )}
             </div>
             <div className="bg-gray-200 dark:bg-white/10 rounded-lg flex items-start justify-center p-4 flex-col">
               <h2 className="mb-4">4. Choose Color Tone</h2>
@@ -308,12 +315,12 @@ export default function ImagePage() {
             </h2>
             <div className="border rounded-md min-h-[200px] overflow-hidden h-full w-full bg-gray-100 dark:bg-white/10 flex items-center justify-center">
               {outputImage ? (
-                <Compare
-                  firstImage={URL.createObjectURL(file as any) as any}
-                  secondImage={outputImage as any}
+                <img
+                  src={outputImage}
+                  className="w-full h-full object-cover "
                 />
               ) : (
-                <span className="text-black  h-full dark:text-white">
+                <span className="text-black  dark:text-white">
                   Generated image will appear here
                 </span>
               )}

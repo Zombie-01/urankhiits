@@ -79,8 +79,10 @@
     "POLICY": "Privacy Policy",
     "TERMS": "Terms & Conditions",
     "URAN": "URANKHIITS",
-    "ZOMBIE": "ZOMBIE"
+    "ZOMBIE": "ZOMBIE",
+    "PIN": " Ulaanbaatar city, Khan Uul district 11th khoroo, Chinggis Avenue - 61 Orgil stadium, No. 1 "
   },
+
   "Projects": {
     "Projects": "Projects",
     "show_all": "Show all",
