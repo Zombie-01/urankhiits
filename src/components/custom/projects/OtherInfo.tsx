@@ -23,10 +23,6 @@ function OtherInfo({ data }: Props) {
         animate={"visible"}
         className=" flex flex-col sm:flex-row items-center gap-8">
         <AnimatedText
-          className=" spacing overflow-hidden text-[#D5D5D6]"
-          data={data?.location}
-        />
-        <AnimatedText
           className=" my-1 text-xl font-semibold md:my-3 "
           data={data?.title}
         />

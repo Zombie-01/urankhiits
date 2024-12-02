@@ -15,7 +15,6 @@ export type Data = {
   img: string;
   title: string;
   description: string;
-  location: string;
 };
 
 export type CurrentSlideData = {
@@ -24,13 +23,33 @@ export type CurrentSlideData = {
 };
 
 export default function Home() {
+  const sliderData = [
+    {
+      img: "/building/1.png",
+      description:
+        "A stunning transformation of an industrial space with exposed beams, high ceilings, and sleek finishes.",
+      title: "Resistance projects"
+    },
+    {
+      img: "/building/2.png",
+      title: "Commercial project",
+      description:
+        "A clean, clutter-free kitchen featuring neutral colors, hidden storage, and efficient layout."
+    },
+    {
+      img: "/building/3.png",
+      title: "Luxury project",
+      description:
+        "Bright and cozy bedroom with natural wood, soft textures, and calming tones for a serene atmosphere."
+    }
+  ];
   const [data, setData] = React.useState<Data[]>(sliderData.slice(1));
   const [transitionData, setTransitionData] = React.useState<Data>(
     sliderData[0]
   );
   const [currentSlideData, setCurrentSlideData] =
     React.useState<CurrentSlideData>({
-      data: initData,
+      data: sliderData[0],
       index: 0
     });
 
@@ -44,7 +63,7 @@ export default function Home() {
           transitionData={transitionData}
           currentSlideData={currentSlideData}
         />
-        <div className="  absolute h-full sm:h-[20%]  bottom-0 py-6 bg-black/10 z-20  w-full">
+        <div className="  absolute h-full sm:h-[20%]  bottom-0 py-6 bg-black bg-opacity-40 z-20  w-full">
           <div className=" flex px-4 sm:px-10 h-full justify-center w-full grid-cols-10 flex-col sm:flex-row">
             <div className=" w-full">
               <SlideInfo
@@ -58,7 +77,7 @@ export default function Home() {
                 currentSlideData={currentSlideData}
                 data={data}
                 transitionData={transitionData}
-                initData={initData}
+                initData={sliderData[0]}
                 handleData={setData}
                 handleTransitionData={setTransitionData}
                 handleCurrentSlideData={setCurrentSlideData}
@@ -71,43 +90,3 @@ export default function Home() {
     </main>
   );
 }
-
-const sliderData = [
-  {
-    img: "/hero_1.png",
-    location: "Modern Loft",
-    description:
-      "A stunning transformation of an industrial space with exposed beams, high ceilings, and sleek finishes.",
-    title: "Urban Living Room"
-  },
-  {
-    img: "/hero_2.png",
-    title: "Minimalist Kitchen",
-    description:
-      "A clean, clutter-free kitchen featuring neutral colors, hidden storage, and efficient layout.",
-    location: "New York Apartment"
-  },
-  {
-    img: "/hero_3.png",
-    title: "Scandinavian Bedroom",
-    description:
-      "Bright and cozy bedroom with natural wood, soft textures, and calming tones for a serene atmosphere.",
-    location: "Stockholm Flat"
-  },
-  {
-    img: "/hero_4.png",
-    title: "Industrial Office Space",
-    description:
-      "An open-concept workspace with concrete finishes, metal fixtures, and modern furniture.",
-    location: "London Studio"
-  },
-  {
-    img: "/pub_1.png",
-    title: "Luxury Home Library",
-    description:
-      "A sophisticated library with floor-to-ceiling shelves, rich wood paneling, and comfortable seating.",
-    location: "Paris Residence"
-  }
-];
-
-const initData = sliderData[0];
