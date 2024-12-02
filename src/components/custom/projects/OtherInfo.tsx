@@ -27,10 +27,6 @@ function OtherInfo({ data }: Props) {
           data={data?.title}
         />
       </motion.div>
-      <AnimatedText
-        className=" text-xs text-[#D5D5D6]"
-        data={data?.description}
-      />
     </motion.div>
   );
 }
