@@ -1,18 +1,26 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Select } from "@/app/[locale]/select";
+import React, { useState } from "react";
 import { MultiStepLoader } from "@/components/ui/multi-step-loader";
-import { Compare } from "@/components/ui/compare";
 import { FileUpload } from "@/components/ui/file-upload";
-import Link from "next/link";
-import { MoveLeft } from "lucide-react";
-import { nanoid } from "nanoid";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { supabase } from "../../../../utils/supabase/client";
 import { useTranslations } from "next-intl";
 
-const themes = ["Modern", "Vintage", "Minimalist", "Professional"];
+const loadingStates = [
+  {
+    text: "Upload image"
+  },
+  {
+    text: "Detect specs"
+  },
+  {
+    text: "generate image"
+  },
+  {
+    text: "Send generated image"
+  }
+];
 const rooms = [
   {
     title: "Living Room",
@@ -41,22 +49,24 @@ const rooms = [
   }
 ];
 
-const loadingStates = [
-  {
-    text: "Upload image"
-  },
-  {
-    text: "Detect specs"
-  },
-  {
-    text: "generate image"
-  },
-  {
-    text: "Send generated image"
-  }
-];
-
 const building = ["Residential", "Commercial", "Exterior"];
+
+const buildingTypes = {
+  Residential: ["Living Room", "Bedroom", "Bathroom", "Kitchen", "Other"],
+  Commercial: ["Office", "Bathroom", "Kitchen", "Other"],
+  Exterior: ["Living Room", "Kitchen", "Other"]
+};
+
+function getRoomsByBuildingType(buildingType: string) {
+  if (!(buildingTypes as any)[buildingType]) {
+    return []; // Return empty array if buildingType is invalid
+  }
+
+  // Filter rooms based on the selected building type
+  return rooms.filter((room) =>
+    (buildingTypes as any)[buildingType].includes(room.title)
+  );
+}
 
 export default function ImagePage() {
   const [isLoading, setLoading] = useState(false);
@@ -230,7 +240,7 @@ export default function ImagePage() {
         <div className="bg-gray-200 dark:bg-white/10 rounded-lg flex items-start justify-center p-4 flex-col">
           <h2 className="mb-4 dark:text-white">2. {t("choose_room_type")}</h2>
           <div className="flex  gap-4 py-2 overflow-auto max-w-full">
-            {rooms.map((r) => (
+            {getRoomsByBuildingType(build).map((r) => (
               <div
                 key={r.title}
                 onClick={() => setRoom(r)}
@@ -240,7 +250,7 @@ export default function ImagePage() {
                 <img
                   src={r.image}
                   alt="hero"
-                  className="w-full h-full object-cover aspect-video"
+                  className="w-full h-full max-h-[200px] object-cover aspect-video"
                 />
                 <span className="text-white absolute bottom-4 left-4 ">
                   {r.title}
@@ -270,7 +280,7 @@ export default function ImagePage() {
             </div>
             <div className="bg-gray-200 dark:bg-white/10 rounded-lg flex items-start justify-center p-4 flex-col">
               <h2 className="mb-4">4. {t("choose_color_tone")}</h2>
-              <div className="grid grid-cols-5 gap-4">
+              <div className="grid grid-cols-5 gap-4 justify-around w-full">
                 {/* Define color options with names */}
                 {[
                   {
@@ -377,7 +387,7 @@ export default function ImagePage() {
                   <div
                     key={index}
                     onClick={() => setTheme(palette.label)}
-                    className={`flex flex-col gap-2 border  rounded-md p-4 transition-transform transform hover:scale-105 cursor-pointer ${
+                    className={`flex flex-col gap-2 border w-full rounded-md p-2 md:p-4 transition-transform transform hover:scale-105 cursor-pointer ${
                       palette.label === theme
                         ? "border-black dark:border-white"
                         : "border-gray-300"

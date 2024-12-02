@@ -32,7 +32,7 @@ export const Footer = () => {
       <div className=" flex w-full items-center gap-10 flex-col sm:flex-row">
         {/* Logo and Tagline */}
         <div className="flex flex-col w-full items-end gap-4">
-          <div className="flex flex-col w-full md:w-3/5 max-w-[500px] pr-8 space-y-2">
+          <div className="flex px-4 md:px-0 flex-col w-full md:w-3/5 max-w-[500px] pr-8 space-y-2">
             <div className="flex items-center gap-2">
               <Logo />
               <span className="h-[80px] w-[1px] bg-black dark:bg-white"></span>
@@ -52,7 +52,7 @@ export const Footer = () => {
           />
         </div>
         {/* Navigation Links */}
-        <div className="w-full justify-start md:max-w-2/5 flex gap-8">
+        <div className="w-full justify-start md:max-w-2/5 px-4 md:px-0 flex gap-8">
           <div className="flex flex-col space-y-2 min-w-[100px] text-sm">
             <h4 className="font-semibold">{t("MENU")}</h4>
             <ul className="space-y-1 text-[#727272]">
