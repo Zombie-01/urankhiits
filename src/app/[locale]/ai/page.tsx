@@ -60,7 +60,7 @@ const building = ["Residential", "Commercial", "Exterior"];
 export default function ImagePage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const [theme, setTheme] = useState<string>("");
+  const [theme, setTheme] = useState<string>("Modern Minimalist");
   const [room, setRoom] = useState<{ title: string; image: string }>(rooms[0]);
   const [build, setBuild] = useState<string>(building[0]);
   const [outputImage, setOutputImage] = useState<string | null>(null);
@@ -95,8 +95,7 @@ export default function ImagePage() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        imageUrl: outputImage,
-        watermarkText: "URANKHIITS"
+        imageUrl: outputImage
       })
     });
 
@@ -273,7 +272,7 @@ export default function ImagePage() {
               ) : (
                 <img
                   src={base64Image}
-                  className="w-full h-full object-cover "
+                  className="w-full h-full rounded-xl overflow-hidden  object-cover "
                 />
               )}
             </div>
@@ -282,28 +281,99 @@ export default function ImagePage() {
               <div className="grid grid-cols-5 gap-4">
                 {/* Define color options with names */}
                 {[
-                  { color: "#FF5733", name: "Vibrant Orange" },
-                  { color: "#33FF57", name: "Green" },
-                  { color: "#3357FF", name: "Blue" },
-                  { color: "#FF33A1", name: "Pink" },
-                  { color: "#FFD733", name: "Smooth Yellow" },
-                  { color: "#6A33FF", name: "Purple" },
-                  { color: "#FF6F33", name: "Warm Orange" },
-                  { color: "#33FFF5", name: "Cyan" },
-                  { color: "#333333", name: "Black" },
-                  { color: "#FFFFFF", name: "White" }
-                ].map(({ color, name }) => (
-                  <button
-                    key={color}
-                    onClick={() => setTheme(name)} // Update your theme state here
-                    style={{ backgroundColor: color }}
-                    className={`w-12 h-12 rounded-full shadow-md border-2 border-gray-300 dark:border-gray-700 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ${
-                      name === theme ? "border-4 border-black" : "" // Highlight selected color
-                    }`}
-                    aria-label={`Select color ${name}`}>
-                    <span className="sr-only">{name}</span>{" "}
-                    {/* Hidden text for accessibility */}
-                  </button>
+                  {
+                    label: "Modern Minimalist",
+                    colors: ["#ffffff", "#cccccc", "#333333"]
+                  },
+                  {
+                    label: "Scandinavian",
+                    colors: ["#f4f4f4", "#d9c7b7", "#8d7b6a"]
+                  },
+                  {
+                    label: "Industrial",
+                    colors: ["#2e2e2e", "#737373", "#d6cfc7"]
+                  },
+                  {
+                    label: "Bohemian",
+                    colors: ["#b57f50", "#f5e3d3", "#a86b5a"]
+                  },
+                  {
+                    label: "Coastal",
+                    colors: ["#d8f1f2", "#86a8d1", "#f5f5dc"]
+                  },
+                  {
+                    label: "Rustic Farmhouse",
+                    colors: ["#dbd3c9", "#796d5a", "#bca580"]
+                  },
+                  {
+                    label: "Mid-Century Modern",
+                    colors: ["#ff6f61", "#fde1a9", "#5b5b5b"]
+                  },
+                  {
+                    label: "Victorian",
+                    colors: ["#543f6f", "#9a8a97", "#e9d8c9"]
+                  },
+                  {
+                    label: "Art Deco",
+                    colors: ["#f7d8ba", "#ac7339", "#3a3a52"]
+                  },
+                  {
+                    label: "Tropical",
+                    colors: ["#2e8b57", "#f3e2a9", "#ff6347"]
+                  },
+                  {
+                    label: "Luxury Modern",
+                    colors: ["#282c34", "#b4975a", "#ece9e4"]
+                  },
+                  {
+                    label: "Zen Japanese",
+                    colors: ["#f4efe6", "#847462", "#d2b48c"]
+                  },
+                  {
+                    label: "Contemporary",
+                    colors: ["#4a4a4a", "#a3a3a3", "#f7f7f7"]
+                  },
+                  {
+                    label: "Mediterranean",
+                    colors: ["#3f88c5", "#f6a623", "#f3eacb"]
+                  },
+                  {
+                    label: "Desert Chic",
+                    colors: ["#c28e6c", "#f4e2b8", "#736f4c"]
+                  },
+                  {
+                    label: "Urban Jungle",
+                    colors: ["#4c956c", "#cddcab", "#3e403f"]
+                  },
+                  {
+                    label: "Futuristic",
+                    colors: ["#232323", "#7a7a7a", "#e8e8e8"]
+                  },
+                  {
+                    label: "Eclectic",
+                    colors: ["#faae42", "#55828b", "#d9d9d9"]
+                  },
+                  { label: "Retro", colors: ["#ed6a5a", "#f4f1bb", "#9bc1bc"] },
+                  {
+                    label: "Warm Neutrals",
+                    colors: ["#b39c94", "#e3d5ca", "#ffffff"]
+                  }
+                ].map((palette, index) => (
+                  <div
+                    key={index}
+                    onClick={() => setTheme(palette.label)}
+                    className={`flex flex-col gap-2 border  rounded-md p-4 transition-transform transform hover:scale-105 cursor-pointer ${
+                      palette?.label === theme
+                        ? "border-black dark:border-white"
+                        : "border-gray-300"
+                    }`}>
+                    {palette.colors.map((color, i) => (
+                      <div
+                        key={i}
+                        className="h-5 w-5 rounded"
+                        style={{ backgroundColor: color }}></div>
+                    ))}
+                  </div>
                 ))}
               </div>
             </div>

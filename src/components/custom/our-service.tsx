@@ -16,21 +16,21 @@ const OurServiceV: React.FC = () => {
     {
       title: t("service1Title"),
       description: t("service1Description"),
-      imageUrl: "/hero_1.png",
+      imageUrl: "/rooms/1.png",
       title2: t("service2Title"),
       description2: t("service2Description")
     },
     {
       title: t("service3Title"),
       description: t("service3Description"),
-      imageUrl: "/hero_1.png",
+      imageUrl: "/rooms/2.png",
       title2: t("service4Title"),
       description2: t("service4Description")
     },
     {
       title: t("service5Title"),
       description: t("service5Description"),
-      imageUrl: "/hero_1.png",
+      imageUrl: "/rooms/3.png",
       title2: t("service6Title"),
       description2: t("service6Description")
     }

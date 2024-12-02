@@ -86,16 +86,28 @@ export const Footer = () => {
             <p className="text-[#727272]">88943939 , 9901 2105</p>
             <p className="text-[#727272]">info@urankhiits.com</p>
             <div className="flex space-x-4 mt-2 text-[#727272]">
-              <a href="#" aria-label="Facebook">
+              <a
+                href="https://www.facebook.com/profile.php"
+                target="_blank"
+                aria-label="Facebook">
                 <IconBrandFacebook size={20} />
               </a>
-              <a href="#" aria-label="Instagram">
+              <a
+                href="https://www.instagram.com/urankhiits.llc?"
+                target="_blank"
+                aria-label="Instagram">
                 <IconBrandInstagram size={20} />
               </a>
-              <a href="#" aria-label="LinkedIn">
+              <a
+                href="https://www.linkedin.com/company/uran-khiits-llc"
+                target="_blank"
+                aria-label="LinkedIn">
                 <IconBrandLinkedin size={20} />
               </a>
-              <a href="#" aria-label="Twitter">
+              <a
+                href="https://www.linkedin.com/company/uran-khiits-llc"
+                target="_blank"
+                aria-label="Twitter">
                 <IconBrandTwitter size={20} />
               </a>
             </div>
