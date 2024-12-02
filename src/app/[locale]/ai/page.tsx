@@ -58,7 +58,6 @@ const loadingStates = [
 const building = ["Residential", "Commercial", "Exterior"];
 
 export default function ImagePage() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [theme, setTheme] = useState<string>("Modern Minimalist");
   const [room, setRoom] = useState<{ title: string; image: string }>(rooms[0]);
@@ -68,16 +67,6 @@ export default function ImagePage() {
   const [base64Image, setBase64Image] = useState<string | null>(null);
 
   const { data: session } = useSession();
-
-  useEffect(() => {
-    // Apply the dark class to the <html> element when dark mode is enabled
-    const html = document.documentElement;
-    if (isDarkMode) {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
-    }
-  }, [isDarkMode]);
 
   function convertImageToBase64(file: File): void {
     const reader = new FileReader();
@@ -283,87 +272,110 @@ export default function ImagePage() {
                 {[
                   {
                     label: "Modern Minimalist",
-                    colors: ["#ffffff", "#cccccc", "#333333"]
+                    colors: ["#ffffff", "#cccccc", "#333333"],
+                    colorNames: "white, light gray, dark gray"
                   },
                   {
                     label: "Scandinavian",
-                    colors: ["#f4f4f4", "#d9c7b7", "#8d7b6a"]
+                    colors: ["#f4f4f4", "#d9c7b7", "#8d7b6a"],
+                    colorNames: "off-white, beige, brown"
                   },
                   {
                     label: "Industrial",
-                    colors: ["#2e2e2e", "#737373", "#d6cfc7"]
+                    colors: ["#2e2e2e", "#737373", "#d6cfc7"],
+                    colorNames: "charcoal, gray, ivory"
                   },
                   {
                     label: "Bohemian",
-                    colors: ["#b57f50", "#f5e3d3", "#a86b5a"]
+                    colors: ["#b57f50", "#f5e3d3", "#a86b5a"],
+                    colorNames: "tan, peach, brown"
                   },
                   {
                     label: "Coastal",
-                    colors: ["#d8f1f2", "#86a8d1", "#f5f5dc"]
+                    colors: ["#d8f1f2", "#86a8d1", "#f5f5dc"],
+                    colorNames: "aqua, blue, beige"
                   },
                   {
                     label: "Rustic Farmhouse",
-                    colors: ["#dbd3c9", "#796d5a", "#bca580"]
+                    colors: ["#dbd3c9", "#796d5a", "#bca580"],
+                    colorNames: "cream, taupe, brown"
                   },
                   {
                     label: "Mid-Century Modern",
-                    colors: ["#ff6f61", "#fde1a9", "#5b5b5b"]
+                    colors: ["#ff6f61", "#fde1a9", "#5b5b5b"],
+                    colorNames: "coral, cream, gray"
                   },
                   {
                     label: "Victorian",
-                    colors: ["#543f6f", "#9a8a97", "#e9d8c9"]
+                    colors: ["#543f6f", "#9a8a97", "#e9d8c9"],
+                    colorNames: "purple, lavender, cream"
                   },
                   {
                     label: "Art Deco",
-                    colors: ["#f7d8ba", "#ac7339", "#3a3a52"]
+                    colors: ["#f7d8ba", "#ac7339", "#3a3a52"],
+                    colorNames: "beige, bronze, navy blue"
                   },
                   {
                     label: "Tropical",
-                    colors: ["#2e8b57", "#f3e2a9", "#ff6347"]
+                    colors: ["#2e8b57", "#f3e2a9", "#ff6347"],
+                    colorNames: "green, sand, tomato red"
                   },
                   {
                     label: "Luxury Modern",
-                    colors: ["#282c34", "#b4975a", "#ece9e4"]
+                    colors: ["#282c34", "#b4975a", "#ece9e4"],
+                    colorNames: "dark gray, gold, ivory"
                   },
                   {
                     label: "Zen Japanese",
-                    colors: ["#f4efe6", "#847462", "#d2b48c"]
+                    colors: ["#f4efe6", "#847462", "#d2b48c"],
+                    colorNames: "cream, brown, tan"
                   },
                   {
                     label: "Contemporary",
-                    colors: ["#4a4a4a", "#a3a3a3", "#f7f7f7"]
+                    colors: ["#4a4a4a", "#a3a3a3", "#f7f7f7"],
+                    colorNames: "charcoal, silver, white"
                   },
                   {
                     label: "Mediterranean",
-                    colors: ["#3f88c5", "#f6a623", "#f3eacb"]
+                    colors: ["#3f88c5", "#f6a623", "#f3eacb"],
+                    colorNames: "blue, gold, beige"
                   },
                   {
                     label: "Desert Chic",
-                    colors: ["#c28e6c", "#f4e2b8", "#736f4c"]
+                    colors: ["#c28e6c", "#f4e2b8", "#736f4c"],
+                    colorNames: "sand, cream, brown"
                   },
                   {
                     label: "Urban Jungle",
-                    colors: ["#4c956c", "#cddcab", "#3e403f"]
+                    colors: ["#4c956c", "#cddcab", "#3e403f"],
+                    colorNames: "green, sage, charcoal"
                   },
                   {
                     label: "Futuristic",
-                    colors: ["#232323", "#7a7a7a", "#e8e8e8"]
+                    colors: ["#232323", "#7a7a7a", "#e8e8e8"],
+                    colorNames: "black, gray, white"
                   },
                   {
                     label: "Eclectic",
-                    colors: ["#faae42", "#55828b", "#d9d9d9"]
+                    colors: ["#faae42", "#55828b", "#d9d9d9"],
+                    colorNames: "orange, blue, gray"
                   },
-                  { label: "Retro", colors: ["#ed6a5a", "#f4f1bb", "#9bc1bc"] },
+                  {
+                    label: "Retro",
+                    colors: ["#ed6a5a", "#f4f1bb", "#9bc1bc"],
+                    colorNames: "red, yellow, teal"
+                  },
                   {
                     label: "Warm Neutrals",
-                    colors: ["#b39c94", "#e3d5ca", "#ffffff"]
+                    colors: ["#b39c94", "#e3d5ca", "#ffffff"],
+                    colorNames: "brown, beige, white"
                   }
                 ].map((palette, index) => (
                   <div
                     key={index}
                     onClick={() => setTheme(palette.label)}
                     className={`flex flex-col gap-2 border  rounded-md p-4 transition-transform transform hover:scale-105 cursor-pointer ${
-                      palette?.label === theme
+                      palette.label === theme
                         ? "border-black dark:border-white"
                         : "border-gray-300"
                     }`}>

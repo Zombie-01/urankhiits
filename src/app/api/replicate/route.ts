@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
     // 2. Initialize the replicate object with our Replicate API token
     const replicate = new Replicate({
-      auth: process.env.REPLICATE_API_TOKEN as string,
+      auth: process.env.REPLICATE_API_TOKEN as string
     });
 
     // 3. Set the model that we're about to run
@@ -38,7 +38,7 @@ export async function POST(req: Request) {
     // 4. Set the image which is the image we uploaded from the client
     const input = {
       image,
-      prompt: `A ${theme} ${room}  Editorial Style Photo, Symmetry, Straight On, Modern Living Room, Large Window (balanced with walls if window not detected then dont add window), Leather, Glass, Metal, Wood Paneling, Neutral Palette, Ikea, Natural Light, Apartment, Afternoon, Serene, Contemporary, 4k`,
+      prompt: `A ${theme} colored ${room}  Editorial Style Photo, Symmetry, Straight On, Modern Living Room, Large Window (balanced with walls if window not detected then dont add window), Leather, Glass, Metal, Wood Paneling, Neutral Palette, Ikea, Natural Light, Apartment, Afternoon, Serene, Contemporary, 4k`,
       a_prompt: `best quality, extremely detailed, photo from Pinterest, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning, architectural balance`,
       n_prompt: `excessive windows, longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, unrealistic proportions`,
       ddim_steps: 20,
@@ -46,7 +46,7 @@ export async function POST(req: Request) {
       value_threshold: 0.1,
       image_resolution: "512",
       detect_resolution: 512,
-      distance_threshold: 0.1,
+      distance_threshold: 0.1
     };
 
     // 5. Run the Replicate's model (to remove background) and get the output image
