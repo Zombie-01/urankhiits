@@ -94,5 +94,17 @@
     "ai_demo_button": "Uran AI DEMO",
     "ai_demo_description": "Explore Uran AI DEMO",
     "ai_demo_slogan": "Remodel your home in minutes!"
+  },
+  "AI": {
+    "choose_building_type": "Choose your building type",
+    "choose_room_type": "Choose Room Type",
+    "upload_image": "Upload your image",
+    "choose_color_tone": "Choose Color Tone",
+    "generated_image": "Generated Image",
+    "reset": "Reset",
+    "generate": "Generate",
+    "download": "Download",
+    "image_uploaded": "Image uploaded successfully.",
+    "image_processing_error": "An error occurred while processing the image."
   }
 }

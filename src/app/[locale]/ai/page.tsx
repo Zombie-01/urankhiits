@@ -10,6 +10,7 @@ import { nanoid } from "nanoid";
 import { signIn, useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { supabase } from "../../../../utils/supabase/client";
+import { useTranslations } from "next-intl";
 
 const themes = ["Modern", "Vintage", "Minimalist", "Professional"];
 const rooms = [
@@ -65,6 +66,8 @@ export default function ImagePage() {
   const [outputImage, setOutputImage] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [base64Image, setBase64Image] = useState<string | null>(null);
+
+  const t = useTranslations("AI");
 
   const { data: session } = useSession();
 
@@ -157,7 +160,7 @@ export default function ImagePage() {
 
         if (storageError) {
           console.error("Error uploading file:", storageError.message);
-          toast.error("Failed to upload image. Please try again.");
+          toast.error(t("image_processing_error"));
           return;
         }
 
@@ -168,7 +171,7 @@ export default function ImagePage() {
         const publicUrl = publicUrlData?.publicUrl;
 
         if (!publicUrl) {
-          toast.error("Failed to generate image URL.");
+          toast.error(t("image_processing_error"));
           return;
         }
 
@@ -181,17 +184,17 @@ export default function ImagePage() {
 
         if (dbError) {
           console.error("Error saving metadata:", dbError.message);
-          toast.error("Failed to save metadata. Please try again.");
+          toast.error(t("image_processing_error"));
           return;
         }
 
-        toast.success("Image processed and saved successfully!");
+        toast.success(t("image_uploaded"));
       } else {
         console.error("Unexpected result format. Unable to display image.");
       }
     } catch (error) {
       console.error("Error submitting image:", error);
-      toast.error("An error occurred while submitting the image.");
+      toast.error(t("image_processing_error"));
     } finally {
       setLoading(false);
     }
@@ -208,7 +211,7 @@ export default function ImagePage() {
       <div className="max-w-6xl flex flex-col gap-4 my-16 mx-auto">
         <div className="bg-gray-200 dark:bg-white/10 rounded-lg flex items-start justify-center p-4 flex-col">
           <h2 className=" mb-4 dark:text-white">
-            1. Choose your building type
+            1. {t("choose_building_type")}
           </h2>
           <div className="flex flex-wrap gap-4">
             {building.map((type) => (
@@ -225,7 +228,7 @@ export default function ImagePage() {
         </div>
 
         <div className="bg-gray-200 dark:bg-white/10 rounded-lg flex items-start justify-center p-4 flex-col">
-          <h2 className="mb-4 dark:text-white">2. Choose Room Type</h2>
+          <h2 className="mb-4 dark:text-white">2. {t("choose_room_type")}</h2>
           <div className="flex  gap-4 py-2 overflow-auto max-w-full">
             {rooms.map((r) => (
               <div
@@ -249,7 +252,7 @@ export default function ImagePage() {
 
         <div className="flex flex-col md:flex-row w-full  gap-6">
           <div className="md:w-1/3 flex flex-col gap-4">
-            <h2 className=" dark:text-white">3. Upload Your Image</h2>
+            <h2 className=" dark:text-white">3. {t("upload_image")}</h2>
             <div className="border-2 relative h-full border-dashed rounded-md flex items-center justify-center">
               {!base64Image ? (
                 <FileUpload
@@ -266,7 +269,7 @@ export default function ImagePage() {
               )}
             </div>
             <div className="bg-gray-200 dark:bg-white/10 rounded-lg flex items-start justify-center p-4 flex-col">
-              <h2 className="mb-4">4. Choose Color Tone</h2>
+              <h2 className="mb-4">4. {t("choose_color_tone")}</h2>
               <div className="grid grid-cols-5 gap-4">
                 {/* Define color options with names */}
                 {[
@@ -393,7 +396,7 @@ export default function ImagePage() {
 
           <div className="md:w-2/3 min-h-[200px]">
             <h2 className="text-lg font-bold dark:text-white">
-              Uran AI Generated
+              {t("generated_image")}
             </h2>
             <div className="border rounded-md min-h-[200px] overflow-hidden h-full w-full bg-gray-100 dark:bg-white/10 flex items-center justify-center">
               {outputImage ? (
@@ -402,9 +405,7 @@ export default function ImagePage() {
                   className="w-full h-full object-cover "
                 />
               ) : (
-                <span className="text-black  dark:text-white">
-                  Generated image will appear here
-                </span>
+                <span className="text-black  dark:text-white"></span>
               )}
             </div>
           </div>
@@ -418,19 +419,19 @@ export default function ImagePage() {
               setBase64Image(null);
             }}
             className="px-4 py-2 bg-gray-200 dark:bg-slate-500 text-black dark:text-white rounded-md">
-            Reset
+            {t("reset")}
           </button>
           {outputImage ? (
             <button
               onClick={() => downloadOutputImage()}
               className="px-4 py-2 bg-blue-600 text-white rounded-md">
-              Download
+              {t("download")}
             </button>
           ) : (
             <button
               onClick={() => submitImage()}
               className="px-4 py-2 bg-green-600 text-white rounded-md">
-              Generate
+              {t("generate")}
             </button>
           )}
         </div>

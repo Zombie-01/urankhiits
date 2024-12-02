@@ -94,5 +94,17 @@
     "ai_demo_button": "Uran AI DEMO",
     "ai_demo_description": "Uran AI-г туршаад, ",
     "ai_demo_slogan": "Өөрийн орчныг минутын дотор өөрчлөөрэй!"
+  },
+  "AI": {
+    "choose_building_type": "Барилга төрөл сонгоно уу",
+    "choose_room_type": "Өрөөний төрөл сонгоно уу",
+    "upload_image": "Зургийг ачаална уу",
+    "choose_color_tone": "Өнгөний өнгийг сонгоно уу",
+    "generated_image": "Үр дүнгийн зураг",
+    "reset": "Дахин тохируулах",
+    "generate": "Зураг үүсгэх",
+    "download": "Татаж авах",
+    "image_uploaded": "Зураг амжилттай ачаалагдсан.",
+    "image_processing_error": "Зургийг боловсруулахдаа алдаа гарлаа."
   }
 }
