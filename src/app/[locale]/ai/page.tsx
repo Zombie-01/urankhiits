@@ -112,12 +112,38 @@ export default function ImagePage() {
     URL.revokeObjectURL(imageObjectURL);
   }
 
+  async function handleGmailLogin() {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google"
+      });
+
+      if (error) {
+        console.error("Gmail login error:", error.message);
+        toast.error("Failed to log in with Gmail");
+        return false; // Return false if login failed
+      }
+
+      if (data) {
+        console.log("User logged in:", data);
+        return true; // Return true if login was successful
+      }
+    } catch (error) {
+      console.error("Unexpected error during Gmail login:", error);
+      toast.error("Unexpected error during Gmail login");
+      return false;
+    }
+  }
+
   async function submitImage(): Promise<void> {
     try {
       if (!file) {
         toast.error("Please upload an image.");
         return;
       }
+
+      // const loggedIn = await handleGmailLogin();
+      // if (!loggedIn) return;
 
       setLoading(true);
 

@@ -48,14 +48,12 @@ type Card = {
   src: string;
   id: string;
 };
-const tabs = ["Show All", "Commercial", "Luxury House", "Residential"];
 
 export function FocusCards({ cards }: { cards: Card[] }) {
-  const [selectedTab, setSelectedTab] = useState("Show All");
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 md:px-8">
+    <div className="max-w-7xl mx-auto px-4 md:px-8  ">
       {/* Card Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {cards.map((card, index) => (

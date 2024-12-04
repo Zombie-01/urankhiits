@@ -123,7 +123,7 @@ const OurServiceV: React.FC = () => {
               <button
                 key={index}
                 className={`w-[60px] h-[6px] rounded-full ${
-                  currentIndex === index ? "bg-[#D9D9D9]" : "bg-[#D9D9D9]/90"
+                  currentIndex === index ? "bg-blue-500" : "bg-[#D9D9D9]"
                 }`}
                 onClick={() => setCurrentIndex(index)}></button>
             ))}
