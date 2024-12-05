@@ -62,7 +62,7 @@ export const Footer: React.FC = () => {
     <div className="flex overflow-hidden max-w-screen flex-col md:flex-row gap-10 items-end pt-20 md:pr-20 pb-11 bg-neutral-200 md:max-md:pr-5">
       {/* Left Section */}
       <div className="flex flex-col self-start text-base font-medium tracking-normal leading-6 text-neutral-500 max-md:max-w-full">
-        <div className="flex gap-6 self-start ml-24 items-center">
+        <div className="flex gap-6 self-start mx-4 md:mx-0 md:ml-24 items-center">
           <Logo />
           <div className="shrink-0 w-px border border-black border-solid h-[83px]" />
           <div className="self-end mt-8 w-[401px]">
