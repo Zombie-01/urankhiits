@@ -23,7 +23,7 @@ function OtherInfo({ data }: Props) {
         animate={"visible"}
         className=" flex flex-col sm:flex-row items-center gap-8">
         <AnimatedText
-          className=" my-1 text-xl font-semibold md:my-3 "
+          className="  text-2xl md:text-4xl font-semibold  "
           data={data?.title}
         />
       </motion.div>

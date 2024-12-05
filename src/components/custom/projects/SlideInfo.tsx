@@ -20,7 +20,7 @@ function SlideInfo({ transitionData, currentSlideData }: Props) {
         <Link href={`/project`}>
           <button
             className=" w-fit border-[#ffffff8f] px-6 py-3 text-[10px] font-thin transition duration-300 
-          ease-in-out hover:bg-white sm:text-xl hover:text-black ">
+          ease-in-out hover:scale-110 underline underline-offset-4 sm:text-lg  ">
             See more
           </button>
         </Link>
