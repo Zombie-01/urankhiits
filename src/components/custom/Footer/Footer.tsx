@@ -1,3 +1,5 @@
+import Logo from "@/app/[locale]/logo";
+import { Link } from "@/i18n/routing";
 import {
   IconBrandFacebook,
   IconBrandInstagram,
@@ -9,7 +11,12 @@ import * as React from "react";
 
 export const Footer: React.FC = () => {
   const t = useTranslations("Header");
-  const links = [t("OURSERVICE"), t("AI"), t("ABOUTUS"), t("PROJECTS")];
+  const links = [
+    { label: t("OURSERVICE"), href: "#ourservice" },
+    { label: t("AI"), href: "/ai" },
+    { label: t("ABOUTUS"), href: "#aboutus" },
+    { label: t("PROJECTS"), href: "/project" }
+  ];
 
   const socialIcons = [
     {
@@ -52,16 +59,11 @@ export const Footer: React.FC = () => {
     }
   ];
   return (
-    <div className="flex overflow-hidden flex-col md:flex-row gap-10 items-end pt-20 pr-20 pb-11 bg-neutral-200 max-md:pr-5">
+    <div className="flex overflow-hidden max-w-screen flex-col md:flex-row gap-10 items-end pt-20 md:pr-20 pb-11 bg-neutral-200 md:max-md:pr-5">
       {/* Left Section */}
       <div className="flex flex-col self-start text-base font-medium tracking-normal leading-6 text-neutral-500 max-md:max-w-full">
-        <div className="flex gap-6 self-start ml-24">
-          <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/4adb6cdb8e76f170ce44cb65078cac0f33b4296a491d0083e98e81f0b88202eb?placeholderIfAbsent=true&apiKey=d78a1b03472d480d89d70a3b96288448"
-            alt="Company logo"
-            className="object-contain self-start aspect-[4.17] w-[333px]"
-          />
+        <div className="flex gap-6 self-start ml-24 items-center">
+          <Logo />
           <div className="shrink-0 w-px border border-black border-solid h-[83px]" />
           <div className="self-end mt-8 w-[401px]">
             <span>Build Innovative </span>
@@ -78,15 +80,15 @@ export const Footer: React.FC = () => {
         />
       </div>
 
-      <div className="flex w-full gap-10 max-w-3xl mx-auto">
+      <div className="flex flex-col px-4 md:px-0 md:flex-row w-full gap-10 max-w-3xl mx-auto">
         {/* Links Section */}
         <div className="flex flex-col mt-6 text-base font-semibold tracking-wide text-zinc-800">
           <div className="leading-none">Холбоосууд</div>
           <div className="flex flex-col mt-6 leading-5 min-h-[192px] max-md:mr-1.5">
             {links.map((link, index) => (
-              <div key={index} className="mt-4">
-                <span>{link}</span>
-              </div>
+              <Link href={link.href} key={index} className="mt-4">
+                <span>{link.label}</span>
+              </Link>
             ))}
           </div>
         </div>
