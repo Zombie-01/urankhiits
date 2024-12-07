@@ -28,7 +28,6 @@ export default function Home() {
   const [categories, setCategories] = useState<Category[]>([]); // State for categories
   const [selectedCategory, setSelectedCategory] = useState<string>(""); // State for selected category
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [confirmDelete, setConfirmDelete] = useState<string | null>(null); // State to track deletion confirmation
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   // Fetch projects and categories from Supabase

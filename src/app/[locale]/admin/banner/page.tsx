@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 import { supabase } from "../../../../../utils/supabase/client";
 
 interface Banner {
+  id: string;
   title: string;
   desc: string;
 }
@@ -23,8 +24,9 @@ export default function BannerPage() {
   const [title, setTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
   const [newImages, setNewImages] = useState<File[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  // Fetch banners and sub-banners
+  // Fetch banners
   useEffect(() => {
     const fetchBanners = async () => {
       const { data, error } = await supabase.from("banner").select("*");
@@ -34,37 +36,37 @@ export default function BannerPage() {
         setBanners(data as unknown as Banner[]);
       }
     };
-
     fetchBanners();
   }, []);
 
+  // Fetch sub-banners
   useEffect(() => {
     if (selectedBanner) {
       const fetchSubBanners = async () => {
         const { data, error } = await supabase
           .from("sub_banner")
           .select("*")
-          .eq("banner_id", (selectedBanner as any).id);
+          .eq("banner_id", selectedBanner.id);
         if (error) {
           console.error("Error fetching sub-banners:", error.message);
         } else {
           setSubBanners(data as unknown as SubBanner[]);
         }
       };
-
       fetchSubBanners();
     }
   }, [selectedBanner]);
 
   // Add new banner
   const handleAddBanner = async () => {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("banner")
-      .insert([{ title, description: desc }]);
+      .insert([{ title, description: desc }])
+      .select();
     if (error) {
       console.error("Error adding banner:", error.message);
-    } else {
-      setBanners([...banners, { title, desc }]);
+    } else if (data) {
+      setBanners([...(banners as any), data[0]]);
       setTitle("");
       setDesc("");
     }
@@ -77,7 +79,7 @@ export default function BannerPage() {
     const uploads = newImages.map(async (image) => {
       const fileName = `${nanoid()}-${image.name}`;
       const { error: storageError } = await supabase.storage
-        .from("projects")
+        .from("sub_banner")
         .upload(fileName, image);
 
       if (storageError) {
@@ -89,18 +91,14 @@ export default function BannerPage() {
       }
 
       const { data: publicURL } = supabase.storage
-        .from("projects")
+        .from("sub_banner")
         .getPublicUrl(fileName);
-
-      //   if (urlError) {
-      //     console.error("Error getting public URL:", urlError.message);
-      //     return null;
-      //   }
 
       return {
         id: nanoid(),
-        banner_id: (selectedBanner as any).id,
-        img_url: publicURL
+        banner_id: selectedBanner.id,
+        image_url: publicURL.publicUrl,
+        link_url: publicURL.publicUrl
       };
     });
 
@@ -119,79 +117,86 @@ export default function BannerPage() {
 
   return (
     <div className="p-6">
-      {selectedBanner ? (
-        <>
-          <h2 className="text-xl font-bold mb-4">
-            Sub-Banners for {selectedBanner.title}
-          </h2>
-          <button
-            className="text-blue-500 mb-4"
-            onClick={() => setSelectedBanner(null)}>
-            Back to Banners
-          </button>
-          <div className="grid grid-cols-3 gap-4">
-            {subBanners.map((subBanner) => (
-              <div key={subBanner.id}>
-                <img
-                  src={subBanner.img_url}
-                  alt={`Sub-Banner ${subBanner.id}`}
-                  className="w-full h-32 object-cover rounded"
-                />
-              </div>
-            ))}
+      <h2 className="text-xl font-bold mb-4">Banners</h2>
+      <div className="grid grid-cols-3 gap-4">
+        {banners.map((banner) => (
+          <div
+            key={banner.id}
+            className="border p-4 cursor-pointer"
+            onClick={() => {
+              setSelectedBanner(banner);
+              setIsModalOpen(true);
+            }}>
+            <h3 className="text-lg font-bold">{banner.title}</h3>
+            <p>{banner.desc}</p>
           </div>
-          <div className="mt-6">
-            <h3 className="text-lg font-bold mb-2">Add Sub-Banners</h3>
-            <input
-              type="file"
-              multiple
-              onChange={(e) =>
-                setNewImages(e.target.files ? Array.from(e.target.files) : [])
-              }
-            />
+        ))}
+      </div>
+      <div className="mt-6">
+        <h3 className="text-lg font-bold mb-2">Add New Banner</h3>
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="border p-2 w-full mb-2"
+        />
+        <textarea
+          placeholder="Description"
+          value={desc}
+          onChange={(e) => setDesc(e.target.value)}
+          className="border p-2 w-full mb-2"
+        />
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+          onClick={handleAddBanner}>
+          Add Banner
+        </button>
+      </div>
+
+      {/* Sub-Banners Modal */}
+      {isModalOpen && selectedBanner && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg w-2/3">
+            <h2 className="text-xl font-bold mb-4">
+              Sub-Banners for {selectedBanner.title}
+            </h2>
             <button
-              className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
-              onClick={handleAddSubBanners}>
-              Add Images
+              className="text-red-500 mb-4"
+              onClick={() => {
+                setIsModalOpen(false);
+                setSelectedBanner(null);
+              }}>
+              Close
             </button>
+            <div className="grid grid-cols-3 gap-4">
+              {subBanners.map((subBanner) => (
+                <div key={subBanner.id}>
+                  <img
+                    src={subBanner.img_url}
+                    alt={`Sub-Banner ${subBanner.id}`}
+                    className="w-full h-32 object-cover rounded"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="mt-6">
+              <h3 className="text-lg font-bold mb-2">Add Sub-Banners</h3>
+              <input
+                type="file"
+                multiple
+                onChange={(e) =>
+                  setNewImages(e.target.files ? Array.from(e.target.files) : [])
+                }
+              />
+              <button
+                className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+                onClick={handleAddSubBanners}>
+                Add Images
+              </button>
+            </div>
           </div>
-        </>
-      ) : (
-        <>
-          <h2 className="text-xl font-bold mb-4">Banners</h2>
-          <div className="grid grid-cols-3 gap-4">
-            {banners.map((banner) => (
-              <div
-                key={(banner as any).id}
-                className="border p-4 cursor-pointer"
-                onClick={() => setSelectedBanner(banner)}>
-                <h3 className="text-lg font-bold">{banner.title}</h3>
-                <p>{banner.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-6">
-            <h3 className="text-lg font-bold mb-2">Add New Banner</h3>
-            <input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="border p-2 w-full mb-2"
-            />
-            <textarea
-              placeholder="Description"
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)}
-              className="border p-2 w-full mb-2"
-            />
-            <button
-              className="bg-blue-500 text-white px-4 py-2 rounded"
-              onClick={handleAddBanner}>
-              Add Banner
-            </button>
-          </div>
-        </>
+        </div>
       )}
     </div>
   );
