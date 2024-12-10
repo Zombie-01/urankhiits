@@ -5,37 +5,51 @@ import { motion, useMotionValue } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { clamp } from "lodash";
 import { useTranslations } from "next-intl";
+import { supabase } from "../../../utils/supabase/client";
 
+interface SubBanner {
+  id: string;
+  banner_id: string;
+  image_url: string;
+}
 export const UranAIDemo = () => {
   const constraintsRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const x = useMotionValue(0);
   const t = useTranslations("Uran_ai");
 
+  const [subBanners, setSubBanners] = useState<SubBanner[]>([]);
+
   const [containerWidth, setContainerWidth] = useState(0);
-  const slides = [
-    {
-      image: "/images/bedoutreal.png",
-      label: "Interior Renovation",
-      heading: "URAN AI",
-      description: "Explore Uran AI. Remodel your home in minutes!",
-      buttonText: "Uran AI DEMO"
-    },
-    {
-      image: "/images/bedoutreal.png", // Replace with another image
-      label: "Living Room Makeover",
-      heading: "URAN AI",
-      description: "Explore Uran AI. Remodel your home in minutes!",
-      buttonText: "Uran AI DEMO"
-    },
-    {
-      image: "/images/bedoutreal.png", // Replace with your next image
-      label: "Modern Kitchen Design",
-      heading: "URAN AI",
-      description: "Explore Uran AI. Remodel your home in minutes!",
-      buttonText: "Uran AI DEMO"
-    }
-  ];
+  useEffect(() => {
+    const fetchBannerImages = async () => {
+      const { data: bannerData, error: bannerError } = (await supabase
+        .from("banner")
+        .select("id")
+        .eq("title", "uran_ai")
+        .single()) as any;
+
+      if (bannerError) {
+        console.error("Error fetching banner:", bannerError.message);
+        return;
+      }
+
+      const bannerId = bannerData?.id;
+
+      const { data: images, error: imagesError } = (await supabase
+        .from("sub_banner")
+        .select("id, banner_id, image_url")
+        .eq("banner_id", bannerId)) as any;
+
+      if (imagesError) {
+        console.error("Error fetching sub-banner images:", imagesError.message);
+      } else {
+        setSubBanners(images || []);
+      }
+    };
+
+    fetchBannerImages();
+  }, []);
 
   useEffect(() => {
     if (constraintsRef.current) {
@@ -52,7 +66,7 @@ export const UranAIDemo = () => {
 
   const dragEndHandler = (_: any, info: { offset: { x: number } }) => {
     const direction = info.offset.x < 0 ? 1 : -1;
-    const newIndex = clamp(currentIndex + direction, 0, slides.length - 1);
+    const newIndex = clamp(currentIndex + direction, 0, subBanners.length - 1);
     setCurrentIndex(newIndex);
   };
 
@@ -66,41 +80,38 @@ export const UranAIDemo = () => {
           <h2 className="text-[48px] font-bold mb-4 text-white md:text-[64px]">
             URAN AI
           </h2>
-          <motion.div
-            drag="x"
-            onDragEnd={dragEndHandler}
-            dragConstraints={{
-              left: -containerWidth * (slides.length - 1),
-              right: 0
-            }}
-            animate={{ x: -containerWidth * currentIndex }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            style={{ x }}
-            className="relative flex w-full">
-            {slides?.map((slide) => (
-              <div className="relative flex-shrink-0 w-full">
+          <div ref={constraintsRef} className="w-full overflow-hidden">
+            <motion.div
+              drag="x"
+              onDragEnd={dragEndHandler}
+              dragConstraints={{
+                left: -containerWidth * (subBanners.length - 1),
+                right: 0
+              }}
+              animate={{ x: -containerWidth * currentIndex }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              style={{ x }}
+              className="relative flex w-full">
+              {subBanners.map((subBanner) => (
                 <img
-                  key={slide.buttonText}
-                  src={slide.image}
-                  alt="Interior Renovation"
-                  className="w-full  h-[350px] object-cover object-center overflow-hidden rounded-lg shadow-lg"
+                  key={subBanner.id}
+                  src={subBanner.image_url}
+                  alt="Sub-Banner Image"
+                  className="w-full rounded-lg aspect-video shadow-lg"
                 />
-                <div className="absolute bottom-4 left-4 bg-opacity-70 text-white dark:text-black px-3 py-1 rounded-md text-sm">
-                  Interior renovation
-                </div>
-              </div>
-            ))}
-          </motion.div>
-          {/* Carousel Dots */}
-          <div className="flex gap-2 my-4 md:gap-4 justify-center">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                className={`w-[60px] h-[6px] rounded-full ${
-                  currentIndex === index ? "bg-blue-500" : "bg-[#D9D9D9]"
-                }`}
-                onClick={() => setCurrentIndex(index)}></button>
-            ))}
+              ))}
+            </motion.div>
+            {/* Carousel Dots */}
+            <div className="flex gap-2 my-4 md:gap-4 justify-center">
+              {subBanners.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-[60px] h-[6px] rounded-full ${
+                    currentIndex === index ? "bg-blue-500" : "bg-[#D9D9D9]"
+                  }`}
+                  onClick={() => setCurrentIndex(index)}></button>
+              ))}
+            </div>
           </div>
         </div>
         {/* Right Side: Text and Button */}

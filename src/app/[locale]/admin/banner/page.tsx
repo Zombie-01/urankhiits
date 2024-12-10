@@ -13,7 +13,7 @@ interface Banner {
 interface SubBanner {
   id: string;
   banner_id: string;
-  img_url: string;
+  image_url: string;
 }
 
 export default function BannerPage() {
@@ -22,7 +22,9 @@ export default function BannerPage() {
   const [subBanners, setSubBanners] = useState<SubBanner[]>([]);
 
   const [title, setTitle] = useState<string>("");
+  const [subtitle, setSubTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
+  const [subdesc, setSubDesc] = useState<string>("");
   const [newImages, setNewImages] = useState<File[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -95,10 +97,11 @@ export default function BannerPage() {
         .getPublicUrl(fileName);
 
       return {
-        id: nanoid(),
         banner_id: selectedBanner.id,
         image_url: publicURL.publicUrl,
-        link_url: publicURL.publicUrl
+        link_url: publicURL.publicUrl,
+        title: subtitle,
+        desc: subdesc
       };
     });
 
@@ -173,7 +176,7 @@ export default function BannerPage() {
               {subBanners.map((subBanner) => (
                 <div key={subBanner.id}>
                   <img
-                    src={subBanner.img_url}
+                    src={subBanner.image_url}
                     alt={`Sub-Banner ${subBanner.id}`}
                     className="w-full h-32 object-cover rounded"
                   />
@@ -184,10 +187,22 @@ export default function BannerPage() {
               <h3 className="text-lg font-bold mb-2">Add Sub-Banners</h3>
               <input
                 type="file"
-                multiple
                 onChange={(e) =>
                   setNewImages(e.target.files ? Array.from(e.target.files) : [])
                 }
+              />
+              <input
+                type="text"
+                placeholder="Title"
+                value={subtitle}
+                onChange={(e) => setSubTitle(e.target.value)}
+                className="border p-2 w-full mb-2"
+              />
+              <textarea
+                placeholder="Description"
+                value={subdesc}
+                onChange={(e) => setSubDesc(e.target.value)}
+                className="border p-2 w-full mb-2"
               />
               <button
                 className="bg-blue-500 text-white px-4 py-2 rounded mt-2"

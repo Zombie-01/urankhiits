@@ -99,6 +99,8 @@
     "choose_building_type": "Choose your building type",
     "choose_room_type": "Choose Room Type",
     "upload_image": "Upload your image",
+
+    "choose_theme_type": "Choose theme type",
     "choose_color_tone": "Choose Color Tone",
     "generated_image": "Generated Image",
     "reset": "Reset",

@@ -98,6 +98,7 @@
   "AI": {
     "choose_building_type": "Барилга төрөл сонгоно уу",
     "choose_room_type": "Өрөөний төрөл сонгоно уу",
+    "choose_theme_type": "Интерьер дизайны төрлөө сонгоно уу",
     "upload_image": "Зургийг ачаална уу",
     "choose_color_tone": "Өнгөний өнгийг сонгоно уу",
     "generated_image": "Үр дүнгийн зураг",

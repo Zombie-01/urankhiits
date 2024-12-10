@@ -15,7 +15,7 @@ export async function POST(req: Request) {
   try {
     // 1. Get request data (in JSON format) from the client
     const body = await req.json();
-    const { image, theme, room } = body;
+    const { image, theme, room, them } = body;
 
     // Check if essential fields are present
     if (!image || !room) {
@@ -38,14 +38,14 @@ export async function POST(req: Request) {
     // 4. Set the image which is the image we uploaded from the client
     const input = {
       image,
-      prompt: `A ${theme} colored ${room}  Editorial Style Photo, Symmetry, Straight On, Modern Living Room, Large Window (balanced with walls if window not detected then dont add window), Leather, Glass, Metal, Wood Paneling, Neutral Palette, Ikea, Natural Light, Apartment, Afternoon, Serene, Contemporary, 4k`,
+      prompt: `A ${them} ${theme} colored ${room}  Editorial Style Photo, Symmetry, Straight On, Modern Living Room, Large Window (balanced with walls if window not detected then dont add window), Leather, Glass, Metal, Wood Paneling, Neutral Palette, Ikea, Natural Light, Apartment, Afternoon, Serene, Contemporary, 4k`,
       a_prompt: `best quality, extremely detailed, photo from Pinterest, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning, architectural balance`,
       n_prompt: `excessive windows, longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, unrealistic proportions`,
       ddim_steps: 20,
       num_samples: "1",
       value_threshold: 0.1,
-      image_resolution: "512",
-      detect_resolution: 512,
+      image_resolution: "1024",
+      detect_resolution: 1024,
       distance_threshold: 0.1
     };
 

@@ -57,6 +57,44 @@ const buildingTypes = {
   Exterior: ["Living Room", "Kitchen", "Other"]
 };
 
+const tems = [
+  {
+    label: "Minimalist",
+    value: "minimalist",
+    selected: false
+  },
+  {
+    label: "Classic",
+    value: "classic",
+    selected: false
+  },
+  {
+    label: "Modern",
+    value: "modern",
+    selected: true
+  },
+  {
+    label: "Mid-Century Modern",
+    value: "mid_century_modern",
+    selected: false
+  },
+  {
+    label: "Contemporary",
+    value: "contemporary",
+    selected: false
+  },
+  {
+    label: "Art Deco",
+    value: "art_deco",
+    selected: false
+  },
+  {
+    label: "Eclectic",
+    value: "eclectic",
+    selected: false
+  }
+];
+
 function getRoomsByBuildingType(buildingType: string) {
   if (!(buildingTypes as any)[buildingType]) {
     return []; // Return empty array if buildingType is invalid
@@ -71,6 +109,7 @@ function getRoomsByBuildingType(buildingType: string) {
 export default function ImagePage() {
   const [isLoading, setLoading] = useState(false);
   const [theme, setTheme] = useState<string>("Modern Minimalist");
+  const [them, setThem] = useState<string>(tems[0].label);
   const [room, setRoom] = useState<{ title: string; image: string }>(rooms[0]);
   const [build, setBuild] = useState<string>(building[0]);
   const [outputImage, setOutputImage] = useState<string | null>(null);
@@ -156,6 +195,7 @@ export default function ImagePage() {
         body: JSON.stringify({
           image: base64Image,
           theme,
+          them,
           room: room.title
         })
       });
@@ -244,7 +284,7 @@ export default function ImagePage() {
         loadingStates={loadingStates}
       />
 
-      <div className="max-w-6xl flex flex-col gap-4 my-16 mx-auto">
+      <div className="container flex flex-col gap-4 my-16 mx-auto">
         <div className="bg-gray-200 dark:bg-white/10 rounded-lg flex items-start justify-center p-4 flex-col">
           <h2 className=" mb-4 dark:text-white">
             1. {t("choose_building_type")}
@@ -285,10 +325,25 @@ export default function ImagePage() {
             ))}
           </div>
         </div>
+        <div className="bg-gray-200 dark:bg-white/10 rounded-lg flex items-start justify-center p-4 flex-col">
+          <h2 className=" mb-4 dark:text-white">3. {t("choose_theme_type")}</h2>
+          <div className="flex gap-4 py-2 overflow-auto max-w-full">
+            {tems.map((type) => (
+              <button
+                onClick={() => setThem(type?.value)}
+                key={type?.value}
+                className={`items-center w-full sm:w-auto relative min-w-[200px] overflow-hidden rounded-md shadow-md bg-white dark:bg-slate-500 hover:bg-gray-100 dark:hover:bg-gray-600 ${
+                  them === type?.value ? "border-2 border-blue-600" : ""
+                }`}>
+                {type?.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
         <div className="flex flex-col md:flex-row w-full  gap-6">
           <div className="md:w-1/3 flex flex-col gap-4">
-            <h2 className=" dark:text-white">3. {t("upload_image")}</h2>
+            <h2 className=" dark:text-white">4. {t("upload_image")}</h2>
             <div className="border-2 relative h-full border-dashed rounded-md flex items-center justify-center">
               {!base64Image ? (
                 <FileUpload
@@ -298,14 +353,16 @@ export default function ImagePage() {
                   }}
                 />
               ) : (
-                <img
-                  src={base64Image}
-                  className="w-full h-full rounded-xl overflow-hidden  object-cover "
-                />
+                <div className="p2 sm:p-4">
+                  <img
+                    src={base64Image}
+                    className="w-full h-full rounded-xl overflow-hidden  object-cover "
+                  />
+                </div>
               )}
             </div>
             <div className="bg-gray-200 dark:bg-white/10 rounded-lg flex items-start justify-center p-4 flex-col">
-              <h2 className="mb-4">4. {t("choose_color_tone")}</h2>
+              <h2 className="mb-4">5. {t("choose_color_tone")}</h2>
               <div className="grid grid-cols-5 gap-4 justify-around w-full">
                 {/* Define color options with names */}
                 {[
