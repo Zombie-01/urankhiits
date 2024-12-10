@@ -45,12 +45,12 @@ const DashboardPage = () => {
 
         // Group generated images by date
         const groupedByDate = generatedData.reduce(
-          (acc: any, { created_at }: { created_at: string }) => {
+          (acc: Record<string, number>, { created_at }: any) => {
             const date = created_at.split("T")[0]; // Extract date from the datetime
             acc[date] = (acc[date] || 0) + 1;
             return acc;
           },
-          {}
+          {} as Record<string, number>
         );
 
         // Prepare data for the chart
