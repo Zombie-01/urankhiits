@@ -1,13 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createCanvas, loadImage } from "canvas";
+import path from "path";
+import { promises as fs } from "fs";
 
 export async function POST(req: NextRequest) {
   const { imageUrl } = await req.json();
 
   try {
-    // Load the base image and the watermark image
+    // Load the base image from the provided URL
     const image = await loadImage(imageUrl);
-    const watermark = await loadImage("/rooms/watermark.png");
+
+    // Resolve the path to the watermark image in the public folder
+    const watermarkPath = path.join(
+      process.cwd(),
+      "public",
+      "rooms",
+      "watermark.png"
+    );
+    const watermarkBuffer = await fs.readFile(watermarkPath);
+    const watermark = await loadImage(watermarkBuffer);
 
     // Set up canvas
     const canvas = createCanvas(image.width, image.height);
