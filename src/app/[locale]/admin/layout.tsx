@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabase } from "../../../../utils/supabase/client";
+import { Link } from "@/i18n/routing";
 
 export default function RootLayout({
   children
@@ -31,26 +32,26 @@ export default function RootLayout({
               Admin Panel
             </div>
             <nav className="flex-1 p-4 space-y-2">
-              <a
+              <Link
                 href="/admin"
                 className="block px-4 py-2 rounded hover:bg-gray-700">
                 Dashboard
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/admin/projects"
                 className="block px-4 py-2 rounded hover:bg-gray-700">
                 Projects
-              </a>
-              <a
-                href="/admin/users"
+              </Link>
+              <Link
+                href="/admin/banner"
                 className="block px-4 py-2 rounded hover:bg-gray-700">
-                Users
-              </a>
-              <a
+                Banners
+              </Link>
+              <Link
                 href="/admin/generated"
                 className="block px-4 py-2 rounded hover:bg-gray-700">
                 Generated
-              </a>
+              </Link>
             </nav>
             <div className="p-4 border-t border-gray-700">
               {user ? (
@@ -62,7 +63,7 @@ export default function RootLayout({
               ) : (
                 <p className="text-sm text-gray-400">Loading...</p>
               )}
-              <a
+              <Link
                 href="#"
                 onClick={async () => {
                   await supabase.auth.signOut();
@@ -70,7 +71,7 @@ export default function RootLayout({
                 }}
                 className="block mt-2 px-4 py-2 text-sm text-gray-400 hover:text-white">
                 Logout
-              </a>
+              </Link>
             </div>
           </aside>
 
