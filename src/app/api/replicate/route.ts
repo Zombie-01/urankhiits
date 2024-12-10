@@ -34,23 +34,24 @@ export async function POST(req: Request) {
     const model =
       "adirik/interior-design:76604baddc85b1b4616e1c6475eca080da339c8875bd4996705440484a6eac38";
     // "jagilley/controlnet-hough:854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b";
-
+    console.log(`${them} ${theme} ${room} `);
     // 4. Set the image which is the image we uploaded from the client
     const input = {
       image,
-      prompt: `A ${them} ${theme} colored ${room}  Editorial Style Photo, Symmetry, Straight On, Modern Living Room, Large Window (balanced with walls if window not detected then dont add window), Leather, Glass, Metal, Wood Paneling, Neutral Palette, Ikea, Natural Light, Apartment, Afternoon, Serene, Contemporary, 4k`,
+      prompt: `A ${them} ${theme} ${room} Editorial Style Photo, Symmetry, Straight On, Modern Living Room, Leather, Glass, Metal, Wood Paneling, Neutral Palette, Ikea, Natural Light, Apartment, Afternoon, Serene, Contemporary, 4k`,
       a_prompt: `best quality, extremely detailed, photo from Pinterest, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning, architectural balance`,
       n_prompt: `excessive windows, longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, unrealistic proportions`,
       ddim_steps: 20,
       num_samples: "1",
       value_threshold: 0.1,
-      image_resolution: "1024",
-      detect_resolution: 1024,
+      image_resolution: "512",
+      detect_resolution: 512,
       distance_threshold: 0.1
     };
 
     // 5. Run the Replicate's model (to remove background) and get the output image
     const output = await replicate.run(model, { input });
+    console.log(output);
 
     // 6. Check if the output is NULL then return error back to the client
     if (!output) {

@@ -278,11 +278,20 @@ export default function ImagePage() {
 
   return (
     <div className="min-h-screen  p-8">
-      <MultiStepLoader
-        duration={2000}
-        loading={isLoading}
-        loadingStates={loadingStates}
-      />
+      {isLoading && (
+        <div className="absolute z-[9999999999999999999999999999] inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md">
+          <div className="flex flex-col items-center">
+            {/* Logo Section */}
+            <div className="w-20 h-20">
+              <img
+                src="/heo_logo.png" // Replace with your logo path
+                alt="Logo"
+                className="animate-bounce"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="container flex flex-col gap-4 my-16 mx-auto">
         <div className="bg-gray-200 dark:bg-white/10 rounded-lg flex items-start justify-center p-4 flex-col">
@@ -330,10 +339,10 @@ export default function ImagePage() {
           <div className="flex gap-4 py-2 overflow-auto max-w-full">
             {tems.map((type) => (
               <button
-                onClick={() => setThem(type?.value)}
-                key={type?.value}
+                onClick={() => setThem(type?.label)}
+                key={type?.label}
                 className={`items-center w-full sm:w-auto relative min-w-[200px] overflow-hidden rounded-md shadow-md bg-white dark:bg-slate-500 hover:bg-gray-100 dark:hover:bg-gray-600 ${
-                  them === type?.value ? "border-2 border-blue-600" : ""
+                  them === type?.label ? "border-2 border-blue-600" : ""
                 }`}>
                 {type?.label}
               </button>
