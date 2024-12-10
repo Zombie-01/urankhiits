@@ -12,59 +12,89 @@ const FocusCardsDemoPage = () => {
   const [cards, setCards] = useState<Project[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [hovered, setHovered] = useState<number | null>(null);
-  const [isClient, setIsClient] = useState(false); // State to check client-side rendering
+  const [isClient, setIsClient] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const LIMIT = 9; // Number of items per page
 
   useEffect(() => {
-    setIsClient(true); // Set to true once the component is mounted on the client
+    setIsClient(true); // Ensures client-side rendering
   }, []);
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("generated")
-          .select("id, image");
-        if (error) {
-          console.error("Error fetching projects:", error.message);
-          return;
-        }
+  const fetchProjects = async (page: number) => {
+    setLoading(true);
+    const offset = (page - 1) * LIMIT; // Calculate offset for pagination
 
-        console.log(data);
+    try {
+      const { data, error, count } = await supabase
+        .from("generated")
+        .select("id, image", { count: "exact" }) // Count total records
+        .range(offset, offset + LIMIT - 1);
 
-        // Map the projects into the desired structure
-        const formattedCards = data.map((project: any) => ({
-          id: project.id,
-          src: project.image || "/placeholder.png" // Use the first image or a placeholder
-        }));
-
-        setCards(formattedCards);
-      } catch (err) {
-        console.error("Unexpected error:", err);
-      } finally {
-        setLoading(false);
+      if (error) {
+        console.error("Error fetching projects:", error.message);
+        return;
       }
-    };
 
-    fetchProjects();
-  }, []);
+      // Map the projects into the desired structure
+      const formattedCards = data.map((project: any) => ({
+        id: project.id,
+        src: project.image || "/placeholder.png"
+      }));
 
-  if (!isClient) return null; // Prevents rendering on the server side
+      setCards(formattedCards);
+      setTotalPages(Math.ceil(count! / LIMIT)); // Calculate total pages
+    } catch (err) {
+      console.error("Unexpected error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects(currentPage);
+  }, [currentPage]);
+
+  if (!isClient) return null;
 
   return (
-    <div className="flex w-full justify-center items-center py-12">
-      <div className="max-w-7xl w-full mx-auto px-4 md:px-8  ">
+    <div className="flex flex-col w-full justify-center items-center py-12">
+      <div className="max-w-7xl w-full mx-auto px-4 md:px-8">
         {/* Card Grid */}
         <div className="grid grid-cols-1 w-full sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {cards?.length > 0 &&
-            cards.map((card, index) => (
-              <Card
-                key={index}
-                card={card}
-                index={index}
-                hovered={hovered}
-                setHovered={setHovered}
-              />
-            ))}
+          {loading
+            ? Array.from({ length: LIMIT }).map((_, index) => (
+                <SkeletonCard key={index} />
+              ))
+            : cards.map((card, index) => (
+                <Card
+                  key={index}
+                  card={card}
+                  index={index}
+                  hovered={hovered}
+                  setHovered={setHovered}
+                />
+              ))}
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="flex justify-between items-center mt-6">
+          <button
+            disabled={currentPage === 1 || loading}
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+            className="px-4 py-2 bg-gray-200 dark:bg-neutral-800 rounded-md disabled:opacity-50">
+            Previous
+          </button>
+          <span className="text-sm">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            disabled={currentPage === totalPages || loading}
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+            className="px-4 py-2 bg-gray-200 dark:bg-neutral-800 rounded-md disabled:opacity-50">
+            Next
+          </button>
         </div>
       </div>
     </div>
@@ -78,7 +108,7 @@ const Card = React.memo(
     hovered,
     setHovered
   }: {
-    card: any;
+    card: Project;
     index: number;
     hovered: number | null;
     setHovered: React.Dispatch<React.SetStateAction<number | null>>;
