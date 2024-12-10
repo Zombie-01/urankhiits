@@ -1,313 +1,183 @@
 "use client";
-
-import Head from "next/head";
-import { useRef, useState, useEffect, ChangeEvent } from "react";
-import { nanoid } from "nanoid";
+import { useEffect, useState, useRef } from "react";
 import { supabase } from "../../../../utils/supabase/client";
 
-interface Project {
-  id: string;
-  title: string;
-  desc: string;
-  imgs: string[];
-  category: string; // Added categoryId field
-}
+const DashboardPage = () => {
+  const [projectsCount, setProjectsCount] = useState<number>(0);
+  const [generatedCount, setGeneratedCount] = useState<number>(0);
+  const [generatedDays, setGeneratedDays] = useState<any[]>([]); // Stores the count of generated images by date
+  const canvasRef = useRef<HTMLCanvasElement | null>(null); // Reference for the canvas element
+  const [tooltip, setTooltip] = useState<{
+    x: number;
+    y: number;
+    value: string;
+  } | null>(null);
 
-interface Category {
-  id: string;
-  category_name: string;
-}
+  // Static cost value
+  const staticCost = 320; // Static cost value, you can change this as needed
 
-export default function Home() {
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
-  const [title, setTitle] = useState<string>("");
-  const [desc, setDesc] = useState<string>("");
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [categories, setCategories] = useState<Category[]>([]); // State for categories
-  const [selectedCategory, setSelectedCategory] = useState<string>(""); // State for selected category
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  // Fetch projects and categories from Supabase
+  // Fetch the count of projects and generated images
   useEffect(() => {
-    const fetchProjects = async () => {
-      const { data, error } = await supabase.from("projects").select("*");
-      if (error) {
-        console.error("Error fetching projects:", error.message);
-      } else {
-        setProjects(data as any);
+    const fetchData = async () => {
+      try {
+        // Get the count of projects
+        const { count: projectCount, error: projectError } = await supabase
+          .from("projects")
+          .select("*", { count: "exact", head: true });
+        if (projectError) throw projectError;
+        setProjectsCount(projectCount || 0);
+
+        // Get the count of generated images
+        const { count: generatedCount, error: generatedError } = await supabase
+          .from("generated")
+          .select("*", { count: "exact", head: true });
+        if (generatedError) throw generatedError;
+        setGeneratedCount(generatedCount || 0);
+
+        // Get the generated images grouped by day (assuming 'created_at' column exists)
+        const { data: generatedData, error: generatedDaysError } =
+          await supabase
+            .from("generated")
+            .select("created_at")
+            .gte("created_at", "2023-01-01") // Adjust the start date as needed
+            .order("created_at", { ascending: true });
+        if (generatedDaysError) throw generatedDaysError;
+
+        // Group generated images by date
+        const groupedByDate = generatedData.reduce(
+          (acc: any, { created_at }: { created_at: string }) => {
+            const date = created_at.split("T")[0]; // Extract date from the datetime
+            acc[date] = (acc[date] || 0) + 1;
+            return acc;
+          },
+          {}
+        );
+
+        // Prepare data for the chart
+        setGeneratedDays(
+          Object.entries(groupedByDate).map(([date, count]) => ({
+            date,
+            count
+          }))
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
     };
 
-    const fetchCategories = async () => {
-      const { data, error } = await supabase.from("category").select("*");
-      if (error) {
-        console.error("Error fetching categories:", error.message);
-      } else {
-        setCategories(data as any);
-      }
-    };
-
-    fetchProjects();
-    fetchCategories();
+    fetchData();
   }, []);
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-    const files = Array.from(e.target.files);
-    setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
-  };
+  // Draw the bar chart using canvas
+  useEffect(() => {
+    const drawChart = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
 
-  const handleUpload = async () => {
-    if (!title || !desc || !selectedCategory) {
-      alert("Please fill in the title, description, and select a category.");
-      return;
-    }
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
 
-    if (selectedFiles.length === 0) {
-      alert("Please select at least one image.");
-      return;
-    }
+      const labels = generatedDays.map((day) => day.date);
+      const data = generatedDays.map((day) => day.count);
+      const chartWidth = canvas.width;
+      const chartHeight = canvas.height;
+      const barWidth = chartWidth / labels.length;
+      const maxDataValue = Math.max(...data);
 
-    const imageUrls: string[] = [];
+      ctx.clearRect(0, 0, chartWidth, chartHeight); // Clear previous chart
 
-    for (const file of selectedFiles) {
-      const filename = nanoid();
-      const extension = file.name.split(".").pop();
-      const { data, error } = await supabase.storage
-        .from("projects")
-        .upload(`${filename}.${extension}`, file);
+      // Draw bars
+      data.forEach((value, index) => {
+        const barHeight = (value / maxDataValue) * (chartHeight - 40); // Scale bar height
+        const x = index * barWidth;
+        const y = chartHeight - barHeight - 20;
 
-      if (error) {
-        console.error("Error uploading file:", error.message);
-      }
+        ctx.fillStyle = "rgba(75, 192, 192, 0.7)";
+        ctx.fillRect(x, y, barWidth - 5, barHeight);
 
-      const { data: fileData, error: urlError }: any = await supabase.storage
-        .from("projects")
-        .getPublicUrl(data?.path || "");
-
-      if (urlError) {
-        console.error("Error fetching file URL:", urlError.message);
-        return;
-      }
-
-      imageUrls.push(fileData?.publicUrl || "");
-    }
-
-    const { data: project, error } = await supabase.from("projects").insert({
-      title,
-      desc,
-      imgs: imageUrls,
-      category: selectedCategory // Save categoryId
-    });
-
-    if (error) {
-      console.error("Error saving project:", error.message);
-    } else {
-      console.log("Project saved successfully:", project);
-      alert("Project uploaded successfully!");
-      setProjects((prev) => [...prev, ...(project as any)]);
-      setSelectedFiles([]);
-      setTitle("");
-      setDesc("");
-      setSelectedCategory(""); // Reset category selection
-      if (inputRef.current) inputRef.current.value = "";
-    }
-  };
-
-  const handleRowClick = (project: Project) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedProject(null);
-  };
-
-  const handleDelete = async (projectId: string) => {
-    const isConfirmed = window.confirm(
-      "Are you sure you want to delete this project?"
-    );
-    if (isConfirmed) {
-      const { data, error } = await supabase
-        .from("projects")
-        .delete()
-        .eq("id", projectId);
-
-      if (error) {
-        console.error("Error deleting project:", error.message);
-      } else {
-        setProjects((prev) =>
-          prev.filter((project) => project.id !== projectId)
+        // Display value on top of the bar
+        ctx.fillStyle = "black";
+        ctx.fillText(
+          value.toString(),
+          x + barWidth / 2 - ctx.measureText(value.toString()).width / 2,
+          y - 5
         );
-        alert("Project deleted successfully.");
-      }
+
+        // Tooltip handling on hover
+        canvas.addEventListener("mousemove", (e) => {
+          const mouseX = e.offsetX;
+          const mouseY = e.offsetY;
+
+          if (
+            mouseX >= x &&
+            mouseX <= x + barWidth - 5 &&
+            mouseY >= y &&
+            mouseY <= y + barHeight
+          ) {
+            setTooltip({
+              x: mouseX,
+              y: mouseY,
+              value: `${labels[index]}: ${value}`
+            });
+          }
+        });
+
+        // Hide tooltip if mouse leaves the bar
+        canvas.addEventListener("mouseout", () => {
+          setTooltip(null);
+        });
+      });
+
+      // Draw axes
+      ctx.beginPath();
+      ctx.moveTo(20, 20);
+      ctx.lineTo(20, chartHeight - 20); // Y axis
+      ctx.lineTo(chartWidth - 20, chartHeight - 20); // X axis
+      ctx.strokeStyle = "black";
+      ctx.stroke();
+    };
+
+    if (generatedDays.length) {
+      drawChart();
     }
-  };
+  }, [generatedDays]);
 
   return (
-    <>
-      <div className="container mx-auto p-4 bg-gray-100">
-        {/* Upload Form */}
-        <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md mb-8">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">
-            Upload Project
-          </h1>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Title
-              </label>
-              <input
-                type="text"
-                placeholder="Project title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Description
-              </label>
-              <textarea
-                placeholder="Project description"
-                value={desc}
-                onChange={(e) => setDesc(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-                rows={4}
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Category
-              </label>
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none">
-                <option value="">Select Category</option>
-                {categories.map((category) => (
-                  <option key={category.id} value={category.category_name}>
-                    {category.category_name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Images (Max 5)
-              </label>
-              <input
-                type="file"
-                ref={inputRef}
-                onChange={handleFileChange}
-                multiple
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-              />
-              {selectedFiles.length > 0 && (
-                <p className="mt-2 text-sm text-gray-500">
-                  {selectedFiles.length} file(s) selected.
-                </p>
-              )}
-            </div>
-          </div>
-          <button
-            className="mt-5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg px-4 py-2 duration-200 w-full font-medium"
-            type="button"
-            onClick={handleUpload}>
-            Upload Project
-          </button>
+    <div className="p-6 py-12 flex flex-col gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Projects and Generated Count */}
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <h3 className="text-xl font-semibold">Projects</h3>
+          <p className="text-2xl">{projectsCount}</p>
         </div>
 
-        {/* Projects Table */}
-        <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Projects</h2>
-          <table className="w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className="border border-gray-300 px-4 py-2 text-left">
-                  Title
-                </th>
-                <th className="border border-gray-300 px-4 py-2 text-left">
-                  Description
-                </th>
-                <th className="border border-gray-300 px-4 py-2">Images</th>
-                <th className="border border-gray-300 px-4 py-2">Category</th>
-                <th className="border border-gray-300 px-4 py-2">
-                  Actions
-                </th>{" "}
-                {/* Added actions column */}
-              </tr>
-            </thead>
-            <tbody>
-              {projects.map((project) => (
-                <tr
-                  key={project.id}
-                  className="hover:bg-gray-100 cursor-pointer"
-                  onClick={() => handleRowClick(project)}>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {project.title}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {project.desc}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    <img
-                      src={project.imgs[0]}
-                      alt="Project Image"
-                      className="w-16 h-16 object-cover"
-                    />
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {project.category}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    <button
-                      className="bg-red-600 text-white px-4 py-2 rounded-lg"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Prevent row click
-                        handleDelete(project.id);
-                      }}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <h3 className="text-xl font-semibold">Generated Images</h3>
+          <p className="text-2xl">{generatedCount}</p>
+        </div>
+
+        {/* Static Cost Card */}
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <h3 className="text-xl font-semibold">Static Cost</h3>
+          <p className="text-2xl">${staticCost}</p>
         </div>
       </div>
 
-      {/* Modal for selected project */}
-      {isModalOpen && selectedProject && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg shadow-md max-w-lg">
-            <h3 className="text-xl font-semibold mb-4">
-              {selectedProject.title}
-            </h3>
-            <p>{selectedProject.desc}</p>
-            <div className="mt-4">
-              {selectedProject.imgs.map((imgUrl, idx) => (
-                <img
-                  key={idx}
-                  src={imgUrl}
-                  alt={`Project Image ${idx + 1}`}
-                  className="w-full h-auto mb-4"
-                />
-              ))}
-            </div>
-            <button
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4"
-              onClick={closeModal}>
-              Close
-            </button>
-          </div>
+      {/* Canvas Bar Chart Section */}
+      <div className="bg-white shadow-md rounded-lg p-6 col-span-2 sm:col-span-1">
+        <h3 className="text-xl font-semibold">Generated Images Over Time</h3>
+        <canvas ref={canvasRef} width={800} height={400}></canvas>
+      </div>
+      {/* Tooltip */}
+      {tooltip && (
+        <div
+          className="absolute bg-gray-800 text-white p-2 rounded"
+          style={{ top: tooltip.y, left: tooltip.x }}>
+          {tooltip.value}
         </div>
       )}
-    </>
+    </div>
   );
-}
+};
+
+export default DashboardPage;
