@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { supabase } from "../../../../../utils/supabase/client";
@@ -79,7 +78,7 @@ export default function BannerPage() {
     if (!selectedBanner) return;
 
     const uploads = newImages.map(async (image) => {
-      const fileName = `${nanoid()}-${image.name}`;
+      const fileName = `<span class="math-inline">\{nanoid\(\)\}\-</span>{image.name}`;
       const { error: storageError } = await supabase.storage
         .from("sub_banner")
         .upload(fileName, image);
@@ -115,6 +114,22 @@ export default function BannerPage() {
     } else {
       setSubBanners([...subBanners, ...subBannerData]);
       setNewImages([]);
+    }
+  };
+
+  // Delete a sub-banner
+  const handleDeleteSubBanner = async (subBannerId: string) => {
+    const { error } = await supabase
+      .from("sub_banner")
+      .delete()
+      .eq("id", subBannerId);
+
+    if (error) {
+      console.error("Error deleting sub-banner:", error.message);
+    } else {
+      setSubBanners(
+        subBanners.filter((subBanner) => subBanner.id !== subBannerId)
+      );
     }
   };
 
@@ -180,6 +195,11 @@ export default function BannerPage() {
                     alt={`Sub-Banner ${subBanner.id}`}
                     className="w-full h-32 object-cover rounded"
                   />
+                  <button
+                    className="bg-red-500 text-white px-2 py-1 rounded mt-2"
+                    onClick={() => handleDeleteSubBanner(subBanner.id)}>
+                    Delete
+                  </button>
                 </div>
               ))}
             </div>
