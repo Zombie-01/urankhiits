@@ -116,12 +116,15 @@ const AboutUs = () => {
             style={{ x }}
             className="relative flex w-full">
             {subBanners.map((subBanner) => (
-              <img
+              <div
                 key={subBanner.id}
-                src={subBanner.image_url}
-                alt="Sub-Banner Image"
-                className="w-full rounded-lg aspect-video shadow-lg"
-              />
+                className="flex justify-center items-center w-full">
+                <img
+                  src={subBanner.image_url}
+                  alt="Sub-Banner Image"
+                  className="w-full rounded-lg max-h-[320px] object-cover max-w-[637px] aspect-video shadow-lg"
+                />
+              </div>
             ))}
           </motion.div>
           {/* Carousel Dots */}

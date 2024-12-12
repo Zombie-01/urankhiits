@@ -19,7 +19,7 @@ function SlideInfo({ transitionData, currentSlideData }: Props) {
       <motion.div layout className=" mt-5 flex items-center gap-3">
         <Link href={`/project`}>
           <button
-            className=" w-fit border-[#ffffff8f] px-6 py-3 text-[10px] font-thin transition duration-300 
+            className=" w-fit border-[#ffffff8f] py-3 text-[10px] font-aeonikLight transition duration-300 
           ease-in-out hover:scale-110 underline underline-offset-4 sm:text-lg  ">
             See more
           </button>

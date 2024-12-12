@@ -78,7 +78,7 @@ export default function BannerPage() {
     if (!selectedBanner) return;
 
     const uploads = newImages.map(async (image) => {
-      const fileName = `<span class="math-inline">\{nanoid\(\)\}\-</span>{image.name}`;
+      const fileName = `${nanoid()}-${image.name}`;
       const { error: storageError } = await supabase.storage
         .from("sub_banner")
         .upload(fileName, image);

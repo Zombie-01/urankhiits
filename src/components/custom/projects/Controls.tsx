@@ -67,10 +67,10 @@ function Controls({
   return (
     <div className="flex items-center gap-3 px-0 py-3 md:px-1 md:py-5">
       <SliderButton handleClick={handlePrev}>
-        <IoIosArrowBack className=" text-3xl" />
+        <IoIosArrowBack className=" text-3xl sm:text-5xl" />
       </SliderButton>
       <SliderButton handleClick={handleNext}>
-        <IoIosArrowForward className=" text-3xl" />
+        <IoIosArrowForward className=" text-3xl sm:text-5xl" />
       </SliderButton>
     </div>
   );

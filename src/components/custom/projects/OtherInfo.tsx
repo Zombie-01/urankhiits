@@ -23,7 +23,7 @@ function OtherInfo({ data }: Props) {
         animate={"visible"}
         className=" flex flex-col sm:flex-row items-center gap-8">
         <AnimatedText
-          className="  text-2xl md:text-4xl font-semibold  "
+          className="  text-2xl md:text-5xl font-semibold  "
           data={data?.title}
         />
       </motion.div>
@@ -47,7 +47,7 @@ const AnimatedText = ({
         display: "inline-block"
       }}>
       <motion.p
-        className={` ${className} font-sans `}
+        className={` ${className} font-aeonikLight `}
         variants={item}
         key={data}>
         {data}

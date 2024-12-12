@@ -83,7 +83,7 @@ export const Footer: React.FC = () => {
       <div className="flex flex-col px-4 md:px-0 md:flex-row w-full gap-10 max-w-3xl mx-auto">
         {/* Links Section */}
         <div className="flex flex-col mt-6 text-base font-semibold tracking-wide text-zinc-800">
-          <div className="leading-none">Холбоосууд</div>
+          <div className="leading-none">{t("MENU")}</div>
           <div className="flex flex-col mt-6 leading-5 min-h-[192px] max-md:mr-1.5">
             {links.map((link, index) => (
               <Link href={link.href} key={index} className="mt-4">
@@ -97,7 +97,7 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col mt-6">
           <div className="flex flex-col text-base">
             <div className="font-semibold tracking-wide leading-none text-zinc-800">
-              Холбоо барих
+              {t("CONTACT")}
             </div>
             <div className="flex flex-col items-start mt-4 tracking-normal text-neutral-500">
               {contactItems.map((item, index) => (
