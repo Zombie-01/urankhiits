@@ -188,6 +188,7 @@ const Modal = ({
         ✕
       </button>
       <img
+        loading="lazy"
         src={image}
         alt="Modal Image"
         className="w-full rounded-md object-cover"
