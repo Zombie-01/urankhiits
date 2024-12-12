@@ -280,7 +280,7 @@ export default function ImagePage() {
         </div>
       )}
 
-      <div className="container flex flex-col gap-4 my-16 mx-auto">
+      <div className="md:container flex flex-col gap-4 my-16 mx-auto">
         <div className="bg-gray-200 dark:bg-white/10 rounded-lg flex items-start justify-center p-4 flex-col">
           <h2 className=" mb-4 dark:text-white">
             1. {t("choose_building_type")}

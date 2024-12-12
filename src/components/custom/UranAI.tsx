@@ -97,7 +97,7 @@ export const UranAIDemo = () => {
                   key={subBanner.id}
                   src={subBanner.image_url}
                   alt="Sub-Banner Image"
-                  className="w-full rounded-lg aspect-video shadow-lg"
+                  className="w-full rounded-lg object-cover aspect-video shadow-lg"
                 />
               ))}
             </motion.div>
