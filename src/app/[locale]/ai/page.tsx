@@ -4,77 +4,215 @@ import { FileUpload } from "@/components/ui/file-upload";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { supabase } from "../../../../utils/supabase/client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const rooms = [
   {
     title: "Living Room",
-    image: "/rooms/Living Room.png"
+    label: {
+      en: "Living Room",
+      mn: "Том өрөө"
+    },
+    image: "/rooms/Living Room.png",
+    buildingType: "Residential"
   },
 
   {
     title: "Bedroom",
-    image: "/rooms/Bedroom.jpg"
+    label: {
+      en: "Bedroom",
+      mn: "Унтлагын өрөө"
+    },
+    image: "/rooms/Bedroom.jpg",
+    buildingType: "Residential"
   },
   {
     title: "Bathroom",
-    image: "/rooms/Bathroom.jpg"
+    label: {
+      en: "Bathroom",
+      mn: "Угаалгын өрөө"
+    },
+    image: "/rooms/Bathroom.jpg",
+    buildingType: "Residential"
   },
   {
     title: "Office",
-    image: "/rooms/Office.png"
+    label: {
+      en: "Office",
+      mn: "Оффис"
+    },
+    image: "/rooms/Office.png",
+    buildingType: "Commercial"
   },
   {
     title: "Kitchen",
-    image: "/rooms/Kitchen.png"
+    label: {
+      en: "Kitchen",
+      mn: "Гал тогоо"
+    },
+    image: "/rooms/Kitchen.png",
+    buildingType: "Residential"
+  },
+  {
+    title: "Retail",
+    label: {
+      en: "Retail",
+      mn: "Худалдаа"
+    },
+    image: "/rooms/Retail.jpg",
+    buildingType: "Commercial"
+  },
+  {
+    title: "Restaurant",
+    label: {
+      en: "Restaurant",
+      mn: "Ресторан"
+    },
+    image: "/rooms/Restaurant.png",
+    buildingType: "Commercial"
+  },
+  {
+    title: "Warehouse",
+    label: {
+      en: "Warehouse",
+      mn: "Агуулах"
+    },
+    image: "/rooms/Warehouse.jpg",
+    buildingType: "Commercial"
+  },
+  {
+    title: "Garden",
+    label: {
+      en: "Garden",
+      mn: "Цэцэрлэг"
+    },
+    image: "/rooms/Garden.jpg",
+    buildingType: "Exterior"
+  },
+  {
+    title: "Patio",
+    label: {
+      en: "Patio",
+      mn: "Патио"
+    },
+    image: "/rooms/Patio.jpeg",
+    buildingType: "Exterior"
+  },
+  {
+    title: "Pool",
+    label: {
+      en: "Pool",
+      mn: "Усан сан"
+    },
+    image: "/rooms/Pool.jpg",
+    buildingType: "Exterior"
+  },
+  {
+    title: "Parking",
+    label: {
+      en: "Parking",
+      mn: "Паркинг"
+    },
+    image: "/rooms/Parking.jpg",
+    buildingType: "Exterior"
   },
   {
     title: "Other",
-    image: "/rooms/Other.jpg"
+    label: {
+      en: "Other",
+      mn: "Бусад"
+    },
+    image: "/rooms/Other.jpg",
+    buildingType: "Residential"
   }
 ];
 
-const building = ["Residential", "Commercial", "Exterior"];
+const building = [
+  {
+    name: "Residential",
+    mn: "Амины орон сууц",
+    en: "Residential"
+  },
+  {
+    name: "Commercial",
+    mn: "Аж ахуйн",
+    en: "Commercial"
+  },
+  {
+    name: "Exterior",
+    mn: "Гадна талбай",
+    en: "Exterior"
+  }
+];
 
 const buildingTypes = {
-  Residential: ["Living Room", "Bedroom", "Bathroom", "Kitchen", "Other"],
-  Commercial: ["Office", "Bathroom", "Kitchen", "Other"],
-  Exterior: ["Living Room", "Kitchen", "Other"]
+  Residential: [
+    "Living Room",
+    "Bathroom",
+    "Kitchen",
+    "Bedroom",
+    "Bathroom",
+    "Kitchen",
+    "Other"
+  ],
+  Commercial: ["Retail", "Restaurant", "Warehouse", "Office", "Other"],
+  Exterior: ["Garden", "Patio", "Pool", "Parking", "Other"]
 };
 
 const tems = [
   {
-    label: "Minimalist",
+    label: {
+      en: "Minimalist",
+      mn: "Энгийн"
+    },
     value: "minimalist",
     selected: false
   },
   {
-    label: "Classic",
+    label: {
+      en: "Classic",
+      mn: "Классик"
+    },
     value: "classic",
     selected: false
   },
   {
-    label: "Modern",
+    label: {
+      en: "Modern",
+      mn: "Орчин үеийн"
+    },
     value: "modern",
     selected: true
   },
   {
-    label: "Mid-Century Modern",
+    label: {
+      en: "Mid-Century Modern",
+      mn: "Дундад зууны үеийн"
+    },
     value: "mid_century_modern",
     selected: false
   },
   {
-    label: "Contemporary",
+    label: {
+      en: "Contemporary",
+      mn: "Орчин үеийн"
+    },
     value: "contemporary",
     selected: false
   },
   {
-    label: "Art Deco",
+    label: {
+      en: "Art Deco",
+      mn: "Урлагийн декор"
+    },
     value: "art_deco",
     selected: false
   },
   {
-    label: "Eclectic",
+    label: {
+      en: "Eclectic",
+      mn: "Төрөл бүрийн"
+    },
     value: "eclectic",
     selected: false
   }
@@ -96,14 +234,15 @@ export default function ImagePage() {
   const [theme, setTheme] = useState<string>("Modern Minimalist");
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [them, setThem] = useState<string>(tems[0].label);
+  const [them, setThem] = useState<string>(tems[0].label?.en);
   const [room, setRoom] = useState<{ title: string; image: string }>(rooms[0]);
-  const [build, setBuild] = useState<string>(building[0]);
+  const [build, setBuild] = useState<string>(building[0].name);
   const [outputImage, setOutputImage] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [base64Image, setBase64Image] = useState<string | null>(null);
 
   const t = useTranslations("AI");
+  const intl = useLocale();
 
   const { data: session } = useSession();
 
@@ -288,12 +427,12 @@ export default function ImagePage() {
           <div className="flex flex-wrap gap-4">
             {building.map((type) => (
               <button
-                onClick={() => setBuild(type)}
-                key={type}
+                onClick={() => setBuild(type?.name)}
+                key={type?.name}
                 className={`items-center w-full sm:w-auto relative min-w-[200px] overflow-hidden rounded-md shadow-md bg-white dark:bg-slate-500 hover:bg-gray-100 dark:hover:bg-gray-600 ${
-                  build === type ? "border-2 border-blue-600" : ""
+                  build === type?.name ? "border-2 border-blue-600" : ""
                 }`}>
-                {type}
+                {(type as any)[intl]}
               </button>
             ))}
           </div>
@@ -314,8 +453,8 @@ export default function ImagePage() {
                   alt="hero"
                   className="w-full h-full max-h-[200px] object-cover aspect-video"
                 />
-                <span className="text-white absolute bottom-4 left-4 ">
-                  {r.title}
+                <span className="text-white bg-black bg-opacity-30 absolute bottom-4 left-4 ">
+                  {(r.label as any)[intl]}
                 </span>
               </div>
             ))}
@@ -326,12 +465,12 @@ export default function ImagePage() {
           <div className="flex gap-4 py-2 overflow-auto max-w-full">
             {tems.map((type) => (
               <button
-                onClick={() => setThem(type?.label)}
-                key={type?.label}
+                onClick={() => setThem(type?.label?.en)}
+                key={type?.label?.en}
                 className={`items-center w-full sm:w-auto relative min-w-[200px] overflow-hidden rounded-md shadow-md bg-white dark:bg-slate-500 hover:bg-gray-100 dark:hover:bg-gray-600 ${
-                  them === type?.label ? "border-2 border-blue-600" : ""
+                  them === type?.label?.en ? "border-2 border-blue-600" : ""
                 }`}>
-                {type?.label}
+                {(type?.label as any)[intl]}
               </button>
             ))}
           </div>
