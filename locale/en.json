@@ -2,33 +2,7 @@
   "HomePage": {
     "ourService": "OUR SERVICE",
     "serviceDescription": "In today’s fast-paced business world, competitive success hinges on the ability to adapt to rapid and sometimes unpredictable changes. As a company that values progress, we make it our mission to stay on the cutting edge by continuously enhancing our services.",
-    "serviceGoal": "We undertake projects in a client-centered manner, tailoring our services to meet the specific needs of each client. Our expertise in diverse areas enables us to provide solutions that drive business success.",
-    "services": {
-      "discussion": {
-        "title": "Discussion & Analysis of Needs",
-        "description": "We begin every project with a comprehensive analysis to understand and outline your vision and requirements."
-      },
-      "conceptDesign": {
-        "title": "Concept & Design Development",
-        "description": "We create initial design concepts to give you an early glimpse of what the finished project will look like."
-      },
-      "visualization": {
-        "title": "3D Visualization and Styling",
-        "description": "Experience a detailed 3D visualization to help you better understand the design."
-      },
-      "coordination": {
-        "title": "Coordination and Approval",
-        "description": "We work closely with you to finalize and approve all elements before moving into implementation."
-      },
-      "materialSelection": {
-        "title": "Interior Material Selection",
-        "description": "Our team assists in selecting the most suitable materials that fit both style and budget."
-      },
-      "projectOverview": {
-        "title": "Overview of the Construction Project",
-        "description": "A comprehensive review is conducted at the completion phase to ensure that all elements align with your expectations."
-      }
-    }
+    "serviceGoal": "We undertake projects in a client-centered manner, tailoring our services to meet the specific needs of each client. Our expertise in diverse areas enables us to provide solutions that drive business success."
   },
   "AboutPage": {
     "aboutUs": "ABOUT US",
