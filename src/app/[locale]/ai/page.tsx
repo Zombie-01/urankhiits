@@ -244,8 +244,6 @@ export default function ImagePage() {
   const t = useTranslations("AI");
   const intl = useLocale();
 
-  const { data: session } = useSession();
-
   function convertImageToBase64(file: File): void {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -279,6 +277,23 @@ export default function ImagePage() {
 
   async function handleGmailLogin() {
     try {
+      // Get the current session to check if the user is already logged in
+      const { data: session, error: sessionError } =
+        await supabase.auth.getUser();
+
+      if (sessionError) {
+        console.error("Error getting session:", sessionError.message);
+        toast.error("Failed to get session");
+        return false;
+      }
+
+      if (session?.user) {
+        // If the user is already logged in
+        console.log("User already logged in:", session.user);
+        return session.user?.id;
+      }
+
+      // Trigger the Gmail login with OAuth
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google"
       });
@@ -289,10 +304,7 @@ export default function ImagePage() {
         return false; // Return false if login failed
       }
 
-      if (data) {
-        console.log("User logged in:", data);
-        return true; // Return true if login was successful
-      }
+      return true; // Return true if login is successful
     } catch (error) {
       console.error("Unexpected error during Gmail login:", error);
       toast.error("Unexpected error during Gmail login");
@@ -381,7 +393,7 @@ export default function ImagePage() {
         const { error: dbError } = await supabase.from("generated").insert({
           image: publicUrl,
           prompt: `A ${theme} ${room} Editorial Style Photo, Symmetry, Straight On, Modern Living Room, Large Window (balanced with walls if window not detected then don't add window), Leather, Glass, Metal, Wood Paneling, Neutral Palette, Ikea, Natural Light, Apartment, Afternoon, Serene, Contemporary, 4k`,
-          user: session?.user?.name || null // Add user ID or null if unavailable
+          user: loggedIn || null // Add user ID or null if unavailable
         });
 
         if (dbError) {
