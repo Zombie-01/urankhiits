@@ -1,14 +1,30 @@
+"use client";
 // src/app/components/Layout.tsx
+import { useEffect, useState } from "react";
 import Sidebar from "./sidebar";
+import { supabase } from "../../../../utils/supabase/client";
+import { useRouter } from "next/navigation";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Get the logged-in user when the component mounts
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        return setUser(session?.user);
+      }
+    );
+  }, []);
+
   return (
     <div className="flex h-screen lg:pt-[81px] ">
-      <Sidebar />
+      <Sidebar user={user} />
       <main className="flex-1 p-6 overflow-y-auto gap-8 sm:gap-10 flex flex-col">
         <div className="flex justify-between items-center">
           <div className="space-x-4">

@@ -17,18 +17,6 @@ export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // To control the dropdown
   const [user, setUser] = useState(null);
 
-  const links = [
-    { title: t("ABOUTUS"), href: "/#aboutus", src: "hero_3.png" },
-    { title: t("OURSERVICE"), href: "/#ourservice", src: "hero_3.png" },
-    { title: t("PROJECTS"), href: "/project", src: "hero_2.png" },
-    { title: t("AI"), href: "/ai", src: "hero_4.png", className: true },
-    { title: t("CONTACT"), href: "/#contact", src: "pub_1.png" }
-  ];
-
-  const fullPath = `${path}${
-    searchParams.toString() ? "?" + searchParams.toString() : ""
-  }`;
-
   useEffect(() => {
     // Get the logged-in user when the component mounts
     const { data: authListener } = supabase.auth.onAuthStateChange(
@@ -42,6 +30,17 @@ export default function Header() {
     await supabase.auth.signOut();
     setUser(null); // Reset the user state on logout
   };
+  const links = [
+    { title: t("ABOUTUS"), href: "/#aboutus", src: "hero_3.png" },
+    { title: t("OURSERVICE"), href: "/#ourservice", src: "hero_3.png" },
+    { title: t("PROJECTS"), href: "/project", src: "hero_2.png" },
+    { title: t("AI"), href: "/ai", src: "hero_4.png", className: true },
+    { title: t("CONTACT"), href: "/#contact", src: "pub_1.png" }
+  ];
+
+  const fullPath = `${path}${
+    searchParams.toString() ? "?" + searchParams.toString() : ""
+  }`;
 
   return (
     <div className="fixed w-full bg-white opacity-[91%] dark:bg-black p-4 z-[99999999] shadow-md">

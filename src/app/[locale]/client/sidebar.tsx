@@ -4,10 +4,13 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "@/i18n/routing";
+import { User } from "@supabase/supabase-js";
 
-const Sidebar: React.FC = () => {
+const Sidebar = ({ user }: { user: User }) => {
   const path = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  console.log(user);
 
   return (
     <>
@@ -24,9 +27,11 @@ const Sidebar: React.FC = () => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}>
         <div className="flex flex-col items-center">
-          <div className="w-16 h-16 rounded-full bg-gray-400 mb-2" />
-          <h2 className="text-lg font-bold">Yuljixamgees</h2>
-          <span className="text-sm text-gray-600">Tsegmid</span>
+          <img
+            src={user?.user_metadata?.avatar_url}
+            className="w-16 h-16 rounded-full bg-gray-400 mb-2"
+          />
+          <h2 className="text-lg font-bold">{user?.user_metadata?.name}</h2>
         </div>
         <nav className="mt-8 space-y-2">
           <Link href="/generated-designs">
