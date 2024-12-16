@@ -1,5 +1,4 @@
 "use client";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Logo from "@/app/[locale]/logo";
 import DarkModeToggle from "@/app/[locale]/DarkModeToggle";

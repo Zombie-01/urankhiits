@@ -2,8 +2,7 @@
 // components/Sidebar.tsx
 
 import React, { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 import { User } from "@supabase/supabase-js";
 
 const Sidebar = ({ user }: { user: User }) => {
@@ -34,7 +33,7 @@ const Sidebar = ({ user }: { user: User }) => {
           <h2 className="text-lg font-bold">{user?.user_metadata?.name}</h2>
         </div>
         <nav className="mt-8 space-y-2">
-          <Link href="/generated-designs">
+          <Link href="/client">
             <p
               className={`block py-2 px-4 rounded ${
                 path === "/client" ? "bg-gray-300 font-bold" : ""
@@ -42,7 +41,7 @@ const Sidebar = ({ user }: { user: User }) => {
               Your Generated Designs
             </p>
           </Link>
-          <Link href="/account">
+          <Link href="/client/account">
             <p
               className={`block py-2 px-4 rounded ${
                 path === "/client/account" ? "bg-gray-300 font-bold" : ""

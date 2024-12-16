@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { FileUpload } from "@/components/ui/file-upload";
-import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { supabase } from "../../../../utils/supabase/client";
 import { useLocale, useTranslations } from "next-intl";
@@ -278,22 +277,77 @@ export default function ImagePage() {
   async function handleGmailLogin() {
     try {
       // Get the current session to check if the user is already logged in
-      const { data: session, error: sessionError } =
-        await supabase.auth.getUser();
+      const {
+        data: { session },
+        error: sessionError
+      } = await supabase.auth.getSession();
 
       if (sessionError) {
-        console.error("Error getting session:", sessionError.message);
+        console.error("Error getting session:", sessionError);
         toast.error("Failed to get session");
         return false;
       }
 
       if (session?.user) {
-        // If the user is already logged in
+        // If the user is already logged in, no need to log them in again
         console.log("User already logged in:", session.user);
-        return session.user?.id;
+
+        // Check if the user already has an entry in the user_log table
+        const { data: existingLog, error: logError } = await supabase
+          .from("user_log")
+          .select("id, remain_token")
+          .eq("user_id", session.user.id);
+
+        if (logError) {
+          console.error("Error checking user log:", logError.message);
+          toast.error("Failed to check user log.");
+          return false;
+        }
+        console.log(existingLog);
+        if (existingLog?.length > 0) {
+          // If the user already has a log entry, don't create a new one
+          console.log("User already has a log entry:", existingLog);
+          if ((existingLog[0] as any).remain_token === 0) {
+            alert("Your tokens are out of stock. Please purchase");
+            return false;
+          }
+          const updatedToken = (existingLog[0] as any).remain_token - 1;
+
+          // Update the remain_token by decrementing it by 1
+          const { error: updateError } = await supabase
+            .from("user_log")
+            .update({ remain_token: updatedToken })
+            .eq("user_id", session.user.id);
+
+          if (updateError) {
+            console.error("Error updating user log:", updateError.message);
+            toast.error("Failed to update user log entry.");
+          } else {
+            console.log("User log entry updated successfully.");
+            toast.success("Remain token updated!");
+          }
+          return session.user.id;
+        }
+
+        console.log(session.user.id);
+
+        // If no log entry exists, create a new log entry
+        const { error: insertError } = await supabase
+          .from("user_log")
+          .insert([{ remain_token: 2 }]);
+
+        if (insertError) {
+          console.error("Error adding to user_log:", insertError.message);
+          toast.error("Failed to create user log entry.");
+        } else {
+          console.log("User log entry added successfully.");
+          toast.success("Logged in and user log created!");
+        }
+
+        return session.user.id;
       }
 
-      // Trigger the Gmail login with OAuth
+      // If no session exists, proceed with Gmail login
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google"
       });
@@ -301,10 +355,10 @@ export default function ImagePage() {
       if (error) {
         console.error("Gmail login error:", error.message);
         toast.error("Failed to log in with Gmail");
-        return false; // Return false if login failed
+        return false;
       }
 
-      return true; // Return true if login is successful
+      return false; // If no session or user is returned, return false
     } catch (error) {
       console.error("Unexpected error during Gmail login:", error);
       toast.error("Unexpected error during Gmail login");
@@ -320,6 +374,7 @@ export default function ImagePage() {
       }
 
       const loggedIn = await handleGmailLogin();
+      console.log(loggedIn);
       if (!loggedIn) return;
 
       setLoading(true);
