@@ -402,10 +402,9 @@ export default function ImagePage() {
       }
 
       if (result.output) {
-        setOutputImage(result.output);
-
         // Fetch the generated image file from the URL
-        const resSt = await fetch(result.output);
+
+        const resSt = await fetch(`${result.output}`);
         if (!resSt.ok) {
           throw new Error("Failed to fetch the file from the URL.");
         }
@@ -426,7 +425,6 @@ export default function ImagePage() {
             .upload(`${filename}.${extension}`, blob, {
               contentType: blob.type // Set the content type from the blob
             });
-
         if (storageError) {
           console.error("Error uploading file:", storageError.message);
           toast.error(t("image_processing_error"));
@@ -457,6 +455,7 @@ export default function ImagePage() {
           return;
         }
 
+        setOutputImage(result.output);
         toast.success(t("image_uploaded"));
       } else {
         console.error("Unexpected result format. Unable to display image.");
