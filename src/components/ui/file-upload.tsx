@@ -3,30 +3,31 @@ import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { IconUpload } from "@tabler/icons-react";
 import { useDropzone } from "react-dropzone";
+import Image from "next/image";
 
 const mainVariant = {
   initial: {
     x: 0,
-    y: 0,
+    y: 0
   },
   animate: {
     x: 20,
     y: -20,
-    opacity: 0.9,
-  },
+    opacity: 0.9
+  }
 };
 
 const secondaryVariant = {
   initial: {
-    opacity: 0,
+    opacity: 0
   },
   animate: {
-    opacity: 1,
-  },
+    opacity: 1
+  }
 };
 
 export const FileUpload = ({
-  onChange,
+  onChange
 }: {
   onChange?: (files: File[]) => void;
 }) => {
@@ -48,7 +49,7 @@ export const FileUpload = ({
     onDrop: handleFileChange,
     onDropRejected: (error) => {
       console.log(error);
-    },
+    }
   });
 
   return (
@@ -127,7 +128,7 @@ export const FileUpload = ({
                 transition={{
                   type: "spring",
                   stiffness: 300,
-                  damping: 20,
+                  damping: 20
                 }}
                 className={cn(
                   "relative group-hover/file:shadow-2xl z-40 bg-white dark:bg-neutral-900 flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md",
@@ -163,22 +164,12 @@ export function GridPattern() {
   const columns = 41;
   const rows = 11;
   return (
-    <div className="flex bg-gray-100 dark:bg-neutral-900 flex-shrink-0 flex-wrap justify-center items-center gap-x-px gap-y-px  scale-105">
-      {Array.from({ length: rows }).map((_, row) =>
-        Array.from({ length: columns }).map((_, col) => {
-          const index = row * columns + col;
-          return (
-            <div
-              key={`${col}-${row}`}
-              className={`w-10 h-10 flex flex-shrink-0 rounded-[2px] ${
-                index % 2 === 0
-                  ? "bg-gray-50 dark:bg-neutral-950"
-                  : "bg-gray-50 dark:bg-neutral-950 shadow-[0px_0px_1px_3px_rgba(255,255,255,1)_inset] dark:shadow-[0px_0px_1px_3px_rgba(0,0,0,1)_inset]"
-              }`}
-            />
-          );
-        })
-      )}
+    <div className="flex relative h-full bg-gray-100 dark:bg-neutral-900 flex-shrink-0 flex-wrap justify-center items-center gap-x-px gap-y-px  scale-105">
+      <img
+        className="object-cover w-full h-full"
+        src="/bg_asset/one.png"
+        alt="bg"
+      />
     </div>
   );
 }

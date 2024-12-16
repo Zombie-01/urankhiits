@@ -1,115 +1,78 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import React, { ReactNode, useEffect, useState } from "react";
-import { ModalBody, ModalContent, useModal } from "./animated-modal";
-import { Compare } from "./compare";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
 
 export const InfiniteMovingCards = ({
   items,
-  direction = "left",
+  direction = "down",
   speed = "fast",
   pauseOnHover = true,
   className,
 }: {
   items: {
     id: number;
-    item: any;
-    content: ReactNode;
+    imageSrc: string;
+    altText: string;
   }[];
-  direction?: "left" | "right";
+  direction?: "up" | "down";
   speed?: "fast" | "normal" | "slow";
   pauseOnHover?: boolean;
   className?: string;
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
-  const { setOpen } = useModal();
-  const [selectedImage, setSelectedImage] = useState(items[0].item);
+  const [start, setStart] = useState(false);
 
   useEffect(() => {
-    addAnimation();
-  }, []);
-  const [start, setStart] = useState(false);
-  function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
+      // Duplicate all items for seamless infinite scrolling
       scrollerContent.forEach((item) => {
         const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
+        scrollerRef.current?.appendChild(duplicatedItem);
       });
 
-      getDirection();
-      getSpeed();
       setStart(true);
     }
-  }
-  const getDirection = () => {
-    if (containerRef.current) {
-      if (direction === "left") {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards"
-        );
-      } else {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse"
-        );
-      }
-    }
-  };
-  const getSpeed = () => {
-    if (containerRef.current) {
-      if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
-      } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
-      } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
-      }
-    }
-  };
+  }, []);
+
   return (
     <div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20  max-w-7xl overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        "scroller relative max-h-[600px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white_20%,white_80%,transparent)]",
         className
-      )}>
+      )}
+      style={
+        {
+          "--animation-duration":
+            speed === "fast" ? "20s" : speed === "normal" ? "40s" : "80s",
+          "--animation-direction": direction === "down" ? "normal" : "reverse",
+        } as React.CSSProperties
+      }>
       <ul
         ref={scrollerRef}
         className={cn(
-          "flex min-w-full h-[400px] shrink-0 gap-4 py-4 w-max flex-nowrap",
-          start && "animate-scroll ",
+          "flex flex-col min-h-full gap-4 py-4 animate-scroll",
+          start && "animate-scroll",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}>
-        {items.map((item, idx) => (
+        {items.map((item) => (
           <li
             key={item.id}
-            onClick={() => {
-              console.log("Item clicked:", item); // Debugging log
-              setSelectedImage(item.item);
-              setOpen(true);
-            }}
-            className="w-[350px] cursor-pointer max-w-full relative px-8 min-h-[200px] py-6 md:w-content">
-            <div>{item.content}</div>
+            className="relative h-48 sm:h-64 rounded-lg overflow-hidden">
+            <Image
+              src={item.imageSrc}
+              alt={item.altText}
+              layout="fill"
+              objectFit="cover"
+            />
           </li>
         ))}
       </ul>
-      <ModalBody>
-        <ModalContent>
-          <div className="p-4">
-            <Compare
-              firstImage={selectedImage?.src}
-              secondImage={selectedImage?.out}
-            />
-          </div>
-        </ModalContent>
-      </ModalBody>
     </div>
   );
 };

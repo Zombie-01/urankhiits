@@ -12,7 +12,7 @@ import { saveAs } from "file-saver";
 import { Compare } from "../ui/compare";
 import { FileUpload } from "../ui/file-upload";
 import { MultiStepLoader } from "../ui/multi-step-loader";
-import { Select } from "@/app/select";
+import { Select } from "@/app/[locale]/select";
 
 const themes = ["Modern", "Vintage", "Minimalist", "Professional"];
 const rooms = ["Living Room", "Dining Room", "Bedroom", "Bathroom", "Office"];

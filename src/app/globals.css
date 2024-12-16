@@ -1,11 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://rsms.me/inter/inter.css");
+@import url("https://fonts.cdnfonts.com/css/helvetica-neue-55");
 
 html {
   scroll-behavior: smooth;
   overflow: scroll;
   overflow-x: hidden;
+  font-family: "Helvetica Neue";
+  font-style: normal;
 }
 ::-webkit-scrollbar {
   width: 0; /* Remove scrollbar space */
@@ -15,6 +19,16 @@ html {
 ::-webkit-scrollbar-thumb {
   background: transparent;
 }
+
+/* html.has-scroll-smooth {
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+} */
+
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -1,0 +1,17 @@
+.description {
+  height: auto;
+  .descriptionContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+    p {
+      font-size: 7vw;
+      cursor: default;
+      margin: 0px;
+      text-transform: uppercase;
+    }
+  }
+}

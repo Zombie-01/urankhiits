@@ -2,6 +2,8 @@
 import React from "react";
 import { StickyScroll } from "../ui/sticky-scroll-reveal";
 import Image from "next/image";
+import { SubTitle } from "../custom/SubTitle";
+import Link from "next/link";
 
 const content = [
   {
@@ -30,27 +32,22 @@ const content = [
       </div>
     ),
   },
-  {
-    title: "Version control",
-    description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
-    content: (
-      <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] flex items-center justify-center text-white">
-        Version control
-      </div>
-    ),
-  },
-  {
-    title: "Running out of content",
-    description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
-    content: (
-      <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] flex items-center justify-center text-white">
-        Running out of content
-      </div>
-    ),
-  },
 ];
 export default function StickyScrollRevealDemo() {
-  return <StickyScroll content={content} />;
+  return (
+    <div>
+      <StickyScroll content={content} />
+      <div className="flex mt-xl flex-col justify-center items-center gap-10">
+        <div>
+          <Link href="/aboutus">
+            <span
+              id="badge"
+              className="ml px-10 py-3 bg-transparent border-2 border-black dark:border-white rounded-3xl text-md">
+              See More
+            </span>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 }
