@@ -292,7 +292,6 @@ export default function ImagePage() {
         // If the user is already logged in, no need to log them in again
         console.log("User already logged in:", session.user);
 
-        // Check if the user already has an entry in the user_log table
         const { data: existingLog, error: logError } = await supabase
           .from("user_log")
           .select("id, remain_token")
