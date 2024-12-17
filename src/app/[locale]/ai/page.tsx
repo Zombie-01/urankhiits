@@ -334,7 +334,7 @@ export default function ImagePage() {
         // If no log entry exists, create a new log entry
         const { error: insertError } = await supabase
           .from("user_log")
-          .insert([{ remain_token: 2 }]);
+          .insert([{ remain_token: 3 }]);
 
         if (insertError) {
           console.error("Error adding to user_log:", insertError.message);
