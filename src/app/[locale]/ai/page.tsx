@@ -303,7 +303,6 @@ export default function ImagePage() {
           toast.error("Failed to check user log.");
           return false;
         }
-        console.log(existingLog);
         if (existingLog?.length > 0) {
           // If the user already has a log entry, don't create a new one
           console.log("User already has a log entry:", existingLog);
@@ -328,8 +327,6 @@ export default function ImagePage() {
           }
           return session.user.id;
         }
-
-        console.log(session.user.id);
 
         // If no log entry exists, create a new log entry
         const { error: insertError } = await supabase
