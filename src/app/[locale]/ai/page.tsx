@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { supabase } from "../../../../utils/supabase/client";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 const rooms = [
   {
@@ -86,17 +87,17 @@ const rooms = [
 const building = [
   {
     name: "Residential",
-    mn: "Амины орон сууц",
+    mn: "Орон сууц",
     en: "Residential"
   },
   {
     name: "Commercial",
-    mn: "Аж ахуйн",
+    mn: "Худалдаа үйлчилгээ",
     en: "Commercial"
   },
   {
     name: "Exterior",
-    mn: "Гадна талбай",
+    mn: "Гадна, Архитектур",
     en: "Exterior"
   }
 ];
@@ -265,7 +266,7 @@ export default function ImagePage() {
           // If the user already has a log entry, don't create a new one
           console.log("User already has a log entry:", existingLog);
           if ((existingLog[0] as any).remain_token === 0) {
-            alert("Your tokens are out of stock. Please purchase");
+            alert(t("out_of_token"));
             return false;
           }
           const updatedToken = (existingLog[0] as any).remain_token - 1;
@@ -747,17 +748,36 @@ export default function ImagePage() {
         </div>
       </div>
       {!logged && (
-        <div className="w-full h-full fixed top-0 inset-0 bg-white dark:bg-black z-[999] bg-opacity-55 flex justify-center items-center">
-          <div className="p-6 rounded-md bg-white dark:bg-black text-gray-700 dark:text-white">
-            <h2 className="text-lg font-bold">{t("login_required")}</h2>
-            <p>{t("please_login_to_use_the_app")}</p>
+        <div
+          style={{
+            backgroundImage: "url(/login.png)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            height: "100vh"
+          }}
+          className="flex fixed inset-0 items-center justify-center">
+          <div className="bg-white/80 dark:bg-black/80 backdrop-blur-md rounded-lg shadow-lg p-8 w-full max-w-md">
+            <h1 className="text-xl font-bold text-center mb-4">
+              {t("welcome")}
+            </h1>
             <button
-              onClick={() => {
-                handleGmailLogin();
-              }}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md">
-              {t("login")}
+              onClick={handleGmailLogin}
+              className="w-full flex items-center justify-center gap-2 bg-[#E9F1FF] hover:bg-[#E9F1FD] text-[#4285F4] py-2 px-4 rounded-md mb-4">
+              <FcGoogle className="h-[26px] w-[26px]" />
+              {t("sign_in")}
             </button>
+
+            <div className="mt-4 text-center">
+              <p className="text-sm">
+                {t("not_member")}{" "}
+                <button
+                  onClick={handleGmailLogin}
+                  className="text-blue-600 hover:underline">
+                  {t("sign_up")}
+                </button>
+              </p>
+            </div>
           </div>
         </div>
       )}

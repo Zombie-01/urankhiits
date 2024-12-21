@@ -73,7 +73,7 @@
         "choose_building_type": "Choose your building type",
         "choose_room_type": "Choose Room Type",
         "upload_image": "Upload your image",
-
+        "out_of_token": "Your tokens are out of stock. Please purchase",
         "choose_theme_type": "Choose theme type",
         "choose_color_tone": "Choose Color Tone",
         "generated_image": "Generated Image",
@@ -84,13 +84,18 @@
         "image_processing_error": "An error occurred while processing the image.",
         "login_required": "Login Required",
         "please_login_to_use_the_app": "Please login to use the app",
-        "login": "Login"
+        "login": "Login",
+        "welcome": "Welcome to Uran AI",
+        "sign_in": "Sign in with Google",
+        "sign_up": "Sign up",
+        "not_member": "Not a member?"
     },
     "CLIENT": {
         "yourGeneratedDesigns": "Your Generated Designs",
         "accountInformation": "Account Information",
         "yourBillingInformation": "Your Billing Information",
         "logOut": "Log out",
-        "yourTokens": "Your Tokens"
+        "yourTokens": "Your Tokens",
+        "CONTACT": "Contact"
     }
 }

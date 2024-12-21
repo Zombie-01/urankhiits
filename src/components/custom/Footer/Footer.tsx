@@ -59,7 +59,7 @@ export const Footer: React.FC = () => {
     }
   ];
   return (
-    <div className="flex overflow-hidden max-w-screen flex-col md:flex-row gap-10 items-end pt-20 md:pr-20 pb-11 bg-neutral-200 md:max-md:pr-5">
+    <div className="flex overflow-hidden max-w-screen flex-col md:flex-row gap-10 items-end pt-20 md:pr-20 pb-11 bg-neutral-200 dark:bg-neutral-200/10 md:max-md:pr-5">
       {/* Left Section */}
       <div className="flex flex-col self-start text-base font-medium tracking-normal leading-6 text-neutral-500 max-md:max-w-full">
         <div className="flex gap-6 self-start mx-4 md:mx-0 md:ml-24 items-center">
@@ -82,7 +82,7 @@ export const Footer: React.FC = () => {
 
       <div className="flex flex-col px-4 md:px-0 md:flex-row w-full gap-10 max-w-3xl mx-auto">
         {/* Links Section */}
-        <div className="flex flex-col mt-6 text-base font-semibold tracking-wide text-zinc-800">
+        <div className="flex flex-col mt-6 text-base font-semibold tracking-wide text-zinc-800 dark:text-white">
           <div className="leading-none">{t("MENU")}</div>
           <div className="flex flex-col mt-6 leading-5 min-h-[192px] max-md:mr-1.5">
             {links.map((link, index) => (
@@ -94,9 +94,9 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Contact & Social Icons Section */}
-        <div className="flex flex-col mt-6">
+        <div id="contact" className="flex flex-col mt-6">
           <div className="flex flex-col text-base">
-            <div className="font-semibold tracking-wide leading-none text-zinc-800">
+            <div className="font-semibold tracking-wide leading-none text-zinc-800 dark:text-white">
               {t("CONTACT")}
             </div>
             <div className="flex flex-col items-start mt-4 tracking-normal text-neutral-500">

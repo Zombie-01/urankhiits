@@ -5,6 +5,7 @@ import Sidebar from "./sidebar";
 import { supabase } from "../../../../utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -71,13 +72,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Sidebar user={user} />
       <main className="flex-1 p-6 overflow-y-auto  gap-8 sm:gap-10 flex flex-col">
         <div className="flex justify-between items-center">
-          <div className="flex justify-between items-center">
-            <div className="md:space-x-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-between w-full items-center">
+            <div className="space-y-4 md:space-y-4  md:space-x-4">
               <div className="inline-block p-4 bg-white/10 w-full md:w-auto shadow rounded">
                 <h3 className="text-xl font-bold">
                   {t("yourGeneratedDesigns")}
                 </h3>{" "}
-                {/* Use translation key */}
                 <p className="text-4xl font-bold text-center">
                   {generatedDesigns.length}
                 </p>
@@ -88,6 +88,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <p className="text-4xl font-bold text-center">{remainToken}</p>
               </div>
             </div>
+            <Link
+              href="/client#contact"
+              className="inline-block p-4 h-full bg-white/10 w-full md:w-auto shadow rounded">
+              <h3 className="text-xl font-bold">{t("CONTACT")}</h3>{" "}
+            </Link>
           </div>
         </div>
         {children}

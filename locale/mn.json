@@ -70,12 +70,14 @@
     "ai_demo_slogan": "Өөрийн орчныг минутын дотор өөрчлөөрэй!"
   },
   "AI": {
-    "choose_building_type": "Барилга төрөл сонгоно уу",
-    "choose_room_type": "Өрөөний төрөл сонгоно уу",
+    "choose_building_type": "Барилгын төрлөө сонгоно уу",
+    "choose_room_type": "Өрөөний төрлийг сонгоно уу",
     "choose_theme_type": "Интерьер дизайны төрлөө сонгоно уу",
-    "upload_image": "Зургийг ачаална уу",
-    "choose_color_tone": "Өнгөний төрлийг сонгоно уу",
-    "generated_image": "Үр дүнгийн зураг",
+
+    "out_of_token": "Таны зураг үүсгэх эрх дууссан байна. Холбогдоно уу",
+    "upload_image": "Зургаа байршуулна уу",
+    "choose_color_tone": "Өнгө сонгоно уу (заавал биш)",
+    "generated_image": "Uran AI, Үүсгэсэн хувилбар",
     "reset": "Дахин тохируулах",
     "generate": "Зураг үүсгэх",
     "download": "Татаж авах",
@@ -83,13 +85,18 @@
     "image_processing_error": "Зургийг боловсруулахдаа алдаа гарлаа.",
     "login_required": "Нэвтрэх шаардлагатай",
     "please_login_to_use_the_app": "Энэ апп-ийг ашиглахын тулд нэвтэрнэ үү",
-    "login": "Нэвтрэх"
+    "login": "Нэвтрэх",
+    "welcome": "URAN AI-д тавтай морил",
+    "sign_in": "Google хаягаар нэвтрэх",
+    "sign_up": "Бүртгүүлэх",
+    "not_member": "Та гишүүн биш үү?"
   },
   "CLIENT": {
     "yourGeneratedDesigns": "Таны үүсгэсэн дизайн",
-    "accountInformation": "Дансны мэдээлэл",
+    "accountInformation": "Хувийн мэдээлэл",
     "yourBillingInformation": "Таны төлбөрийн мэдээлэл",
     "logOut": "Гарах",
-    "yourTokens": "Таны токен"
+    "yourTokens": "Таны токен",
+    "CONTACT": "Холбоо барих"
   }
 }

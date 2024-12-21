@@ -24,7 +24,7 @@ const Sidebar = ({ user }: { user: User }) => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:relative  top-0 left-0 h-screen lg:h-full w-64 rounded-r-3xl bg-[#c6c6c6] dark:bg-[#c6c6c6]/10 p-4 shadow-md z-40 transform transition-transform ${
+        className={`fixed lg:relative  top-0 left-0 h-screen lg:h-full w-64 rounded-r-3xl bg-[#c6c6c6] dark:bg-slate-900 p-4 shadow-md z-40 transform transition-transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}>
         <div className="flex flex-col items-center">
@@ -38,7 +38,9 @@ const Sidebar = ({ user }: { user: User }) => {
           <Link href="/client">
             <p
               className={`block py-2 px-4 rounded ${
-                path === "/client" ? "bg-gray-300 font-bold" : ""
+                path === "/client"
+                  ? "bg-gray-300 dark:bg-gray-700 font-bold"
+                  : ""
               }`}>
               {t("yourGeneratedDesigns")} {/* Use translation key */}
             </p>
@@ -46,7 +48,9 @@ const Sidebar = ({ user }: { user: User }) => {
           <Link href="/client/account">
             <p
               className={`block py-2 px-4 rounded ${
-                path === "/client/account" ? "bg-gray-300 font-bold" : ""
+                path === "/client/account"
+                  ? "bg-gray-300 dark:bg-gray-700 font-bold"
+                  : ""
               }`}>
               {t("accountInformation")} {/* Use translation key */}
             </p>
@@ -54,7 +58,7 @@ const Sidebar = ({ user }: { user: User }) => {
           {/* <Link href="/client/billing">
             <p
               className={`block py-2 px-4 rounded ${
-                path === "/client/billing" ? "bg-gray-300 font-bold" : ""
+                path === "/client/billing" ? "bg-gray-300 dark:bg-gray-700 font-bold" : ""
               }`}>
               {t("yourBillingInformation")} 
             </p>

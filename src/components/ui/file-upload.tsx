@@ -53,7 +53,7 @@ export const FileUpload = ({
   });
 
   return (
-    <div className="w-full z-40" {...getRootProps()}>
+    <div className="w-full " {...getRootProps()}>
       <motion.div
         onClick={handleClick}
         whileHover="animate"
@@ -69,10 +69,10 @@ export const FileUpload = ({
           <GridPattern />
         </div>
         <div className="flex flex-col items-center justify-center">
-          <p className="relative z-20 font-sans font-bold text-neutral-700 dark:text-neutral-300 text-base">
+          <p className="relative  font-sans font-bold text-neutral-700 dark:text-neutral-300 text-base">
             Upload file
           </p>
-          <p className="relative z-20 font-sans font-normal text-neutral-400 dark:text-neutral-400 text-base mt-2">
+          <p className="relative  font-sans font-normal text-neutral-400 dark:text-neutral-400 text-base mt-2">
             Drag or drop your files here or click to upload
           </p>
           <div className="relative w-full mt-10 max-w-xl mx-auto">
@@ -82,7 +82,7 @@ export const FileUpload = ({
                   key={"file" + idx}
                   layoutId={idx === 0 ? "file-upload" : "file-upload-" + idx}
                   className={cn(
-                    "relative overflow-hidden z-40 bg-white dark:bg-neutral-900 flex flex-col items-start justify-start md:h-24 p-4 mt-4 w-full mx-auto rounded-md",
+                    "relative overflow-hidden  bg-white dark:bg-neutral-900 flex flex-col items-start justify-start md:h-24 p-4 mt-4 w-full mx-auto rounded-md",
                     "shadow-sm"
                   )}>
                   <div className="flex justify-between w-full items-center gap-4">
@@ -131,7 +131,7 @@ export const FileUpload = ({
                   damping: 20
                 }}
                 className={cn(
-                  "relative group-hover/file:shadow-2xl z-40 bg-white dark:bg-neutral-900 flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md",
+                  "relative group-hover/file:shadow-2xl  bg-white dark:bg-neutral-900 flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md",
                   "shadow-[0px_10px_50px_rgba(0,0,0,0.1)]"
                 )}>
                 {isDragActive ? (
@@ -151,7 +151,7 @@ export const FileUpload = ({
             {!files.length && (
               <motion.div
                 variants={secondaryVariant}
-                className="absolute opacity-0 border border-dashed border-sky-400 inset-0 z-30 bg-transparent flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md"></motion.div>
+                className="absolute opacity-0 border border-dashed border-sky-400 inset-0  bg-transparent flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md"></motion.div>
             )}
           </div>
         </div>

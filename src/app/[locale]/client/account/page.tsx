@@ -39,7 +39,7 @@ const Account = () => {
           </p>
           <p>
             <strong>User Metadata:</strong>{" "}
-            <pre className="bg-gray-100 p-2 rounded">
+            <pre className="bg-gray-100 dark:bg-gray-800 p-2 rounded">
               {JSON.stringify(user.user_metadata, null, 2)}
             </pre>
           </p>
