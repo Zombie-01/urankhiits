@@ -52,6 +52,11 @@ export default function RootLayout({
                 className="block px-4 py-2 rounded hover:bg-gray-700">
                 Generated
               </Link>
+              <Link
+                href="/admin/users"
+                className="block px-4 py-2 rounded hover:bg-gray-700">
+                Users
+              </Link>
             </nav>
             <div className="p-4 border-t border-gray-700">
               {user ? (

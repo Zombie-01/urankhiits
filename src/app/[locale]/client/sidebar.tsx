@@ -51,14 +51,14 @@ const Sidebar = ({ user }: { user: User }) => {
               {t("accountInformation")} {/* Use translation key */}
             </p>
           </Link>
-          <Link href="/client/billing">
+          {/* <Link href="/client/billing">
             <p
               className={`block py-2 px-4 rounded ${
                 path === "/client/billing" ? "bg-gray-300 font-bold" : ""
               }`}>
-              {t("yourBillingInformation")} {/* Use translation key */}
+              {t("yourBillingInformation")} 
             </p>
-          </Link>
+          </Link> */}
           <button className="w-full block text-left py-2 px-4 bg-red-500 text-white rounded mt-4">
             {t("logOut")} {/* Use translation key */}
           </button>
