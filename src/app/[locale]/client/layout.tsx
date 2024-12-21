@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import Sidebar from "./sidebar";
 import { supabase } from "../../../../utils/supabase/client";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const t = useTranslations("CLIENT"); // Use 'common' namespace for translations
   const [user, setUser] = useState<any>(null);
   const [remainToken, setRemainToken] = useState<number>(0);
   const [generatedDesigns, setGeneratedDesigns] = useState<any[]>([]);
@@ -65,27 +67,28 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, [user]);
 
   return (
-    <div className="flex h-screen lg:pt-[81px] ">
+    <div className="flex h-screen pt-[65px] lg:pt-[81px] ">
       <Sidebar user={user} />
-      <main className="flex-1 p-6 overflow-y-auto gap-8 sm:gap-10 flex flex-col">
+      <main className="flex-1 p-6 overflow-y-auto  gap-8 sm:gap-10 flex flex-col">
         <div className="flex justify-between items-center">
           <div className="flex justify-between items-center">
-            <div className="space-x-4">
-              <div className="inline-block p-4 bg-white/10 shadow rounded">
-                <h3 className="text-xl font-bold">Your Generated Designs</h3>
+            <div className="md:space-x-4">
+              <div className="inline-block p-4 bg-white/10 w-full md:w-auto shadow rounded">
+                <h3 className="text-xl font-bold">
+                  {t("yourGeneratedDesigns")}
+                </h3>{" "}
+                {/* Use translation key */}
                 <p className="text-4xl font-bold text-center">
                   {generatedDesigns.length}
                 </p>
               </div>
-              <div className="inline-block p-4 bg-white/10 shadow rounded">
-                <h3 className="text-xl font-bold">Your Tokens</h3>
+              <div className="inline-block p-4 bg-white/10 w-full md:w-auto shadow rounded">
+                <h3 className="text-xl font-bold">{t("yourTokens")}</h3>{" "}
+                {/* Use translation key */}
                 <p className="text-4xl font-bold text-center">{remainToken}</p>
               </div>
             </div>
           </div>
-          <button className="px-6 py-2 bg-blue-600 text-white font-bold rounded shadow">
-            Buy Package
-          </button>
         </div>
         {children}
       </main>

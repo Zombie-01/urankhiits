@@ -1,8 +1,4 @@
 "use client";
-import ThreeDCardDemo from "@/components/example/3d-card-demo";
-import StickyScrollRevealDemo from "@/components/example/sticky-scroll-reveal-demo";
-import TextRevealCardPreview from "@/components/example/text-reveal-card-demo";
-import AppleCardsCarouselDemo from "@/components/example/apple-cards-carousel-demo";
 import { useEffect, useState } from "react";
 import TypewriterLoader from "./loader";
 import Gallery from "@/components/custom/projects/gallery";
@@ -13,9 +9,14 @@ import OurService from "@/components/custom/service/section/service";
 import OurServiceV from "@/components/custom/our-service";
 import AboutUs from "@/components/custom/aboutUs";
 import { UranAIDemo } from "@/components/custom/UranAI";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 
 export default function Home() {
   const [showLoader, setShowLoader] = useState(true);
+
+  const earchparams = useSearchParams();
+  const router = useRouter();
 
   useEffect(() => {
     // Set a timeout to hide the loader after 4 seconds
@@ -26,6 +27,10 @@ export default function Home() {
     // Cleanup the timer when the component is unmounted
     return () => clearTimeout(timer);
   }, []);
+  useEffect(() => {
+    // Set a timeout to hide the loader after 4 seconds
+    if (earchparams.get("code")) router.push("/ai");
+  }, [earchparams]);
 
   return (
     <>

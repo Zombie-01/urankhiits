@@ -4,25 +4,27 @@
 import React, { useState } from "react";
 import { Link, usePathname } from "@/i18n/routing";
 import { User } from "@supabase/supabase-js";
+import { useTranslations } from "next-intl";
 
 const Sidebar = ({ user }: { user: User }) => {
+  const t = useTranslations("CLIENT"); // Use 'common' namespace for translations
   const path = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-
-  console.log(user);
 
   return (
     <>
       {/* Mobile Toggle Button */}
       <button
-        className="lg:hidden fixed left-4 top-1/2 z-50 bg-gray-800 text-white px-3 py-2 rounded"
+        className={`lg:hidden fixed left-4  z-50 bg-gray-800 text-white px-3 py-2 rounded ${
+          isOpen ? "bottom-4" : "top-1/2"
+        }`}
         onClick={() => setIsOpen(!isOpen)}>
         {isOpen ? "✕" : "☰"} {/* Toggle between X and burger menu */}
       </button>
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:relative  top-0 left-0 h-screen lg:h-full w-64 rounded-r-3xl bg-[#c6c6c6] dark:bg-[#c6c6c6]/10 p-4 shadow-md z-40 transform transition-transform ${
+        className={`fixed lg:relative  top-0 left-0 h-screen lg:h-full w-64 rounded-r-3xl bg-[#c6c6c6] dark:bg-[#c6c6c6]/10 p-4 shadow-md z-40 transform transition-transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}>
         <div className="flex flex-col items-center">
@@ -38,7 +40,7 @@ const Sidebar = ({ user }: { user: User }) => {
               className={`block py-2 px-4 rounded ${
                 path === "/client" ? "bg-gray-300 font-bold" : ""
               }`}>
-              Your Generated Designs
+              {t("yourGeneratedDesigns")} {/* Use translation key */}
             </p>
           </Link>
           <Link href="/client/account">
@@ -46,7 +48,7 @@ const Sidebar = ({ user }: { user: User }) => {
               className={`block py-2 px-4 rounded ${
                 path === "/client/account" ? "bg-gray-300 font-bold" : ""
               }`}>
-              Account Information
+              {t("accountInformation")} {/* Use translation key */}
             </p>
           </Link>
           <Link href="/client/billing">
@@ -54,11 +56,11 @@ const Sidebar = ({ user }: { user: User }) => {
               className={`block py-2 px-4 rounded ${
                 path === "/client/billing" ? "bg-gray-300 font-bold" : ""
               }`}>
-              Your Billing Information
+              {t("yourBillingInformation")} {/* Use translation key */}
             </p>
           </Link>
           <button className="w-full block text-left py-2 px-4 bg-red-500 text-white rounded mt-4">
-            Log out
+            {t("logOut")} {/* Use translation key */}
           </button>
         </nav>
       </aside>

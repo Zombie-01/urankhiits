@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FileUpload } from "@/components/ui/file-upload";
 import { toast } from "sonner";
 import { supabase } from "../../../../utils/supabase/client";
 import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 
 const rooms = [
   {
@@ -70,51 +71,7 @@ const rooms = [
     image: "/rooms/Restaurant.png",
     buildingType: "Commercial"
   },
-  {
-    title: "Warehouse",
-    label: {
-      en: "Warehouse",
-      mn: "Агуулах"
-    },
-    image: "/rooms/Warehouse.jpg",
-    buildingType: "Commercial"
-  },
-  {
-    title: "Garden",
-    label: {
-      en: "Garden",
-      mn: "Цэцэрлэг"
-    },
-    image: "/rooms/Garden.jpg",
-    buildingType: "Exterior"
-  },
-  {
-    title: "Patio",
-    label: {
-      en: "Patio",
-      mn: "Патио"
-    },
-    image: "/rooms/Patio.jpeg",
-    buildingType: "Exterior"
-  },
-  {
-    title: "Pool",
-    label: {
-      en: "Pool",
-      mn: "Усан сан"
-    },
-    image: "/rooms/Pool.jpg",
-    buildingType: "Exterior"
-  },
-  {
-    title: "Parking",
-    label: {
-      en: "Parking",
-      mn: "Паркинг"
-    },
-    image: "/rooms/Parking.jpg",
-    buildingType: "Exterior"
-  },
+
   {
     title: "Other",
     label: {
@@ -231,8 +188,10 @@ function getRoomsByBuildingType(buildingType: string) {
 export default function ImagePage() {
   const [isLoading, setLoading] = useState(false);
   const [theme, setTheme] = useState<string>("Modern Minimalist");
+  const pathname = usePathname();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [logged, setLogged] = useState(false);
   const [them, setThem] = useState<string>(tems[0].label?.en);
   const [room, setRoom] = useState<{ title: string; image: string }>(rooms[0]);
   const [build, setBuild] = useState<string>(building[0].name);
@@ -343,9 +302,14 @@ export default function ImagePage() {
         return session.user.id;
       }
 
+      console.log(pathname);
+
       // If no session exists, proceed with Gmail login
       const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "google"
+        provider: "google",
+        options: {
+          redirectTo: pathname
+        }
       });
 
       if (error) {
@@ -359,6 +323,26 @@ export default function ImagePage() {
       console.error("Unexpected error during Gmail login:", error);
       toast.error("Unexpected error during Gmail login");
       return false;
+    }
+  }
+  async function checkLogin() {
+    try {
+      const {
+        data: { session },
+        error: sessionError
+      } = await supabase.auth.getSession();
+
+      if (sessionError) {
+        console.error("Error getting session:", sessionError);
+        toast.error("Failed to get session");
+        return null; // Return null if there's an error
+      }
+
+      return session?.user || null; // Return user if logged in, otherwise null
+    } catch (error) {
+      console.error("Unexpected error during session check:", error);
+      toast.error("Unexpected error during session check");
+      return null;
     }
   }
 
@@ -463,6 +447,17 @@ export default function ImagePage() {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    checkLogin().then((user) => {
+      console.log(user);
+      if (user) {
+        setLogged(true);
+      } else {
+        setLogged(false);
+      }
+    });
+  }, [supabase]);
 
   return (
     <div className="min-h-screen  p-8">
@@ -751,6 +746,21 @@ export default function ImagePage() {
           )}
         </div>
       </div>
+      {!logged && (
+        <div className="w-full h-full fixed top-0 inset-0 bg-white dark:bg-black z-[999] bg-opacity-55 flex justify-center items-center">
+          <div className="p-6 rounded-md bg-white dark:bg-black text-gray-700 dark:text-white">
+            <h2 className="text-lg font-bold">{t("login_required")}</h2>
+            <p>{t("please_login_to_use_the_app")}</p>
+            <button
+              onClick={() => {
+                handleGmailLogin();
+              }}
+              className="px-4 py-2 bg-blue-600 text-white rounded-md">
+              {t("login")}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

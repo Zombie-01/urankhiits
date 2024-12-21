@@ -143,7 +143,7 @@ const OurServiceV: React.FC = () => {
             width="588"
             height="556"
             fill="url(#pattern0_8885_126)"
-            fill-opacity="0.2"
+            fillOpacity="0.2"
           />
           <defs>
             <pattern

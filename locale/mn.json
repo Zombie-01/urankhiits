@@ -80,6 +80,16 @@
     "generate": "Зураг үүсгэх",
     "download": "Татаж авах",
     "image_uploaded": "Зураг амжилттай ачаалагдсан.",
-    "image_processing_error": "Зургийг боловсруулахдаа алдаа гарлаа."
+    "image_processing_error": "Зургийг боловсруулахдаа алдаа гарлаа.",
+    "login_required": "Нэвтрэх шаардлагатай",
+    "please_login_to_use_the_app": "Энэ апп-ийг ашиглахын тулд нэвтэрнэ үү",
+    "login": "Нэвтрэх"
+  },
+  "CLIENT": {
+    "yourGeneratedDesigns": "Таны үүсгэсэн дизайн",
+    "accountInformation": "Дансны мэдээлэл",
+    "yourBillingInformation": "Таны төлбөрийн мэдээлэл",
+    "logOut": "Гарах",
+    "yourTokens": "Таны токен"
   }
 }

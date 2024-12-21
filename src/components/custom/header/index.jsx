@@ -4,7 +4,7 @@ import Logo from "@/app/[locale]/logo";
 import DarkModeToggle from "@/app/[locale]/DarkModeToggle";
 import LanguageToggle from "@/app/[locale]/langToggle";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
 import { usePathname, useSearchParams } from "next/navigation";
 import { supabase } from "../../../../utils/supabase/client";
 
@@ -12,6 +12,7 @@ export default function Header() {
   const t = useTranslations("Header");
   const path = usePathname();
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // To control the dropdown
   const [user, setUser] = useState(null);
@@ -27,6 +28,7 @@ export default function Header() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+    router.push("/");
     setUser(null); // Reset the user state on logout
   };
   const links = [
