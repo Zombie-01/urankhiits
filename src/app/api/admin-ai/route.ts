@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
-
+export const maxDuration = 500
 // ESModule syntax
 // import { ImgurClient } from "imgur";
 
