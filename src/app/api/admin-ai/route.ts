@@ -1,14 +1,7 @@
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
 export const maxDuration = 500
-// ESModule syntax
-// import { ImgurClient } from "imgur";
 
-// CommonJS syntax
-
-// all credentials with a refresh token, in order to get access tokens automatically
-// const client = new ImgurClient({
-// });
 
 // This function handles POST requests for the API route
 export async function POST(req: Request) {
