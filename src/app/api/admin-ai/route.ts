@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
-export const maxDuration = 500
-
+export const maxDuration = 60;
 
 // This function handles POST requests for the API route
 export async function POST(req: Request) {
