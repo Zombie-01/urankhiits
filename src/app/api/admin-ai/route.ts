@@ -1,25 +1,17 @@
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
-import { Readable } from "stream";
+export const config = {
+  runtime: "edge"
+};
 
-export const maxDuration = 60;
-
-// Fake streaming function
-async function* fakeStream(output: string[]) {
-  for (const chunk of output) {
-    // Simulate processing time
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    yield chunk;
-  }
-}
-
-// Main handler
+// This function handles POST requests for the API route
 export async function POST(req: Request) {
   try {
-    // 1. Parse input
+    // 1. Get request data (in JSON format) from the client
     const body = await req.json();
     const { image, prompt } = body;
 
+    // Check if essential fields are present
     if (!image || !prompt) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -27,14 +19,16 @@ export async function POST(req: Request) {
       );
     }
 
-    // 2. Initialize Replicate API
+    // 2. Initialize the replicate object with our Replicate API token
     const replicate = new Replicate({
       auth: process.env.REPLICATE_API_TOKEN as string
     });
 
-    // 3. Set the model and inputs
+    // 3. Set the model that we're about to run
     const model =
       "erayyavuz/interior-ai:e299c531485aac511610a878ef44b554381355de5ee032d109fcae5352f39fa9";
+    // "jagilley/controlnet-hough:854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b";
+    // 4. Set the image which is the image we uploaded from the client
     const input = {
       input: image,
       prompt: prompt,
@@ -43,38 +37,21 @@ export async function POST(req: Request) {
       num_inference_steps: 25
     };
 
-    // 4. Simulate the API call and processing
-    const fakeOutput = [
-      "Step 1: Processing image...",
-      "Step 2: Running the AI model...",
-      "Step 3: Generating output...",
-      "Step 4: Finalizing..."
-    ];
+    // 5. Run the Replicate's model (to remove background) and get the output image
+    const output = await replicate.run(model, { input });
+    console.log(output);
 
-    // Optional: Uncomment this if you use Replicate API
-    // const result = await replicate.run(model, { input });
+    // 6. Check if the output is NULL then return error back to the client
+    if (!output) {
+      console.log("Something went wrong");
+      return NextResponse.json(
+        { error: "Something went wrong" },
+        { status: 500 }
+      );
+    }
 
-    // 5. Create a Readable stream
-    const stream = new Readable({
-      read() {} // No-op
-    });
-
-    // Send headers to mimic streaming
-    const headers = new Headers();
-    headers.append("Content-Type", "text/event-stream");
-    headers.append("Cache-Control", "no-cache");
-    headers.append("Connection", "keep-alive");
-
-    // Start streaming response
-    const response = new Response(stream as any, { headers });
-    (async () => {
-      for await (const chunk of fakeStream(fakeOutput)) {
-        stream.push(`data: ${chunk}\n\n`); // Send as event-stream
-      }
-      stream.push(null); // End the stream
-    })();
-
-    return response;
+    // 7. Return the output back to the client
+    return NextResponse.json({ output }, { status: 201 });
   } catch (error) {
     console.error("Error processing request:", error);
     return NextResponse.json(
