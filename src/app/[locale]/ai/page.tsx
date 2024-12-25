@@ -120,9 +120,17 @@ const tems = [
   {
     label: {
       en: "Minimalist",
-      mn: "Энгийн"
+      mn: "Минимал"
     },
     value: "minimalist",
+    selected: false
+  },
+  {
+    label: {
+      en: "Japandi",
+      mn: "Жапанди"
+    },
+    value: "japandi",
     selected: false
   },
   {
@@ -136,7 +144,7 @@ const tems = [
   {
     label: {
       en: "Modern",
-      mn: "Орчин үеийн"
+      mn: "Модерн"
     },
     value: "modern",
     selected: true
@@ -160,7 +168,7 @@ const tems = [
   {
     label: {
       en: "Art Deco",
-      mn: "Урлагийн декор"
+      mn: "Декор"
     },
     value: "art_deco",
     selected: false
@@ -168,7 +176,7 @@ const tems = [
   {
     label: {
       en: "Eclectic",
-      mn: "Төрөл бүрийн"
+      mn: "Електрик"
     },
     value: "eclectic",
     selected: false
