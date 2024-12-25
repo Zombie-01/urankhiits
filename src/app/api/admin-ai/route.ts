@@ -1,8 +1,5 @@
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
-export const config = {
-  runtime: "edge"
-};
 
 // This function handles POST requests for the API route
 export async function POST(req: Request) {
