@@ -4,46 +4,75 @@ import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import { supabase } from "../../../utils/supabase/client";
+
+interface SubBanner {
+  id: string;
+  banner_id: string;
+  image_url: string;
+}
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const t = useTranslations("Hero");
 
-  const items = [
-    {
-      title: t("innovative"),
-      thumbnail: "/pub_1.png"
-    },
-    {
-      title: t("creative"),
-      thumbnail: "/pub_2.png"
-    }
-  ];
+  const [subBanners, setSubBanners] = useState<SubBanner[]>([]);
+
+  // Fetch images for the "about_us" banner
+  useEffect(() => {
+    const fetchBannerImages = async () => {
+      const { data: bannerData, error: bannerError } = (await supabase
+        .from("banner")
+        .select("id")
+        .eq("title", "hero")
+        .single()) as any;
+
+      if (bannerError) {
+        console.error("Error fetching banner:", bannerError.message);
+        return;
+      }
+
+      const bannerId = bannerData?.id;
+
+      const { data: images, error: imagesError } = (await supabase
+        .from("sub_banner")
+        .select("id, banner_id, image_url")
+        .eq("banner_id", bannerId)) as any;
+
+      if (imagesError) {
+        console.error("Error fetching sub-banner images:", imagesError.message);
+      } else {
+        setSubBanners(images || []);
+      }
+    };
+
+    fetchBannerImages();
+  }, []);
 
   const duration = 9000; // Time for each slide
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % subBanners.length);
     }, duration);
     return () => clearInterval(interval);
-  }, [items.length, duration]);
+  }, [subBanners.length, duration]);
 
   return (
     <div
       id="home"
       className="relative h-screen  w-screen overflow-hidden flex items-center bg-black">
       {/* Background Image Slider */}
-      {items.map((item, index) => (
+      {subBanners.map((item, index) => (
         <div
-          key={item.title}
+          key={item.banner_id}
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
             currentIndex === index ? "opacity-100 z-10" : "opacity-0"
           }`}>
           <img
-            src={item.thumbnail}
-            alt={item.title}
+            src={item.image_url}
+            alt={item.banner_id}
             className="object-cover w-full h-full"
           />
         </div>
@@ -79,7 +108,7 @@ const Hero = () => {
 
       {/* Slider Dots */}
       <div className="absolute bottom-8 flex left-1/2 -translate-x-1/2 space-x-2 z-10">
-        {items.map((_, index) => (
+        {subBanners.map((_, index) => (
           <div
             key={index}
             onClick={() => setCurrentIndex(index)}
