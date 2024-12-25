@@ -8,7 +8,7 @@ html {
   scroll-behavior: smooth;
   overflow: scroll;
   overflow-x: hidden;
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   font-style: normal;
 }
 ::-webkit-scrollbar {
