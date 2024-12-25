@@ -64,13 +64,6 @@ export const Footer: React.FC = () => {
       <div className="flex flex-col self-start text-base font-medium tracking-normal leading-6 text-neutral-500 max-md:max-w-full">
         <div className="flex gap-6 self-start mx-4 md:mx-0 md:ml-24 items-center">
           <Logo />
-          <div className="shrink-0 w-px border border-black border-solid h-[83px]" />
-          <div className="self-end mt-8 w-[401px]">
-            <span>Build Innovative </span>
-            <br />
-            <span>Design with </span>
-            <span className="font-bold">URANKHIITS</span>
-          </div>
         </div>
         <img
           loading="lazy"
