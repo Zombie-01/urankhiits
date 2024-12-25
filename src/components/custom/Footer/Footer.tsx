@@ -18,29 +18,6 @@ export const Footer: React.FC = () => {
     { label: t("PROJECTS"), href: "/project" }
   ];
 
-  const socialIcons = [
-    {
-      src: "https://cdn.builder.io/api/v1/image/assets/TEMP/ada74cdc60ed06c0b1df5b6c462e61785e444435be435dd06bdd78d371963227?placeholderIfAbsent=true&apiKey=d78a1b03472d480d89d70a3b96288448",
-      alt: "Social media icon 1"
-    },
-    {
-      src: "https://cdn.builder.io/api/v1/image/assets/TEMP/71b7f0f3a360d650a429392de15956b43dd6f648db08bfc887558a8aea6018ec?placeholderIfAbsent=true&apiKey=d78a1b03472d480d89d70a3b96288448",
-      alt: "Social media icon 2"
-    },
-    {
-      src: "https://cdn.builder.io/api/v1/image/assets/TEMP/ac039bf996d409f79cf4084d7014c4db3c0b5f96e33a5188821a58f0079f360f?placeholderIfAbsent=true&apiKey=d78a1b03472d480d89d70a3b96288448",
-      alt: "Social media icon 3"
-    },
-    {
-      src: "https://cdn.builder.io/api/v1/image/assets/TEMP/e5386af6396db4e207fd903e399d30560ffdfefa51176cbd1064b68c6a29e615?placeholderIfAbsent=true&apiKey=d78a1b03472d480d89d70a3b96288448",
-      alt: "Social media icon 4"
-    },
-    {
-      src: "https://cdn.builder.io/api/v1/image/assets/TEMP/09fdeb76bbaddbf97785d03becd3e45d8124e351255b393bd28c60e833b1a081?placeholderIfAbsent=true&apiKey=d78a1b03472d480d89d70a3b96288448",
-      alt: "Social media icon 5"
-    }
-  ];
-
   const contactItems = [
     {
       icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/5044eee29a31341c92cf85a35705273289c27b35fd71a1351da339183bdb68e3?placeholderIfAbsent=true&apiKey=d78a1b03472d480d89d70a3b96288448",
@@ -54,7 +31,7 @@ export const Footer: React.FC = () => {
     },
     {
       icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/67aff6e3f3dfaa4c32c119a23cb5e5301c5423f3de6e11007614e455e6c56130?placeholderIfAbsent=true&apiKey=d78a1b03472d480d89d70a3b96288448",
-      text: "contact@urankhiits.mn",
+      text: "info@urankhiits.com",
       alt: "Email icon"
     }
   ];
@@ -110,7 +87,7 @@ export const Footer: React.FC = () => {
           </div>
           <div className="flex space-x-4 mt-2 text-[#727272]">
             <a
-              href="https://www.facebook.com/profile.php"
+              href="https://www.facebook.com/profile.php?id=61564822048185"
               target="_blank"
               aria-label="Facebook">
               <IconBrandFacebook size={20} />
@@ -126,9 +103,6 @@ export const Footer: React.FC = () => {
               target="_blank"
               aria-label="LinkedIn">
               <IconBrandLinkedin size={20} />
-            </a>
-            <a href="https://twitter.com/" target="_blank" aria-label="Twitter">
-              <IconBrandTwitter size={20} />
             </a>
           </div>
         </div>
