@@ -68,19 +68,23 @@ export default function ProjectDetail() {
         </div>
         <div className="w-full sm:w-2/3">
           {project.imgs.length > 0 && (
-            <div
-              className="bg-cover rounded-lg overflow-hidden bg-no-repeat w-full h-full bg-center aspect-video bg-lightgray"
-              style={{ backgroundImage: `url(${project.imgs[0]})` }}></div>
+            <img
+              className="rounded-lg w-full h-auto"
+              src={project.imgs[0]}
+              alt={`Project ${project.title}`}
+            />
           )}
         </div>
       </div>
       {project.imgs
         .slice(1)
-        .map((image: any, index: Key | null | undefined) => (
-          <div
+        .map((image: string, index: Key | null | undefined) => (
+          <img
             key={index}
-            className="bg-cover rounded-lg bg-no-repeat w-full h-full bg-center aspect-video bg-lightgray"
-            style={{ backgroundImage: `url(${image})` }}></div>
+            className="rounded-lg w-full h-auto"
+            src={image}
+            alt={`Project additional image ${index}`}
+          />
         ))}
     </section>
   );
