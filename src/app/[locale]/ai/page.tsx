@@ -494,7 +494,6 @@ export default function ImagePage() {
             {building.map((type) => (
               <button
                 onClick={() => setBuild(type?.name)}
-                disabled={type?.name === "Exterior"}
                 key={type?.name}
                 className={`items-center w-full sm:w-auto relative min-w-[200px] overflow-hidden rounded-md shadow-md bg-white dark:bg-slate-500 hover:bg-gray-100 dark:hover:bg-gray-600 ${
                   build === type?.name ? "border-2 border-blue-600" : ""

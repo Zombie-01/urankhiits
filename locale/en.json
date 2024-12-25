@@ -1,101 +1,102 @@
 {
-    "HomePage": {
-        "ourService": "OUR SERVICE",
-        "serviceDescription": "In today’s fast-paced business world, competitive success hinges on the ability to adapt to rapid and sometimes unpredictable changes. As a company that values progress, we make it our mission to stay on the cutting edge by continuously enhancing our services.",
-        "serviceGoal": "We undertake projects in a client-centered manner, tailoring our services to meet the specific needs of each client. Our expertise in diverse areas enables us to provide solutions that drive business success."
-    },
-    "AboutPage": {
-        "aboutUs": "ABOUT US",
-        "aboutDescription": "Urankhiits LLC was established in 2018 and operates in the fields of architecture, interior and exterior design, and technical engineering services. Our company has successfully completed over 120 projects. Our strengths lie in our innovative ideas, adherence to high standards, and effective collaboration. We continue to operate with the goal of thoroughly understanding project objectives, carefully analyzing client requirements, and bringing in creative ideas.",
-        "experience-title": "120+",
-        "experience-description": "Interior and exterior design project",
-        "sustainableProjects-title": "60+",
-        "sustainableProjects-description": "Interior renovation project"
-    },
-    "ServicePage": {
-        "title": "SERVICE",
-        "work_process": "WORK PROCESS",
-        "description": "We offer high-quality services in architectural planning, interior design, and interior renovation. Our services focus on creating perfectly organized spaces, incorporating the latest design solutions, and tailoring environments to meet your needs and preferences. We are committed to delivering the best quality and maximum efficiency, working together to create the ideal solution for your work and living spaces, while enhancing their value.",
-        "description1": "As Ulaanbaatar grows, the demand for personalized home renovations is on the rise. At UranKhiits LLC, we specialize in transforming living spaces into unique sanctuaries that promote comfort and well-being. ",
-        "description2": "To meet this growing demand, Uran AI has been launched to provide fast, AI-powered interior design solutions. With Uran AI, customers can quickly receive customized designs, ensuring high-quality results delivered with speed and efficiency.",
-        "service1Title": "Discussion & Analysis of Needs",
-        "service1Description": "The design team collaborates with the client to understand their preferences, goals, budget, and project features.",
-        "service2Title": "Concept & Sketch Development",
-        "service2Description": "Designers create preliminary concepts and sketches that reflect the desired interior style, including color palettes and material selections.",
-        "service3Title": "3D Visualization and Design",
-        "service3Description": "Detailed 3D models and visualizations are developed to help clients visualize the final design.",
-        "service4Title": "Coordination and Approval",
-        "service4Description": "A detailed budget and work schedule are formulated, incorporating project requirements and material costs, and client approval is obtained.",
-        "service5Title": "Interior renovation work",
-        "service5Description": "Commencement of the interior construction, managing all tasks to ensure alignment with the approved design and specifications.",
-        "service6Title": "Handover of the Completed Project",
-        "service6Description": "Final review and handover of the completed project to the client, ensuring it meets all expectations and addressing any final adjustments."
-    },
-    "Hero": {
-        "innovative": "Luxury You Can Feel",
-        "creative": "Creative",
-        "headlinePrefix": "Luxury You Can Feel",
-        "headlineSuffix": "Craftsmanship You Can Trust",
-        "buttonText": "TRY Uran AI"
-    },
-    "Header": {
-        "HOME": "Home",
-        "MENU": "MENU",
-        "CLOSE": "CLOSE",
-        "PROJECTS": "Projects",
-        "ABOUTUS": "About us",
-        "OURSERVICE": "Our service",
-        "AI": "URAN AI",
-        "CONTACT": "Contact",
-        "MADEBY": "MADE BY",
-        "DEVELOPER": "DEVELOPER",
-        "DESIGN": "DESIGN",
-        "POLICY": "Privacy Policy",
-        "TERMS": "Terms & Conditions",
-        "URAN": "URANKHIITS",
-        "ZOMBIE": "ZOMBIE",
-        "PIN": " Ulaanbaatar city, Khan Uul district 11th khoroo, Chinggis Avenue - 61 Orgil stadium, No. 1 "
-    },
+  "HomePage": {
+    "ourService": "OUR SERVICE",
+    "serviceDescription": "In today’s fast-paced business world, competitive success hinges on the ability to adapt to rapid and sometimes unpredictable changes. As a company that values progress, we make it our mission to stay on the cutting edge by continuously enhancing our services.",
+    "serviceGoal": "We undertake projects in a client-centered manner, tailoring our services to meet the specific needs of each client. Our expertise in diverse areas enables us to provide solutions that drive business success."
+  },
+  "AboutPage": {
+    "aboutUs": "ABOUT US",
+    "aboutDescription": "Urankhiits LLC was established in 2018 and operates in the fields of architecture, interior and exterior design, and technical engineering services. Our company has successfully completed over 120 projects. Our strengths lie in our innovative ideas, adherence to high standards, and effective collaboration. We continue to operate with the goal of thoroughly understanding project objectives, carefully analyzing client requirements, and bringing in creative ideas.",
+    "experience-title": "120+",
+    "experience-description": "Interior and exterior design project",
+    "sustainableProjects-title": "60+",
+    "sustainableProjects-description": "Interior renovation project"
+  },
+  "ServicePage": {
+    "title": "SERVICE",
+    "work_process": "WORK PROCESS",
+    "description": "We offer high-quality services in architectural planning, interior design, and interior renovation. Our services focus on creating perfectly organized spaces, incorporating the latest design solutions, and tailoring environments to meet your needs and preferences. We are committed to delivering the best quality and maximum efficiency, working together to create the ideal solution for your work and living spaces, while enhancing their value.",
+    "description1": "As Ulaanbaatar grows, the demand for personalized home renovations is on the rise. At UranKhiits LLC, we specialize in transforming living spaces into unique sanctuaries that promote comfort and well-being. ",
+    "description2": "To meet this growing demand, Uran AI has been launched to provide fast, AI-powered interior design solutions. With Uran AI, customers can quickly receive customized designs, ensuring high-quality results delivered with speed and efficiency.",
+    "service1Title": "Discussion & Analysis of Needs",
+    "service1Description": "The design team collaborates with the client to understand their preferences, goals, budget, and project features.",
+    "service2Title": "Concept & Sketch Development",
+    "service2Description": "Designers create preliminary concepts and sketches that reflect the desired interior style, including color palettes and material selections.",
+    "service3Title": "3D Visualization and Design",
+    "service3Description": "Detailed 3D models and visualizations are developed to help clients visualize the final design.",
+    "service4Title": "Coordination and Approval",
+    "service4Description": "A detailed budget and work schedule are formulated, incorporating project requirements and material costs, and client approval is obtained.",
+    "service5Title": "Interior renovation work",
+    "service5Description": "Commencement of the interior construction, managing all tasks to ensure alignment with the approved design and specifications.",
+    "service6Title": "Handover of the Completed Project",
+    "service6Description": "Final review and handover of the completed project to the client, ensuring it meets all expectations and addressing any final adjustments."
+  },
+  "Hero": {
+    "innovative": "Luxury You Can Feel",
+    "creative": "Creative",
+    "headlinePrefix": "Luxury You Can Feel",
+    "headlineSuffix": "Craftsmanship You Can Trust",
+    "buttonText": "TRY Uran AI"
+  },
+  "Header": {
+    "HOME": "Home",
+    "MENU": "MENU",
+    "CLOSE": "CLOSE",
+    "PROJECTS": "Projects",
+    "ABOUTUS": "About us",
+    "OURSERVICE": "Our service",
+    "AI": "URAN AI",
+    "CONTACT": "Contact",
+    "MADEBY": "MADE BY",
+    "DEVELOPER": "DEVELOPER",
+    "DESIGN": "DESIGN",
+    "POLICY": "Privacy Policy",
+    "TERMS": "Terms & Conditions",
+    "URAN": "URANKHIITS",
+    "ZOMBIE": "ZOMBIE",
+    "PIN": " Ulaanbaatar city, Khan Uul district 11th khoroo, Chinggis Avenue - 61 Orgil stadium, No. 1 "
+  },
 
-    "Projects": {
-        "Projects": "Projects",
-        "show_all": "Show all",
-        "commercial": "Commercial",
-        "lux_house": "Luxury house",
-        "residential": "Residential"
-    },
-    "Uran_ai": {
-        "ai_demo_button": "Uran AI DEMO",
-        "ai_demo_description": "Explore Uran AI DEMO",
-        "ai_demo_slogan": "Remodel your home in minutes!"
-    },
-    "AI": {
-        "choose_building_type": "Choose your building type",
-        "choose_room_type": "Choose Room Type",
-        "upload_image": "Upload your image",
-        "out_of_token": "Your tokens are out of stock. Please purchase",
-        "choose_theme_type": "Choose theme type",
-        "choose_color_tone": "Choose Color Tone",
-        "generated_image": "Generated Image",
-        "reset": "Reset",
-        "generate": "Generate",
-        "download": "Download",
-        "image_uploaded": "Image uploaded successfully.",
-        "image_processing_error": "An error occurred while processing the image.",
-        "login_required": "Login Required",
-        "please_login_to_use_the_app": "Please login to use the app",
-        "login": "Login",
-        "welcome": "Welcome to Uran AI",
-        "sign_in": "Sign in with Google",
-        "sign_up": "Sign up",
-        "not_member": "Not a member?"
-    },
-    "CLIENT": {
-        "yourGeneratedDesigns": "Your Generated Designs",
-        "accountInformation": "Account Information",
-        "yourBillingInformation": "Your Billing Information",
-        "logOut": "Log out",
-        "yourTokens": "Your Tokens",
-        "CONTACT": "Contact"
-    }
+  "Projects": {
+    "Projects": "Projects",
+    "show_all": "Show all",
+    "commercial": "Commercial",
+    "lux_house": "Luxury house",
+    "residential": "Residential"
+  },
+  "Uran_ai": {
+    "ai_demo_button": "Uran AI DEMO",
+    "ai_demo_description": "Explore Uran AI DEMO",
+    "ai_demo_slogan": "Remodel your home in minutes!"
+  },
+  "AI": {
+    "choose_building_type": "Choose your building type",
+    "choose_room_type": "Choose Room Type",
+    "upload_image": "Upload your image",
+    "land_image": "For best results, take a horizontal photo in landscape mode!",
+    "out_of_token": "Your tokens are out of stock. Please purchase",
+    "choose_theme_type": "Choose theme type",
+    "choose_color_tone": "Choose Color Tone",
+    "generated_image": "Generated Image",
+    "reset": "Reset",
+    "generate": "Generate",
+    "download": "Download",
+    "image_uploaded": "Image uploaded successfully.",
+    "image_processing_error": "An error occurred while processing the image.",
+    "login_required": "Login Required",
+    "please_login_to_use_the_app": "Please login to use the app",
+    "login": "Login",
+    "welcome": "Welcome to Uran AI",
+    "sign_in": "Sign in with Google",
+    "sign_up": "Sign up",
+    "not_member": "Not a member?"
+  },
+  "CLIENT": {
+    "yourGeneratedDesigns": "Your Generated Designs",
+    "accountInformation": "Account Information",
+    "yourBillingInformation": "Your Billing Information",
+    "logOut": "Log out",
+    "yourTokens": "Your Tokens",
+    "CONTACT": "Contact"
+  }
 }

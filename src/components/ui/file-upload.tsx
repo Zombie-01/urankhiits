@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { IconUpload } from "@tabler/icons-react";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const mainVariant = {
   initial: {
@@ -39,6 +40,8 @@ export const FileUpload = ({
     onChange && onChange(newFiles);
   };
 
+  const t = useTranslations("AI");
+
   const handleClick = () => {
     fileInputRef.current?.click();
   };
@@ -73,7 +76,7 @@ export const FileUpload = ({
             Upload file
           </p>
           <p className="relative  font-sans font-normal text-neutral-400 dark:text-neutral-400 text-base mt-2">
-            Drag or drop your files here or click to upload
+            {t("land_image")}
           </p>
           <div className="relative w-full mt-10 max-w-xl mx-auto">
             {files.length > 0 &&
@@ -166,8 +169,8 @@ export function GridPattern() {
   return (
     <div className="flex relative h-full bg-gray-100 dark:bg-neutral-900 flex-shrink-0 flex-wrap justify-center items-center gap-x-px gap-y-px  scale-105">
       <img
-        className="object-cover w-full h-full"
-        src="/bg_asset/one.png"
+        className="object-cover hidden dark:block w-full h-full"
+        src="/bg-assets/one.png"
         alt="bg"
       />
     </div>
