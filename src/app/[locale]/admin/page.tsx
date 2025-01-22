@@ -4,6 +4,7 @@ import { supabase } from "../../../../utils/supabase/client";
 
 const DashboardPage = () => {
   const [projectsCount, setProjectsCount] = useState<number>(0);
+  const [generated, setGenerated] = useState<Array<{ created_at: string }>>([]);
   const [generatedCount, setGeneratedCount] = useState<number>(0);
   const [generatedDays, setGeneratedDays] = useState<any[]>([]); // Stores the count of generated images by date
   const canvasRef = useRef<HTMLCanvasElement | null>(null); // Reference for the canvas element
@@ -28,20 +29,16 @@ const DashboardPage = () => {
         setProjectsCount(projectCount || 0);
 
         // Get the count of generated images
-        const { count: generatedCount, error: generatedError } = await supabase
+        const {
+          data: generatedData,
+          count: generatedCount,
+          error: generatedError
+        } = await supabase
           .from("generated")
-          .select("*", { count: "exact", head: true });
+          .select("id, image, created_at", { count: "exact" });
+        setGenerated(generatedData as any);
         if (generatedError) throw generatedError;
         setGeneratedCount(generatedCount || 0);
-
-        // Get the generated images grouped by day (assuming 'created_at' column exists)
-        const { data: generatedData, error: generatedDaysError } =
-          await supabase
-            .from("generated")
-            .select("created_at")
-            .gte("created_at", "2023-01-01") // Adjust the start date as needed
-            .order("created_at", { ascending: true });
-        if (generatedDaysError) throw generatedDaysError;
 
         // Group generated images by date
         const groupedByDate = generatedData.reduce(
@@ -158,9 +155,19 @@ const DashboardPage = () => {
 
         {/* Static Cost Card */}
         <div className="bg-white shadow-md rounded-lg p-6">
-          <h3 className="text-xl font-semibold">Static Cost</h3>
+          <h3 className="text-xl font-semibold">Real Cost</h3>
           <p className="text-2xl">
-            ${Number(+generatedCount * 0.5).toFixed(2)}
+            $
+            {Number(
+              (generated?.reduce(
+                (sum, e) =>
+                  sum + new Date(e.created_at).getMilliseconds() * 1000,
+                0
+              ) *
+                (0.018 - 0.01)) /
+                (60 * 1000) +
+                0.01
+            ).toFixed(2)}
           </p>
         </div>
       </div>
@@ -170,6 +177,41 @@ const DashboardPage = () => {
         <h3 className="text-xl font-semibold">Generated Images Over Time</h3>
         <canvas ref={canvasRef} width={800} height={400}></canvas>
       </div>
+      <table
+        style={{ borderCollapse: "collapse", width: "100%" }}
+        className="dark:text-white">
+        <thead>
+          <tr>
+            <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+              Created At
+            </th>
+            <th style={{ border: "1px solid #ddd", padding: "8px" }}>id</th>
+            <th style={{ border: "1px solid #ddd", padding: "8px" }}>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {generated?.map((e: any, index) => {
+            const secondsInMilliseconds =
+              new Date(e.created_at).getMilliseconds() * 1000;
+            const scaledValue =
+              (secondsInMilliseconds * (0.018 - 0.01)) / (60 * 1000) + 0.01;
+
+            return (
+              <tr key={index}>
+                <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  {e.created_at}
+                </td>
+                <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  {e?.id}
+                </td>
+                <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  ${scaledValue.toFixed(2)}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
       {/* Tooltip */}
       {tooltip && (
         <div

@@ -95,20 +95,46 @@ const FocusCardsDemoPage = () => {
         </div>
 
         {/* Pagination Controls */}
-        <div className="flex justify-between items-center mt-6">
+        {/* Pagination Controls */}
+        <div className="flex justify-center items-center mt-6 space-x-2 dark:text-white">
           <button
             disabled={currentPage === 1 || loading}
             onClick={() => setCurrentPage((prev) => prev - 1)}
-            className="px-4 py-2 bg-gray-200 dark:bg-neutral-800 rounded-md disabled:opacity-50">
+            className="px-4 py-2 bg-gray-200 dark:bg-neutral-800 rounded-md disabled:opacity-50 dark:text-white">
             Previous
           </button>
-          <span className="text-sm">
-            Page {currentPage} of {totalPages}
-          </span>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .filter((page) => {
+              if (totalPages <= 7) return true; // Show all if total pages are 7 or less
+              if (page === 1 || page === totalPages) return true; // Always show the first and last page
+              if (page >= currentPage - 1 && page <= currentPage + 1)
+                return true; // Show current page, one before, and one after
+              return false;
+            })
+            .map((page, i, visiblePages) => (
+              <React.Fragment key={page}>
+                {i > 0 &&
+                  page !== visiblePages[i - 1] + 1 && ( // Insert ellipsis between non-consecutive pages
+                    <span className="px-2">...</span>
+                  )}
+                <button
+                  onClick={() => setCurrentPage(page)}
+                  className={cn(
+                    "px-4 py-2 rounded-md",
+                    page === currentPage
+                      ? "bg-blue-500 "
+                      : "bg-gray-200 dark:bg-neutral-800 dark:text-white"
+                  )}>
+                  {page}
+                </button>
+              </React.Fragment>
+            ))}
+
           <button
             disabled={currentPage === totalPages || loading}
             onClick={() => setCurrentPage((prev) => prev + 1)}
-            className="px-4 py-2 bg-gray-200 dark:bg-neutral-800 rounded-md disabled:opacity-50">
+            className="px-4 py-2 bg-gray-200 dark:text-white dark:bg-neutral-800 rounded-md disabled:opacity-50">
             Next
           </button>
         </div>
@@ -154,7 +180,7 @@ const Card = React.memo(
       <img
         src={card.src}
         alt={card.src}
-        className="object-cover absolute inset-0"
+        className="object-cover aspect-video absolute inset-0"
       />
       <div
         className={cn(
@@ -180,8 +206,8 @@ const Modal = ({
   disableNext: boolean;
   disablePrev: boolean;
 }) => (
-  <div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
-    <div className="relative w-11/12 md:w-3/4 lg:w-1/2">
+  <div className="fixed inset-0 dark:text-white bg-black/70 flex justify-center items-center z-50">
+    <div className="relative max-h-[70vh] w-11/12 md:w-3/4 lg:w-1/2">
       <button
         onClick={onClose}
         className="absolute top-4 right-4 bg-white text-black rounded-full p-2">
@@ -191,7 +217,7 @@ const Modal = ({
         loading="lazy"
         src={image}
         alt="Modal Image"
-        className="w-full rounded-md object-cover"
+        className="w-full rounded-md object-cover aspect-video"
       />
       <div className="absolute bottom-4 left-0 right-0 flex justify-between px-6">
         <button
