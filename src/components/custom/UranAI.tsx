@@ -18,38 +18,40 @@ export const UranAIDemo = () => {
   const x = useMotionValue(0);
   const t = useTranslations("Uran_ai");
 
-  const [subBanners, setSubBanners] = useState<SubBanner[]>([]);
+  const [subBanners, setSubBanners] = useState<SubBanner[]>([
+    { id: "01", image_url: "/images/sketchout.png", banner_id: "01" }
+  ]);
 
   const [containerWidth, setContainerWidth] = useState(0);
-  useEffect(() => {
-    const fetchBannerImages = async () => {
-      const { data: bannerData, error: bannerError } = (await supabase
-        .from("banner")
-        .select("id")
-        .eq("title", "uran_ai")
-        .single()) as any;
+  // useEffect(() => {
+  //   const fetchBannerImages = async () => {
+  //     const { data: bannerData, error: bannerError } = (await supabase
+  //       .from("banner")
+  //       .select("id")
+  //       .eq("title", "uran_ai")
+  //       .single()) as any;
 
-      if (bannerError) {
-        console.error("Error fetching banner:", bannerError.message);
-        return;
-      }
+  //     if (bannerError) {
+  //       console.error("Error fetching banner:", bannerError.message);
+  //       return;
+  //     }
 
-      const bannerId = bannerData?.id;
+  //     const bannerId = bannerData?.id;
 
-      const { data: images, error: imagesError } = (await supabase
-        .from("sub_banner")
-        .select("id, banner_id, image_url")
-        .eq("banner_id", bannerId)) as any;
+  //     const { data: images, error: imagesError } = (await supabase
+  //       .from("sub_banner")
+  //       .select("id, banner_id, image_url")
+  //       .eq("banner_id", bannerId)) as any;
 
-      if (imagesError) {
-        console.error("Error fetching sub-banner images:", imagesError.message);
-      } else {
-        setSubBanners(images || []);
-      }
-    };
+  //     if (imagesError) {
+  //       console.error("Error fetching sub-banner images:", imagesError.message);
+  //     } else {
+  //       setSubBanners(images || []);
+  //     }
+  //   };
 
-    fetchBannerImages();
-  }, []);
+  //   fetchBannerImages();
+  // }, []);
 
   useEffect(() => {
     if (constraintsRef.current) {

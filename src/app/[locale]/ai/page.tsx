@@ -242,98 +242,98 @@ export default function ImagePage() {
     URL.revokeObjectURL(imageObjectURL);
   }
 
-  async function handleGmailLogin() {
-    try {
-      // Get the current session to check if the user is already logged in
-      const {
-        data: { session },
-        error: sessionError
-      } = await supabase.auth.getSession();
+  // async function handleGmailLogin() {
+  //   try {
+  //     // Get the current session to check if the user is already logged in
+  //     const {
+  //       data: { session },
+  //       error: sessionError
+  //     } = await supabase.auth.getSession();
 
-      if (sessionError) {
-        console.error("Error getting session:", sessionError);
-        toast.error("Failed to get session");
-        return false;
-      }
+  //     if (sessionError) {
+  //       console.error("Error getting session:", sessionError);
+  //       toast.error("Failed to get session");
+  //       return false;
+  //     }
 
-      if (session?.user) {
-        // If the user is already logged in, no need to log them in again
-        console.log("User already logged in:", session.user);
+  //     if (session?.user) {
+  //       // If the user is already logged in, no need to log them in again
+  //       console.log("User already logged in:", session.user);
 
-        const { data: existingLog, error: logError } = await supabase
-          .from("user_log")
-          .select("id, remain_token")
-          .eq("user_id", session.user.id);
+  //       const { data: existingLog, error: logError } = await supabase
+  //         .from("user_log")
+  //         .select("id, remain_token")
+  //         .eq("user_id", session.user.id);
 
-        if (logError) {
-          console.error("Error checking user log:", logError.message);
-          toast.error("Failed to check user log.");
-          return false;
-        }
-        if (existingLog?.length > 0) {
-          // If the user already has a log entry, don't create a new one
-          console.log("User already has a log entry:", existingLog);
-          if ((existingLog[0] as any).remain_token === 0) {
-            alert(t("out_of_token"));
-            return false;
-          }
-          const updatedToken = (existingLog[0] as any).remain_token - 1;
+  //       if (logError) {
+  //         console.error("Error checking user log:", logError.message);
+  //         toast.error("Failed to check user log.");
+  //         return false;
+  //       }
+  //       if (existingLog?.length > 0) {
+  //         // If the user already has a log entry, don't create a new one
+  //         console.log("User already has a log entry:", existingLog);
+  //         if ((existingLog[0] as any).remain_token === 0) {
+  //           alert(t("out_of_token"));
+  //           return false;
+  //         }
+  //         const updatedToken = (existingLog[0] as any).remain_token - 1;
 
-          // Update the remain_token by decrementing it by 1
-          const { error: updateError } = await supabase
-            .from("user_log")
-            .update({ remain_token: updatedToken })
-            .eq("user_id", session.user.id);
+  //         // Update the remain_token by decrementing it by 1
+  //         const { error: updateError } = await supabase
+  //           .from("user_log")
+  //           .update({ remain_token: updatedToken })
+  //           .eq("user_id", session.user.id);
 
-          if (updateError) {
-            console.error("Error updating user log:", updateError.message);
-            toast.error("Failed to update user log entry.");
-          } else {
-            console.log("User log entry updated successfully.");
-            toast.success("Remain token updated!");
-          }
-          return session.user.id;
-        }
+  //         if (updateError) {
+  //           console.error("Error updating user log:", updateError.message);
+  //           toast.error("Failed to update user log entry.");
+  //         } else {
+  //           console.log("User log entry updated successfully.");
+  //           toast.success("Remain token updated!");
+  //         }
+  //         return session.user.id;
+  //       }
 
-        // If no log entry exists, create a new log entry
-        const { error: insertError } = await supabase
-          .from("user_log")
-          .insert([{ remain_token: 3 }]);
+  //       // If no log entry exists, create a new log entry
+  //       const { error: insertError } = await supabase
+  //         .from("user_log")
+  //         .insert([{ remain_token: 3 }]);
 
-        if (insertError) {
-          console.error("Error adding to user_log:", insertError.message);
-          toast.error("Failed to create user log entry.");
-        } else {
-          console.log("User log entry added successfully.");
-          toast.success("Logged in and user log created!");
-        }
+  //       if (insertError) {
+  //         console.error("Error adding to user_log:", insertError.message);
+  //         toast.error("Failed to create user log entry.");
+  //       } else {
+  //         console.log("User log entry added successfully.");
+  //         toast.success("Logged in and user log created!");
+  //       }
 
-        return session.user.id;
-      }
+  //       return session.user.id;
+  //     }
 
-      console.log(pathname);
+  //     console.log(pathname);
 
-      // If no session exists, proceed with Gmail login
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: pathname
-        }
-      });
+  //     // If no session exists, proceed with Gmail login
+  //     const { data, error } = await supabase.auth.signInWithOAuth({
+  //       provider: "google",
+  //       options: {
+  //         redirectTo: pathname
+  //       }
+  //     });
 
-      if (error) {
-        console.error("Gmail login error:", error.message);
-        toast.error("Failed to log in with Gmail");
-        return false;
-      }
+  //     if (error) {
+  //       console.error("Gmail login error:", error.message);
+  //       toast.error("Failed to log in with Gmail");
+  //       return false;
+  //     }
 
-      return false; // If no session or user is returned, return false
-    } catch (error) {
-      console.error("Unexpected error during Gmail login:", error);
-      toast.error("Unexpected error during Gmail login");
-      return false;
-    }
-  }
+  //     return false; // If no session or user is returned, return false
+  //   } catch (error) {
+  //     console.error("Unexpected error during Gmail login:", error);
+  //     toast.error("Unexpected error during Gmail login");
+  //     return false;
+  //   }
+  // }
   async function checkLogin() {
     try {
       const {
@@ -362,9 +362,9 @@ export default function ImagePage() {
         return;
       }
 
-      const loggedIn = await handleGmailLogin();
-      console.log(loggedIn);
-      if (!loggedIn) return;
+      // const loggedIn = await handleGmailLogin();
+      // console.log(loggedIn);
+      // if (!loggedIn) return;
 
       setLoading(true);
 
@@ -408,41 +408,41 @@ export default function ImagePage() {
           .substring(2)}`;
 
         // Upload Blob to Supabase Storage
-        const { data: storageData, error: storageError } =
-          await supabase.storage
-            .from("projects")
-            .upload(`${filename}.${extension}`, blob, {
-              contentType: blob.type // Set the content type from the blob
-            });
-        if (storageError) {
-          console.error("Error uploading file:", storageError.message);
-          toast.error(t("image_processing_error"));
-          return;
-        }
+        // const { data: storageData, error: storageError } =
+        //   await supabase.storage
+        //     .from("projects")
+        //     .upload(`${filename}.${extension}`, blob, {
+        //       contentType: blob.type // Set the content type from the blob
+        //     });
+        // if (storageError) {
+        //   console.error("Error uploading file:", storageError.message);
+        //   toast.error(t("image_processing_error"));
+        //   return;
+        // }
 
         // Get the public URL for the uploaded image
-        const { data: publicUrlData } = supabase.storage
-          .from("projects")
-          .getPublicUrl(`${filename}.${extension}`);
-        const publicUrl = publicUrlData?.publicUrl;
+        // const { data: publicUrlData } = supabase.storage
+        //   .from("projects")
+        //   .getPublicUrl(`${filename}.${extension}`);
+        // const publicUrl = publicUrlData?.publicUrl;
 
-        if (!publicUrl) {
-          toast.error(t("image_processing_error"));
-          return;
-        }
+        // if (!publicUrl) {
+        //   toast.error(t("image_processing_error"));
+        //   return;
+        // }
 
         // Save metadata to Supabase database
-        const { error: dbError } = await supabase.from("generated").insert({
-          image: publicUrl,
-          prompt: `A ${theme} ${room} Editorial Style Photo, Symmetry, Straight On, Modern Living Room, Large Window (balanced with walls if window not detected then don't add window), Leather, Glass, Metal, Wood Paneling, Neutral Palette, Ikea, Natural Light, Apartment, Afternoon, Serene, Contemporary, 4k`,
-          user: loggedIn || null // Add user ID or null if unavailable
-        });
+        // const { error: dbError } = await supabase.from("generated").insert({
+        //   image: publicUrl,
+        //   prompt: `A ${theme} ${room} Editorial Style Photo, Symmetry, Straight On, Modern Living Room, Large Window (balanced with walls if window not detected then don't add window), Leather, Glass, Metal, Wood Paneling, Neutral Palette, Ikea, Natural Light, Apartment, Afternoon, Serene, Contemporary, 4k`,
+        //   user: loggedIn || null // Add user ID or null if unavailable
+        // });
 
-        if (dbError) {
-          console.error("Error saving metadata:", dbError.message);
-          toast.error(t("image_processing_error"));
-          return;
-        }
+        // if (dbError) {
+        //   console.error("Error saving metadata:", dbError.message);
+        //   toast.error(t("image_processing_error"));
+        //   return;
+        // }
 
         setOutputImage(result.output);
         toast.success(t("image_uploaded"));
@@ -457,16 +457,16 @@ export default function ImagePage() {
     }
   }
 
-  useEffect(() => {
-    checkLogin().then((user) => {
-      console.log(user);
-      if (user) {
-        setLogged(true);
-      } else {
-        setLogged(false);
-      }
-    });
-  }, [supabase]);
+  // useEffect(() => {
+  //   checkLogin().then((user) => {
+  //     console.log(user);
+  //     if (user) {
+  //       setLogged(true);
+  //     } else {
+  //       setLogged(false);
+  //     }
+  //   });
+  // }, [supabase]);
 
   return (
     <div className="min-h-screen  p-8">
@@ -755,7 +755,7 @@ export default function ImagePage() {
           )}
         </div>
       </div>
-      {!logged && (
+      {/* {!logged && (
         <div
           style={{
             backgroundImage: "url(/login.png)",
@@ -788,7 +788,7 @@ export default function ImagePage() {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
