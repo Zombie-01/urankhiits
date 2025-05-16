@@ -8,13 +8,13 @@ const authHandler = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+    })
   ],
   secret: process.env.NEXTAUTH_SECRET, // Add the secret here
   pages: {
     signIn: "/auth/signin", // Optional: Custom sign-in page
-    error: "/auth/error", // Optional: Custom error page
+    error: "/auth/error" // Optional: Custom error page
   },
   callbacks: {
     async jwt({ token, account }: any) {
@@ -30,10 +30,9 @@ const authHandler = NextAuth({
         session.user.email = token.email as string | null;
       }
       return session;
-    },
-  },
+    }
+  }
 });
-
 // Export GET and POST handlers directly
 export const GET = authHandler;
 export const POST = authHandler;
